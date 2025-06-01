@@ -10,6 +10,8 @@ import (
 
 func GetBacklinks(w http.ResponseWriter, r *http.Request) {
 
+	var req models.BacklinkRequest
+
 	w.Header().Set("Content-Type", "application/json")
 
 	if r.Method != http.MethodPost {
@@ -20,7 +22,14 @@ func GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	query := r.URL.Query().Get("q")
-	fmt.Println(query)
+	err := json.NewDecoder(r.Body).Decode(&req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Invalid JSON",
+		})
+	}
+
+	fmt.Println(req)
 
 }
