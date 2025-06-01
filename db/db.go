@@ -12,7 +12,7 @@ import (
 func InitDB() (*sql.DB, error) {
 	displayOpeningMessage()
 
-	db, err := sql.Open("sqlite3", "avsolutions.db")
+	db, err := sql.Open("sqlite3", "./avsolutions.db")
 	if err != nil {
 		return nil, fmt.Errorf("failed opening database: %w", err)
 	}
