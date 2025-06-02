@@ -6,9 +6,14 @@ import (
 	"net/http"
 
 	"github.com/danielavshalumov/around/models"
+	"github.com/danielavshalumov/around/services"
 )
 
-func GetBacklinks(w http.ResponseWriter, r *http.Request) {
+type BacklinkHandler struct {
+	crawlerService *services.CrawlerService
+}
+
+func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 
 	var req models.BacklinkRequest
 
@@ -30,6 +35,10 @@ func GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	fmt.Println(req)
+	query := "https://html.duckduckgo.com/html?q=cheap%20" + req.Industry + "%20forums"
 
+	spider := models.NewSpider(query, 3)
+
+	crawlJobId := b.crawlerService.StartCrawl(spider)
+	fmt.Println(crawlJobId)
 }

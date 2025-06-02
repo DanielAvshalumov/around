@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/danielavshalumov/around/db"
+	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/handlers"
 )
 
 func main() {
 
 	// Initiate Connection to db
-	_, err := db.InitDB()
+	_, err := config.InitDB()
 	if err != nil {
 		fmt.Println(err)
 	}
