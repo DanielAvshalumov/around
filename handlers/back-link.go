@@ -13,6 +13,12 @@ type BacklinkHandler struct {
 	crawlerService *services.CrawlerService
 }
 
+func NewBacklinkHandler(crawler *services.CrawlerService) *BacklinkHandler {
+	return &BacklinkHandler{
+		crawlerService: crawler,
+	}
+}
+
 func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 
 	var req models.BacklinkRequest
