@@ -11,6 +11,7 @@ import (
 
 func main() {
 
+	fmt.Println("works")
 	// Initiate Connection to db
 	db, err := config.InitDB()
 	if err != nil {

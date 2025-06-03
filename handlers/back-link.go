@@ -45,6 +45,6 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 
 	spider := models.NewSpider(query, 3)
 
-	crawlJobId := b.crawlerService.StartCrawl(spider)
-	fmt.Println(crawlJobId)
+	crawlJobId := b.crawlerService.StartCrawl(spider, r.Context())
+	fmt.Println(spider, crawlJobId)
 }
