@@ -11,15 +11,15 @@ import (
 
 func main() {
 
-	fmt.Println("works")
 	// Initiate Connection to db
 	db, err := config.InitDB()
 	if err != nil {
 		fmt.Println(err)
 	}
+	// Initialize Services
+	CrawlerService := services.NewCrawlerService(db, 50)
 
-	CrawlerService := services.NewCrawlerService(db)
-
+	// Define Handlers
 	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService)
 
 	// Set Up Endpoints
