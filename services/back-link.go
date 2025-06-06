@@ -34,16 +34,24 @@ func NewCrawlerService(db *sql.DB, maxThreads int) *CrawlerService {
 
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context) int32 {
 
-	Crawl(cs, spider, ctx, spider.StartUrl, spider.MaxDepth)
+	cs.wg.Add(1)
+	go func() {
+		defer cs.wg.Done()
+		Crawl(cs, spider, ctx, spider.StartUrl, spider.MaxDepth)
+		cs.wg.Wait()
+	}()
+
+	fmt.Println("Backlinks found:", spider.Backlinks)
+	fmt.Println("Crawling finished")
 
 	return 0
 }
 
-func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, next_url string, depth int) {
+func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_url string, depth int) {
 
 	cs.mu.RLock()
 	switch {
-	case s.Visited[next_url]:
+	case s.Visited[current_url]:
 		cs.mu.RUnlock()
 		return
 	default:
@@ -62,19 +70,36 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, next_url s
 	}
 
 	cs.mu.Lock()
-	s.Visited[next_url] = true
+	s.Visited[current_url] = true
 	cs.mu.Unlock()
 
-	links := extractAnchorTags("https://www.houzz.com/discussions/6494587/big-box-or-building-supply-store-near-sf-w-floating-vanities-in-stock#n=4")
-	var absolute, relative, backlinks []string
-	for link := range links {
+	cs.mu.RLock()
+	defer cs.mu.RUnlock()
+
+	fmt.Println("Crawling %s", current_url)
+	links := extractAnchorTags(current_url)
+	var absolute, relative []string
+
+	for link, rel := range links {
 		if strings.HasPrefix(link, "http") {
+			if depth != s.MaxDepth && checkBacklink(link, current_url) != "" {
+				s.Backlinks[link] = rel
+				continue
+			}
 			absolute = append(absolute, link)
+
 		} else {
 			relative = append(relative, link)
 		}
+
+		cs.wg.Add(1)
+		go func(link string) {
+			defer cs.wg.Done()
+			Crawl(cs, s, ctx, link, depth-1)
+		}(link)
 	}
 
+	// Printing for testing purposes
 	for _, name := range absolute {
 		fmt.Println(name)
 	}
@@ -85,27 +110,25 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, next_url s
 
 }
 
-func extractBacklinks(links map[string]string, current_url string) (map[string]string, error) {
-	res := make(map[string]string)
+func checkBacklink(link string, current_url string) string {
 	parsed, err := url.Parse(current_url)
 	if err != nil {
 		fmt.Printf("Error parsing current_url %s", current_url)
-		return nil, err
+		return ""
 	}
-	for key, val := range links {
-		parsed_link, err := url.Parse(key)
-		if err != nil {
-			fmt.Printf("extractBackinks() ~ Error parsing result link from scraped links %s", link)
-			continue
-		}
-		if parsed_link.Hostname() != parsed.Hostname() {
-			res[key] = val
-			fmt.Println("------------ Backlink Found ------------")
-			fmt.Println(current_url + "->" + key)
-			fmt.Println("----------------------------------------")
-		}
+	parsed_link, err := url.Parse(link)
+	if err != nil {
+		fmt.Printf("extractBackinks() ~ Error parsing result link from scraped links %s", link)
+		return ""
 	}
-	return res, nil
+
+	if parsed_link.Hostname() != parsed.Hostname() {
+		fmt.Println("------------ Backlink Found ------------")
+		fmt.Println(current_url + "->" + link)
+		fmt.Println("----------------------------------------")
+	}
+
+	return link
 }
 
 func extractAnchorTags(page_url string) map[string]string {
