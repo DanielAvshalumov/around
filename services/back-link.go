@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 	"sync/atomic"
+	"time"
 
 	"github.com/danielavshalumov/around/models"
 	"golang.org/x/net/html"
@@ -38,17 +39,17 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context)
 	go func() {
 		defer cs.wg.Done()
 		Crawl(cs, spider, ctx, spider.StartUrl, spider.MaxDepth)
-		cs.wg.Wait()
 	}()
-
-	fmt.Println("Backlinks found:", spider.Backlinks)
+	cs.wg.Wait()
 	fmt.Println("Crawling finished")
 
 	return 0
 }
 
 func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_url string, depth int) {
-
+	if depth == 0 {
+		return
+	}
 	cs.mu.RLock()
 	switch {
 	case s.Visited[current_url]:
@@ -76,11 +77,13 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	cs.mu.RLock()
 	defer cs.mu.RUnlock()
 
-	fmt.Println("Crawling %s", current_url)
+	time.Sleep(2 * time.Second)
+	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	links := extractAnchorTags(current_url)
 	var absolute, relative []string
 
 	for link, rel := range links {
+		link = strings.Replace(link, "www.", "", 1)
 		if strings.HasPrefix(link, "http") {
 			if depth != s.MaxDepth && checkBacklink(link, current_url) != "" {
 				s.Backlinks[link] = rel
@@ -92,26 +95,59 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			relative = append(relative, link)
 		}
 
+		var next_url string
+
+		// Uses conditional for now, TODO will change to interface later
+		if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
+			link_mal := link[strings.Index(link, "https"):]
+			next_url = link_mal[:strings.Index(link_mal, "&")]
+		} else if !strings.Contains(link, "https") {
+			next_url = current_url[:strings.Index(current_url, ".com")+4] + link
+		}
+
+		if depth < s.MaxDepth {
+			parsed_link, err := url.Parse(link)
+			if err != nil {
+				fmt.Println(link)
+				fmt.Println("Error parsing link")
+			}
+			path_link := parsed_link.Path
+
+			if !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "threads") && !strings.Contains(path_link, "forums") && !strings.Contains(path_link, "comments") {
+				continue
+			}
+			curr_parse, err := url.QueryUnescape(current_url)
+			if path_link[0] != '/' {
+				path_link = "/" + path_link
+			}
+			next_url = "https://" + curr_parse[strings.Index(curr_parse, "https://")+8:strings.Index(curr_parse, ".com")+4] + path_link
+		}
+
 		cs.wg.Add(1)
-		go func(link string) {
+		go func(next_url string) {
 			defer cs.wg.Done()
-			Crawl(cs, s, ctx, link, depth-1)
-		}(link)
+			Crawl(cs, s, ctx, next_url, depth-1)
+		}(next_url)
 	}
 
-	// Printing for testing purposes
-	for _, name := range absolute {
-		fmt.Println(name)
-	}
-	fmt.Println("------------------------------")
-	for _, name := range relative {
-		fmt.Println(name)
-	}
+	// Test Print
+
+	// for _, name := range absolute {
+	// 	fmt.Println(name)
+	// }
+	// fmt.Println("------------------------------")
+	// for _, name := range relative {
+	// 	fmt.Println(name)
+	// }
 
 }
 
 func checkBacklink(link string, current_url string) string {
-	parsed, err := url.Parse(current_url)
+	_parsed, err := url.QueryUnescape(current_url)
+	if err != nil {
+		fmt.Printf("Failed unescaping string or string does not need unescaping %s\n", current_url)
+	}
+	parsed, err := url.Parse(_parsed)
 	if err != nil {
 		fmt.Printf("Error parsing current_url %s", current_url)
 		return ""
@@ -122,11 +158,17 @@ func checkBacklink(link string, current_url string) string {
 		return ""
 	}
 
-	if parsed_link.Hostname() != parsed.Hostname() {
-		fmt.Println("------------ Backlink Found ------------")
-		fmt.Println(current_url + "->" + link)
-		fmt.Println("----------------------------------------")
+	for _, value := range strings.Split(parsed_link.Hostname(), ".") {
+
+		if strings.Contains(value, strings.Replace(parsed.Hostname(), ".com", "", 1)) {
+			return ""
+		}
+
 	}
+	fmt.Println("------------ Backlink Found ------------")
+	fmt.Println(current_url + "->" + link)
+	fmt.Println(parsed.Hostname(), "->", parsed_link.Hostname())
+	fmt.Println("----------------------------------------")
 
 	return link
 }
@@ -134,9 +176,15 @@ func checkBacklink(link string, current_url string) string {
 func extractAnchorTags(page_url string) map[string]string {
 	// Get HTML from Page URL
 	page_html := func(page_url string) string {
-		res, err := http.Get(page_url)
+
+		parsed_url, err := url.QueryUnescape(page_url)
 		if err != nil {
-			fmt.Printf("Erorr making GET request to: %s", page_url)
+			fmt.Printf("Error parsing url %s\n", page_url)
+		}
+
+		res, err := http.Get(parsed_url)
+		if err != nil {
+			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 			return ""
 		}
 		defer res.Body.Close()
@@ -158,7 +206,8 @@ func extractAnchorTags(page_url string) map[string]string {
 			attrs := node.Attr
 			var href, rel string
 			for _, attr := range attrs {
-				if attr.Key == "href" && (!strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
+				//TODO: Somehow find a way to make this more concise put in another method or something
+				if attr.Key == "href" && (!strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
 					href = attr.Val
 				}
 				if attr.Key == "rel" {

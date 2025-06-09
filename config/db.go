@@ -9,6 +9,12 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+type db struct {
+	client *sql.DB
+}
+
+func NewDB() {}
+
 func InitDB() (*sql.DB, error) {
 	displayOpeningMessage()
 
@@ -20,6 +26,10 @@ func InitDB() (*sql.DB, error) {
 	createBacklinkTable(db)
 
 	return db, nil
+}
+
+func (db *db) InsertIntoBacklink() {
+
 }
 
 func createBacklinkTable(db *sql.DB) {

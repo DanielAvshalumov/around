@@ -42,10 +42,12 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	query := "https://html.duckduckgo.com/html?q=cheap%20" + req.Industry + "%20forums"
+	query := "https://html.duckduckgo.com/html?q=" + req.Industry + "%20forums"
+	comp_domain := req.Comp_domains
 
-	spider := models.NewSpider(query, 3)
+	spider := models.NewSpider(query, 3, comp_domain)
+	fmt.Println("competitor Domains", spider)
 
 	crawlJobId := b.crawlerService.StartCrawl(spider, r.Context())
-	fmt.Println(spider, crawlJobId)
+	fmt.Println(crawlJobId)
 }
