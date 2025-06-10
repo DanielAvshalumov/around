@@ -85,8 +85,14 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	for link, rel := range links {
 		link = strings.Replace(link, "www.", "", 1)
 		if strings.HasPrefix(link, "http") {
-			if depth != s.MaxDepth && checkBacklink(link, current_url) != "" {
+			if depth != s.MaxDepth && checkBacklink(link, current_url, s.CompDomains) != "" {
+
+				cs.mu.RUnlock()
+				cs.mu.Lock()
 				s.Backlinks[link] = rel
+				cs.mu.Unlock()
+				cs.mu.RLock()
+
 				continue
 			}
 			absolute = append(absolute, link)
@@ -113,7 +119,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			}
 			path_link := parsed_link.Path
 
-			if !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "threads") && !strings.Contains(path_link, "forums") && !strings.Contains(path_link, "comments") {
+			if !strings.Contains(path_link, "discussions") && !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "threads") && !strings.Contains(path_link, "forums") && !strings.Contains(path_link, "comments") {
 				continue
 			}
 			curr_parse, err := url.QueryUnescape(current_url)
@@ -142,7 +148,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 }
 
-func checkBacklink(link string, current_url string) string {
+func checkBacklink(link string, current_url string, filterAgainst []string) string {
 	_parsed, err := url.QueryUnescape(current_url)
 	if err != nil {
 		fmt.Printf("Failed unescaping string or string does not need unescaping %s\n", current_url)
@@ -163,11 +169,22 @@ func checkBacklink(link string, current_url string) string {
 		if strings.Contains(value, strings.Replace(parsed.Hostname(), ".com", "", 1)) {
 			return ""
 		}
-
 	}
+
+	if len(filterAgainst) == 0 {
+		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com"}
+	}
+
+	parsed_link_host := parsed_link.Hostname()
+	for _, domain := range filterAgainst {
+		if parsed_link_host == domain {
+			return ""
+		}
+	}
+
 	fmt.Println("------------ Backlink Found ------------")
 	fmt.Println(current_url + "->" + link)
-	fmt.Println(parsed.Hostname(), "->", parsed_link.Hostname())
+	fmt.Println(parsed.Hostname(), "->", parsed_link_host)
 	fmt.Println("----------------------------------------")
 
 	return link
