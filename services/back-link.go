@@ -164,6 +164,7 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 		return ""
 	}
 
+	// Checks domain for similarities
 	for _, value := range strings.Split(parsed_link.Hostname(), ".") {
 
 		if strings.Contains(value, strings.Replace(parsed.Hostname(), ".com", "", 1)) {
@@ -172,7 +173,11 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 	}
 
 	if len(filterAgainst) == 0 {
-		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com"}
+		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com"}
+	}
+
+	if strings.Contains(link, "amazon.com/registry/") {
+		return ""
 	}
 
 	parsed_link_host := parsed_link.Hostname()

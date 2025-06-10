@@ -4,43 +4,13 @@ Server Listening on port 8080
 competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=home%20appliances%20forums []}
 Depth 3 Crawling https://html.duckduckgo.com/html?q=home%20appliances%20forums
 GET - https://html.duckduckgo.com/html?q=home%20appliances%20forums - Status code 200
-Depth 2 Crawling https%3A%2F%2Fforum.partsdr.com%2Fforumdisplay.php%3F6%2DRange%2DOven%2Damp%2DCooktop%2DRepairs
-GET - https%3A%2F%2Fforum.partsdr.com%2Fforumdisplay.php%3F6%2DRange%2DOven%2Damp%2DCooktop%2DRepairs - Status code 200
+Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=aa924879d95d97f1842e0485b3c7b89159cc002e6a2502f2c2e81c2494040511
+GET - https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=aa924879d95d97f1842e0485b3c7b89159cc002e6a2502f2c2e81c2494040511 - Status code 200
+Depth 2 Crawling https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances
+GET - https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances - Status code 200
 ------------ Backlink Found ------------
-https%3A%2F%2Fforum.partsdr.com%2Fforumdisplay.php%3F6%2DRange%2DOven%2Damp%2DCooktop%2DRepairs->https://vbulletin.com
-forum.partsdr.com -> vbulletin.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fappliancerepairforums.com%2F
-GET - https%3A%2F%2Fappliancerepairforums.com%2F - Status code 200
-Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
-GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
-Depth 2 Crawling https://html.duckduckgo.com/html/
-GET - https://html.duckduckgo.com/html/ - Status code 202
-Depth 2 Crawling https%3A%2F%2Fdiscusscooking.com%2Fforums%2Fappliances.84%2F
-GET - https%3A%2F%2Fdiscusscooking.com%2Fforums%2Fappliances.84%2F - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fdiscusscooking.com%2Fforums%2Fappliances.84%2F->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
-Erorr Get "https://homeappliancesforum.com/latest?page=1": dial tcp 44.205.250.224:443: i/o timeout making GET request to: https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
-Depth 1 Crawling https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/latest
-GET - https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/latest - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/latest->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/
-GET - https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/should-you-remove-a-cookware-off-the-induction-stove-after-cooking-or-can-you-leave-it-on-the-stove.139899/->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F
-GET - https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
+https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances->http://feeds.feedburner.com/houzz
+houzz.com -> feeds.feedburner.com
 ----------------------------------------
 Depth 2 Crawling https%3A%2F%2Fhomerepairforum.com%2F
 GET - https%3A%2F%2Fhomerepairforum.com%2F - Status code 200
@@ -48,361 +18,45 @@ GET - https%3A%2F%2Fhomerepairforum.com%2F - Status code 200
 https%3A%2F%2Fhomerepairforum.com%2F->https://apps.apple.com/us/app/home-repair-forum-mobile/id1552895477
 homerepairforum.com -> apps.apple.com
 ----------------------------------------
+Depth 2 Crawling https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
+Erorr Get "https://homeappliancesforum.com/latest?page=1": dial tcp [2607:7700:0:e:0:2:2ccd:fae0]:443: i/o timeout making GET request to: https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters
+Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
+GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters - Status code 200
+------------ Backlink Found ------------
+https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters->https://vbulletin.com
+homerepairforum.com -> vbulletin.com
+----------------------------------------
+Depth 2 Crawling https%3A%2F%2Fwhatsbestforum.com%2Fforums%2Fhome%2Dappliance%2Dforum.111%2F
+Depth 2 Crawling https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F
+Depth 2 Crawling https://html.duckduckgo.com/html/
+Depth 2 Crawling https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F
+GET - https://html.duckduckgo.com/html/ - Status code 202
+GET - https%3A%2F%2Fwhatsbestforum.com%2Fforums%2Fhome%2Dappliance%2Dforum.111%2F - Status code 200
+GET - https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F - Status code 200
+GET - https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F - Status code 409
+Depth 2 Crawling https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F
+GET - https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F - Status code 200
+------------ Backlink Found ------------
+https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F->https://atakanau.wordpress.com/2023/09/26/automatically-hierarchic-categories-in-menu/?d=newscrunch&v=1.6.6&n=Newscrunch
+home-appliance-hub.com -> atakanau.wordpress.com
+----------------------------------------
+Depth 2 Crawling https://html.duckduckgo.com
+Depth 2 Crawling https%3A%2F%2Fappliancerepairforums.com%2F
+GET - https://html.duckduckgo.com - Status code 202
+GET - https%3A%2F%2Fappliancerepairforums.com%2F - Status code 200
 Depth 2 Crawling https%3A%2F%2Fappliance.net%2Fforum
 GET - https%3A%2F%2Fappliance.net%2Fforum - Status code 200
 ------------ Backlink Found ------------
-https%3A%2F%2Fappliance.net%2Fforum->http://appliance.net/buy
+https%3A%2F%2Fappliance.net%2Fforum->http://appliance.net/category/consumer-electronics
 appliance.net -> appliance.net
 ----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/6488638/miele-vs-sebo-vacuum
+Depth 1 Crawling https://houzz.com/discussions/4055729/risotto-in-the-steam-oven
+GET - https://houzz.com/discussions/4055729/risotto-in-the-steam-oven - Status code 200
 ------------ Backlink Found ------------
-https%3A%2F%2Fforum.partsdr.com%2Fforumdisplay.php%3F6%2DRange%2DOven%2Damp%2DCooktop%2DRepairs->http://partsdr.com
-forum.partsdr.com -> partsdr.com
+https://houzz.com/discussions/4055729/risotto-in-the-steam-oven->http://seriouseats.com/2011/10/the-food-lab-the-science-of-risotto.html
+houzz.com -> seriouseats.com
 ----------------------------------------
-Depth 2 Crawling https://html.duckduckgo.com
-GET - https://html.duckduckgo.com - Status code 202
-Depth 2 Crawling https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances
-GET - https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances->http://feeds.feedburner.com/houzz
-houzz.com -> feeds.feedburner.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F
-GET - https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F - Status code 409
-Depth 1 Crawling https://appliancerepairforums.com/forums/general-appliance-repair-chat.16/
-GET - https://appliancerepairforums.com/forums/general-appliance-repair-chat.16/ - Status code 200
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/646057-degreaser-range-hood-blower.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/646057-degreaser-range-hood-blower.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/646057-degreaser-range-hood-blower.html->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://appliancerepairforums.com/forums/dishwashers.22/
-GET - https://appliancerepairforums.com/forums/dishwashers.22/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/general-chit-chat.31/
-GET - https://appliancerepairforums.com/forums/general-chit-chat.31/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/-/index.rss
-GET - https://appliancerepairforums.com/forums/-/index.rss - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/ovens-stoves-ranges.21/
-Depth 1 Crawling https://doityourself.com/forum/
-GET - https://appliancerepairforums.com/forums/ovens-stoves-ranges.21/ - Status code 200
-GET - https://doityourself.com/forum/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://appliancerepairforums.com/forums/appliance-repair-classifieds-buy-sell-trade.30/
-GET - https://appliancerepairforums.com/forums/appliance-repair-classifieds-buy-sell-trade.30/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/microwaves-small-appliances.23/
-GET - https://appliancerepairforums.com/forums/microwaves-small-appliances.23/ - Status code 200
-Depth 1 Crawling https://doityourself.com/forum/search.php
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-GET - https://doityourself.com/forum/search.php - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/search.php->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://appliancerepairforums.com/forums/refrigerators-freezers.20/
-GET - https://appliancerepairforums.com/forums/refrigerators-freezers.20/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/smart-appliances-iot.27/
-GET - https://appliancerepairforums.com/forums/smart-appliances-iot.27/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/introductions.15/
-GET - https://appliancerepairforums.com/forums/introductions.15/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/washing-machines-dryers.19/
-GET - https://appliancerepairforums.com/forums/washing-machines-dryers.19/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/replacement-parts-where-to-buy.25/
-GET - https://appliancerepairforums.com/forums/replacement-parts-where-to-buy.25/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/appliance-repair-forum-announcements-support.14/
-GET - https://appliancerepairforums.com/forums/appliance-repair-forum-announcements-support.14/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/safety-proper-handling.28/
-GET - https://appliancerepairforums.com/forums/safety-proper-handling.28/ - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/forums/-/create-thread
-GET - https://appliancerepairforums.com/forums/-/create-thread - Status code 200
-Depth 1 Crawling https://appliancerepairforums.com/whats-new/media-comments/
-GET - https://appliancerepairforums.com/whats-new/media-comments/ - Status code 200
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/653297-please-help-kitchenaid-kp26m9xcer-no-spinning-under-load.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/653297-please-help-kitchenaid-kp26m9xcer-no-spinning-under-load.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/653297-please-help-kitchenaid-kp26m9xcer-no-spinning-under-load.html->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/free-wearever-chicken-bucket-instructions.42239/page-2
-GET - https://discusscooking.com/threads/free-wearever-chicken-bucket-instructions.42239/page-2 - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/free-wearever-chicken-bucket-instructions.42239/page-2->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/
-GET - https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/->https://amazon.com/Mandoline-Kitchen-Vegetable-Adjustable-Thickness/dp/B0D9Q53W9H/ref=sr_1_44?crid=3GWUU6C0R0B4E&dib=eyJ2IjoiMSJ9.1MAQtC0nNVNfVx2RQSj7dbu5dr9O_-8c0pjPUzTYKq_8nc0HLauR_czKfIt7CF78AUceSmhRWKKntvloRHwTHvaEDOe1EI0NEI1qA90dadAuF4_qi_w9cJ_WGnGPR_DY2Ui2PYX_1O_oLPMLp9fHgXnjKLewRLY4MUgz8Mq2d69-IpIKchIJH4qm_Al8bEAFIcnMaYyxjRAl_o6lvMtasYbFDAYwfxfe0nHm4jbsFG9mZwqaUVxjUCoiC3b-Ui8ALDl2jmzCVOWDgH-WWFZK8kLVeb74Evx2TwSkabuiQJ4HpJv-uk6haWxJmMEh4isMOLtiIxE5Vqx2Lo1gDsgMNJjk_YtrqZXzKoDtg2h__uN-VXVxyxX3KOPExnae9JXhGqoIekmDHXCYSdksOFOFTbO5TKHRY6v-v_AG3WGULym1sNTJtoPDMjqLplKajLEa.AZD4s3qgisoEISQXXTi6zOVoJX2nWbmhwiALFQp1CvE&dib_tag=se&keywords=safe%2Bmandoline&qid=1738083589&sprefix=safe%2Bmandolin%2Caps%2C262&sr=8-44&th=1
-discusscooking.com -> amazon.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/countertop-blenders-do-i-need-a-new-one.137899/
-GET - https://discusscooking.com/threads/countertop-blenders-do-i-need-a-new-one.137899/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/countertop-blenders-do-i-need-a-new-one.137899/->https://amazon.ca/BL1230SG-PowerCrush-Multi-Function-Blender-Settings/dp/B07RQVL8D5/ref=sr_1_5?crid=WKPOWQU2J8B5&keywords=countertop%2BBlender&nav_sdd=aps&qid=1706368924&sprefix=blender&sr=8-5&th=1
-discusscooking.com -> amazon.ca
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/help-waring-by-cuisinart-commercial-food-processor-s-blade-not-pulling-food-down-cutting-it-all-any-help-solution.137220/
-GET - https://discusscooking.com/threads/help-waring-by-cuisinart-commercial-food-processor-s-blade-not-pulling-food-down-cutting-it-all-any-help-solution.137220/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/help-waring-by-cuisinart-commercial-food-processor-s-blade-not-pulling-food-down-cutting-it-all-any-help-solution.137220/->https://cuisinart.com/shopping/appliances/food_processors/dfp-14bcny/
-discusscooking.com -> cuisinart.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/page-2
-GET - https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/page-2 - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/page-2->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/forums/-/index.rss
-Depth 2 Crawling https%3A%2F%2Fhouzz.co.uk%2Fdiscussions%2Fappliances
-GET - https://discusscooking.com/forums/-/index.rss - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/forums/-/index.rss->https://tastesbetterfromscratch.com/harissa-pasta/
-discusscooking.com -> tastesbetterfromscratch.com
-----------------------------------------
-GET - https%3A%2F%2Fhouzz.co.uk%2Fdiscussions%2Fappliances - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fhouzz.co.uk%2Fdiscussions%2Fappliances->https://houzz.co.uk/discussions/cleaning-tips
-houzz.co.uk -> houzz.co.uk
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/latest
-Depth 1 Crawling https://discusscooking.com/threads/issue-with-air-fryer.137721/
-GET - https://discusscooking.com/threads/issue-with-air-fryer.137721/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/issue-with-air-fryer.137721/->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-GET - https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/latest - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/latest->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/
-GET - https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/ - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
-Depth 1 Crawling https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/page-2
-GET - https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/page-2 - Status code 200
------------- Backlink Found ------------
-https://discusscooking.com/threads/after-using-the-oven-is-it-important-to-leave-the-oven-door-a-bit-open-for-a-while.141082/page-2->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
------------- Backlink Found ------------
-https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/651968-replacing-small-dc-motor-paper-collator.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/651968-replacing-small-dc-motor-paper-collator.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/651968-replacing-small-dc-motor-paper-collator.html->https://aliexpress.us/item/3256805818554344.html?gatewayAdapt=glo2usa4itemAdapt#nav-specification
-doityourself.com -> aliexpress.us
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/wallpaper-wallcoverings-38/
-GET - https://doityourself.com/forum/wallpaper-wallcoverings-38/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/wallpaper-wallcoverings-38/->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/carpentry-cabinetry-interior-woodworking-47/
-GET - https://doityourself.com/forum/carpentry-cabinetry-interior-woodworking-47/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/carpentry-cabinetry-interior-woodworking-47/->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/hardware-fasteners-57/
-GET - https://doityourself.com/forum/hardware-fasteners-57/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/hardware-fasteners-57/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/sports-186/
-GET - https://doityourself.com/forum/sports-186/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/sports-186/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/ponds-fountains-water-gardens-137/
-GET - https://doityourself.com/forum/ponds-fountains-water-gardens-137/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/ponds-fountains-water-gardens-137/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/misc.php
-GET - https://doityourself.com/forum/misc.php - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/misc.php->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/interior-home-improvement-center-90/
-GET - https://doityourself.com/forum/interior-home-improvement-center-90/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/interior-home-improvement-center-90/->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/651209-robo-vac.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/651209-robo-vac.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/651209-robo-vac.html->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/roofing-gutters-all-waterproofing-anywhere-19/
-GET - https://doityourself.com/forum/roofing-gutters-all-waterproofing-anywhere-19/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/roofing-gutters-all-waterproofing-anywhere-19/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https%3A%2F%2Fappliance.net%2Fforum->http://appliance.net/category/features
-appliance.net -> appliance.net
-----------------------------------------
------------- Backlink Found ------------
-https%3A%2F%2Fhomerepairforum.com%2F->https://gourmetads.com
-homerepairforum.com -> gourmetads.com
-----------------------------------------
------------- Backlink Found ------------
-https%3A%2F%2Fforum.partsdr.com%2Fforumdisplay.php%3F6%2DRange%2DOven%2Damp%2DCooktop%2DRepairs->http://forum.partsdr.com/faq.php
-forum.partsdr.com -> forum.partsdr.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/passenger-cars-mini-vans-suv-service-repairs-no-trucks/653485-2012-ford-focus-piercing-noise.html
-GET - https://doityourself.com/forum/passenger-cars-mini-vans-suv-service-repairs-no-trucks/653485-2012-ford-focus-piercing-noise.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/passenger-cars-mini-vans-suv-service-repairs-no-trucks/653485-2012-ford-focus-piercing-noise.html->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/auto-vehicle-vessel-insurance-204/
-GET - https://doityourself.com/forum/auto-vehicle-vessel-insurance-204/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/auto-vehicle-vessel-insurance-204/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/646057-degreaser-range-hood-blower.html->https://i.postimg.cc/sDm19Ryd/1tag.jpg
-doityourself.com -> i.postimg.cc
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/652413-countertop-juicer-capacitor-validation.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/652413-countertop-juicer-capacitor-validation.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/652413-countertop-juicer-capacitor-validation.html->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://appliancerepairforums.com/forums/registry.17/
-GET - https://appliancerepairforums.com/forums/registry.17/ - Status code 200
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/moderator-positions-available-qualified-professionals-119.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/moderator-positions-available-qualified-professionals-119.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/moderator-positions-available-qualified-professionals-119.html->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/proprietorship-partnership-franchises-200/
-GET - https://doityourself.com/forum/proprietorship-partnership-franchises-200/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/proprietorship-partnership-franchises-200/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https://doityourself.com/forum/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://appliancerepairforums.com/forums/diy-repair-techniques.26/
-GET - https://appliancerepairforums.com/forums/diy-repair-techniques.26/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/search.php->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/apartment-rental-properties-268/
-GET - https://doityourself.com/forum/apartment-rental-properties-268/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/apartment-rental-properties-268/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances-67-8.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances-67-8.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances-67-8.html->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/651497-microwave-makes-intermittent-whirring-noise.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/651497-microwave-makes-intermittent-whirring-noise.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/651497-microwave-makes-intermittent-whirring-noise.html->https://youtu.be/GqvjcwWSvcg?si=VbiGyklM4FGDct4e
-doityourself.com -> youtu.be
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances-67/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/members/469851-bitjam
-GET - https://doityourself.com/forum/members/469851-bitjam - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/members/469851-bitjam->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/wall-flooring-indoor-tiling-64/
-GET - https://doityourself.com/forum/wall-flooring-indoor-tiling-64/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/wall-flooring-indoor-tiling-64/->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/members/671710-lordstanley30
-GET - https://doityourself.com/forum/members/671710-lordstanley30 - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/members/671710-lordstanley30->https://internetbrands.com/ib/privacy/enthusiasts?site=www.doityourself.com
-doityourself.com -> internetbrands.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/electric-small-kitchen-home-appliances/652548-microwave-so-much-quieter.html
-GET - https://doityourself.com/forum/electric-small-kitchen-home-appliances/652548-microwave-so-much-quieter.html - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/652548-microwave-so-much-quieter.html->https://internetbrands.com/ibterms/
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https://doityourself.com/forum/electric-small-kitchen-home-appliances/653297-please-help-kitchenaid-kp26m9xcer-no-spinning-under-load.html->https://kitchenaidparts.com/PartDetail/Planetary/WP9708180/4439041
-doityourself.com -> kitchenaidparts.com
-----------------------------------------
------------- Backlink Found ------------
-https://discusscooking.com/threads/free-wearever-chicken-bucket-instructions.42239/page-2->https://ebay.com/itm/GASKET-SEAL-to-replace-Wearever-part-90024-3-8-for-Chicken-Bucket-90024-3-8-1/313288170810?hash=item48f16e1d3a:g:NsgAAOSwK9ZfpDE4
-discusscooking.com -> ebay.com
-----------------------------------------
-Depth 1 Crawling https://doityourself.com/forum/home-automation-systems-devices-15/
-GET - https://doityourself.com/forum/home-automation-systems-devices-15/ - Status code 200
------------- Backlink Found ------------
-https://doityourself.com/forum/home-automation-systems-devices-15/->https://internetbrands.com/privacy/cookie-policy.html
-doityourself.com -> internetbrands.com
-----------------------------------------
------------- Backlink Found ------------
-https://discusscooking.com/threads/iso-help-with-cutting-sweet-potatoes-electric-slicer.140575/->https://amazon.com/EMT-625B-Precision-Removable-Adjustable-Vegetables/dp/B07D7TFTVN/ref=sr_1_21?crid=1Y4HXC5JFJPXM&dib=eyJ2IjoiMSJ9.hi53xgbNilnLO4l74h_zw5_Pw0PUV_zdrjaQTA_NVS7EWjWTDClIRX5lwbFLKPHvS7YfVlLbPb_LGIsN4xUicP2KfveQvDZZhSABt9WqzBHr69UrUQlRL6oFyOp8POEdm8ql6W4Ks1-k83foqzCyoGSTEhlxkRTT6XAyG1G2nwtAYqiliiSRW1x_yYPo3HSXju5Y2FTDCV9HKvtwPBrTWho6yhBWU-CG9-4Wj7JYxV8.DSD15YHfDXi1BqYfl95_Cc5GwvWRK3lYWqgZw2QhH7s&dib_tag=se&keywords=electric%2Bvegetable%2Bslicers%2Bfor%2Bhome%2Buse&qid=1738037266&sprefix=electric%2Bvegatable%2Bslicers%2Caps%2C141&sr=8-21&ufe=app_do%3Aamzn1.fos.9fe8cbfa-bf43-43d1-a707-3f4e65a4b666&xpid=ZEfzVlNElbbYF&th=1
-discusscooking.com -> amazon.com
-----------------------------------------
------------- Backlink Found ------------
-https://discusscooking.com/threads/countertop-blenders-do-i-need-a-new-one.137899/->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
------------- Backlink Found ------------
-https://discusscooking.com/threads/help-waring-by-cuisinart-commercial-food-processor-s-blade-not-pulling-food-down-cutting-it-all-any-help-solution.137220/->https://xenforo.com
-discusscooking.com -> xenforo.com
-----------------------------------------
------------- Backlink Found ------------
-https://discusscooking.com/forums/-/index.rss->https://momontimeout.com/pistachio-and-white-chocolate-pudding-cookies-recipe/#recipe
-discusscooking.com -> momontimeout.com
-----------------------------------------
+GET - https://houzz.com/discussions/6488638/miele-vs-sebo-vacuum - Status code 200
