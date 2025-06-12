@@ -11,6 +11,8 @@ import (
 	"sync/atomic"
 	"time"
 
+	"slices"
+
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"golang.org/x/net/html"
@@ -80,6 +82,9 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	var absolute, relative []string
 
 	for link, rel := range links {
+		if link == "" {
+			continue
+		}
 		link = strings.Replace(link, "www.", "", 1)
 		if strings.HasPrefix(link, "http") {
 			if depth != s.MaxDepth && checkBacklink(link, current_url, s.CompDomains) != "" {
@@ -119,6 +124,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 				fmt.Println(link)
 				fmt.Println("Error parsing link")
 			}
+
 			path_link := parsed_link.Path
 
 			if !strings.Contains(path_link, "discussions") && !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "threads") && !strings.Contains(path_link, "forums") && !strings.Contains(path_link, "comments") {
@@ -175,7 +181,7 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 	}
 
 	if len(filterAgainst) == 0 {
-		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com"}
+		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "feedspot.com"}
 	}
 
 	if strings.Contains(link, "amazon.com/registry/") {
@@ -183,15 +189,20 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 	}
 
 	parsed_link_host := parsed_link.Hostname()
-	for _, domain := range filterAgainst {
-		if parsed_link_host == domain {
+	parsed_host := parsed.Hostname()
+	if slices.Contains(filterAgainst, parsed_link_host) {
+		return ""
+	}
+
+	for _, value := range strings.Split(parsed_link_host, ".") {
+		if slices.Contains(strings.Split(parsed_host, "."), value) {
 			return ""
 		}
 	}
 
 	fmt.Println("------------ Backlink Found ------------")
 	fmt.Println(current_url + "->" + link)
-	fmt.Println(parsed.Hostname(), "->", parsed_link_host)
+	fmt.Println(parsed_host, "->", parsed_link_host)
 	fmt.Println("----------------------------------------")
 
 	return link
