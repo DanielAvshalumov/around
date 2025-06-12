@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 	"io"
 	"net/http"
@@ -12,19 +11,20 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"golang.org/x/net/html"
 )
 
 type CrawlerService struct {
-	DB           *sql.DB
+	DB           *config.Db
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
 	semaphore    chan struct{}
 	limitReached atomic.Bool
 }
 
-func NewCrawlerService(db *sql.DB, maxThreads int) *CrawlerService {
+func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	cs := &CrawlerService{
 		DB:        db,
 		semaphore: make(chan struct{}, maxThreads),
@@ -85,6 +85,13 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			if depth != s.MaxDepth && checkBacklink(link, current_url, s.CompDomains) != "" {
 
 				cs.mu.Lock()
+				var dofollow bool
+				if strings.Contains(rel, "nofollow") {
+					dofollow = false
+				} else {
+					dofollow = true
+				}
+				cs.DB.InsertIntoBacklink(&models.Backlink{Source: current_url, Link: link, Dofollow: dofollow})
 				s.Backlinks[link] = rel
 				cs.mu.Unlock()
 
