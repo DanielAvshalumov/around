@@ -74,9 +74,6 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	s.Visited[current_url] = true
 	cs.mu.Unlock()
 
-	cs.mu.RLock()
-	defer cs.mu.RUnlock()
-
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	links := extractAnchorTags(current_url)
@@ -87,11 +84,9 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 		if strings.HasPrefix(link, "http") {
 			if depth != s.MaxDepth && checkBacklink(link, current_url, s.CompDomains) != "" {
 
-				cs.mu.RUnlock()
 				cs.mu.Lock()
 				s.Backlinks[link] = rel
 				cs.mu.Unlock()
-				cs.mu.RLock()
 
 				continue
 			}
