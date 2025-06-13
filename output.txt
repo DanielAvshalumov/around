@@ -1,62 +1,0 @@
-Opening Sqlite3
-LoadingLoading.Loading..Loading...Loading....Loading.....Opening backlinks table
-Server Listening on port 8080
-competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=home%20appliances%20forums []}
-Depth 3 Crawling https://html.duckduckgo.com/html?q=home%20appliances%20forums
-GET - https://html.duckduckgo.com/html?q=home%20appliances%20forums - Status code 200
-Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=aa924879d95d97f1842e0485b3c7b89159cc002e6a2502f2c2e81c2494040511
-GET - https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=aa924879d95d97f1842e0485b3c7b89159cc002e6a2502f2c2e81c2494040511 - Status code 200
-Depth 2 Crawling https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances
-GET - https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances->http://feeds.feedburner.com/houzz
-houzz.com -> feeds.feedburner.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fhomerepairforum.com%2F
-GET - https%3A%2F%2Fhomerepairforum.com%2F - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fhomerepairforum.com%2F->https://apps.apple.com/us/app/home-repair-forum-mobile/id1552895477
-homerepairforum.com -> apps.apple.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
-Erorr Get "https://homeappliancesforum.com/latest?page=1": dial tcp [2607:7700:0:e:0:2:2ccd:fae0]:443: i/o timeout making GET request to: https%3A%2F%2Fhomeappliancesforum.com%2Flatest%3Fpage%3D1
-Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters
-Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
-GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
-GET - https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters - Status code 200
------------- Backlink Found ------------
-https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters->https://vbulletin.com
-homerepairforum.com -> vbulletin.com
-----------------------------------------
-Depth 2 Crawling https%3A%2F%2Fwhatsbestforum.com%2Fforums%2Fhome%2Dappliance%2Dforum.111%2F
-Depth 2 Crawling https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F
-Depth 2 Crawling https://html.duckduckgo.com/html/
-Depth 2 Crawling https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F
-GET - https://html.duckduckgo.com/html/ - Status code 202
-GET - https%3A%2F%2Fwhatsbestforum.com%2Fforums%2Fhome%2Dappliance%2Dforum.111%2F - Status code 200
-GET - https%3A%2F%2Fdoityourself.com%2Fforum%2Felectric%2Dsmall%2Dkitchen%2Dhome%2Dappliances%2D67%2F - Status code 200
-GET - https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F - Status code 409
-Depth 2 Crawling https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F
-GET - https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fhome%2Dappliance%2Dhub.com%2Fbuying%2Dguides%2Fthe%2Dultimate%2Dguide%2Dto%2Dhome%2Dappliance%2Dforums%2Dwhere%2Dto%2Dfind%2Dexpert%2Dadvice%2F->https://atakanau.wordpress.com/2023/09/26/automatically-hierarchic-categories-in-menu/?d=newscrunch&v=1.6.6&n=Newscrunch
-home-appliance-hub.com -> atakanau.wordpress.com
-----------------------------------------
-Depth 2 Crawling https://html.duckduckgo.com
-Depth 2 Crawling https%3A%2F%2Fappliancerepairforums.com%2F
-GET - https://html.duckduckgo.com - Status code 202
-GET - https%3A%2F%2Fappliancerepairforums.com%2F - Status code 200
-Depth 2 Crawling https%3A%2F%2Fappliance.net%2Fforum
-GET - https%3A%2F%2Fappliance.net%2Fforum - Status code 200
------------- Backlink Found ------------
-https%3A%2F%2Fappliance.net%2Fforum->http://appliance.net/category/consumer-electronics
-appliance.net -> appliance.net
-----------------------------------------
-Depth 1 Crawling https://houzz.com/discussions/6488638/miele-vs-sebo-vacuum
-Depth 1 Crawling https://houzz.com/discussions/4055729/risotto-in-the-steam-oven
-GET - https://houzz.com/discussions/4055729/risotto-in-the-steam-oven - Status code 200
------------- Backlink Found ------------
-https://houzz.com/discussions/4055729/risotto-in-the-steam-oven->http://seriouseats.com/2011/10/the-food-lab-the-science-of-risotto.html
-houzz.com -> seriouseats.com
-----------------------------------------
-GET - https://houzz.com/discussions/6488638/miele-vs-sebo-vacuum - Status code 200
