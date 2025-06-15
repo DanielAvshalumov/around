@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
 	"io"
 	"net/http"
@@ -12,19 +11,22 @@ import (
 	"sync/atomic"
 	"time"
 
+	"slices"
+
+	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"golang.org/x/net/html"
 )
 
 type CrawlerService struct {
-	DB           *sql.DB
+	DB           *config.Db
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
 	semaphore    chan struct{}
 	limitReached atomic.Bool
 }
 
-func NewCrawlerService(db *sql.DB, maxThreads int) *CrawlerService {
+func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	cs := &CrawlerService{
 		DB:        db,
 		semaphore: make(chan struct{}, maxThreads),
@@ -50,18 +52,18 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	if depth == 0 {
 		return
 	}
-	cs.mu.RLock()
+	cs.mu.Lock()
 	switch {
 	case s.Visited[current_url]:
-		cs.mu.RUnlock()
+		cs.mu.Unlock()
 		return
 	default:
 		if cs.limitReached.Load() {
-			cs.mu.RUnlock()
+			cs.mu.Unlock()
 			return
 		}
 	}
-	cs.mu.RUnlock()
+	cs.mu.Unlock()
 
 	select {
 	case cs.semaphore <- struct{}{}:
@@ -74,27 +76,33 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	s.Visited[current_url] = true
 	cs.mu.Unlock()
 
-	cs.mu.RLock()
-	defer cs.mu.RUnlock()
-
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	links := extractAnchorTags(current_url)
 	var absolute, relative []string
 
 	for link, rel := range links {
+		if link == "" {
+			continue
+		}
 		link = strings.Replace(link, "www.", "", 1)
 		if strings.HasPrefix(link, "http") {
-			if depth != s.MaxDepth && checkBacklink(link, current_url, s.CompDomains) != "" {
-
-				cs.mu.RUnlock()
+			cs.mu.Lock()
+			if checkBacklink(link, current_url, s.CompDomains, s) != "" && depth != s.MaxDepth {
+				cs.mu.Unlock()
+				var dofollow bool
+				if strings.Contains(rel, "nofollow") {
+					dofollow = false
+				} else {
+					dofollow = true
+				}
+				cs.DB.InsertIntoBacklink(&models.Backlink{Source: current_url, Link: link, Dofollow: dofollow})
 				cs.mu.Lock()
 				s.Backlinks[link] = rel
 				cs.mu.Unlock()
-				cs.mu.RLock()
-
 				continue
 			}
+			cs.mu.Unlock()
 			absolute = append(absolute, link)
 
 		} else {
@@ -116,6 +124,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			if err != nil {
 				fmt.Println(link)
 				fmt.Println("Error parsing link")
+				continue
 			}
 			path_link := parsed_link.Path
 
@@ -125,6 +134,9 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			curr_parse, err := url.QueryUnescape(current_url)
 			if path_link[0] != '/' {
 				path_link = "/" + path_link
+			}
+			if !strings.Contains(curr_parse, ".com") {
+				continue
 			}
 			next_url = "https://" + curr_parse[strings.Index(curr_parse, "https://")+8:strings.Index(curr_parse, ".com")+4] + path_link
 		}
@@ -148,7 +160,8 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 }
 
-func checkBacklink(link string, current_url string, filterAgainst []string) string {
+func checkBacklink(link string, current_url string, filterAgainst []string, s *models.Spider) string {
+
 	_parsed, err := url.QueryUnescape(current_url)
 	if err != nil {
 		fmt.Printf("Failed unescaping string or string does not need unescaping %s\n", current_url)
@@ -173,7 +186,7 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 	}
 
 	if len(filterAgainst) == 0 {
-		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com"}
+		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "feedspot.com"}
 	}
 
 	if strings.Contains(link, "amazon.com/registry/") {
@@ -181,18 +194,34 @@ func checkBacklink(link string, current_url string, filterAgainst []string) stri
 	}
 
 	parsed_link_host := parsed_link.Hostname()
-	for _, domain := range filterAgainst {
-		if parsed_link_host == domain {
-			return ""
+	parsed_host := parsed.Hostname()
+
+	for _, value := range strings.Split(parsed_link_host, ".") {
+		split := strings.Split(parsed_host, ".")
+		for _, word := range split {
+			if strings.Contains(word, "com") {
+				continue
+			}
+			if strings.Contains(value, word) {
+				return ""
+			}
 		}
+		// if slices.Contains(split, value) {
+		// 	return ""
+		// }
 	}
 
-	fmt.Println("------------ Backlink Found ------------")
-	fmt.Println(current_url + "->" + link)
-	fmt.Println(parsed.Hostname(), "->", parsed_link_host)
-	fmt.Println("----------------------------------------")
+	if !slices.Contains(filterAgainst, parsed_link_host) {
+		fmt.Println("------------ Backlink Found ------------")
+		fmt.Println(current_url + "->" + link)
+		fmt.Println(parsed_host, "->", parsed_link_host)
+		fmt.Println("----------------------------------------")
+		return link
+	}
 
-	return link
+	// if slices.Contains(s.CompDomains,parsed_link_host) {}
+
+	return ""
 }
 
 func extractAnchorTags(page_url string) map[string]string {

@@ -10,26 +10,30 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-type db struct {
+type Db struct {
 	client *sql.DB
 }
 
-func NewDB() {}
+func NewDB(db *sql.DB) *Db {
+	return &Db{
+		client: db,
+	}
+}
 
-func InitDB() (*sql.DB, error) {
+func InitDB() (*Db, error) {
 	displayOpeningMessage()
 
 	db, err := sql.Open("sqlite3", "./config/avsolutions.db")
 	if err != nil {
 		return nil, fmt.Errorf("failed opening database: %w", err)
 	}
+	Db := NewDB(db)
+	createBacklinkTable(Db.client)
 
-	createBacklinkTable(db)
-
-	return db, nil
+	return Db, nil
 }
 
-func (db *db) InsertIntoBacklink(backlink *models.Backlink) (int64, error) {
+func (db *Db) InsertIntoBacklink(backlink *models.Backlink) (int64, error) {
 	query := `
 		INSERT INTO backlinks (source, link, dofollow)
 		VALUES (?, ?, ?)

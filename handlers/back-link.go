@@ -42,7 +42,11 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
+	// keywords := req.Keywords
+
 	query := "https://html.duckduckgo.com/html?q=" + req.Industry + "%20forums"
+	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
+
 	comp_domain := req.Comp_domains
 
 	spider := models.NewSpider(query, 3, comp_domain)
