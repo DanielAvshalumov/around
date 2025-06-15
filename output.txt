@@ -1,602 +1,1336 @@
 Opening Sqlite3
 LoadingLoading.Loading..Loading...Loading....Loading.....Opening backlinks table
 Server Listening on port 8080
-competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=digital%20marketing%20software%20forums []}
-Depth 3 Crawling https://html.duckduckgo.com/html?q=digital%20marketing%20software%20forums
-GET - https://html.duckduckgo.com/html?q=digital%20marketing%20software%20forums - Status code 200
-Depth 2 Crawling https%3A%2F%2Fit%2Dmaniacs.com%2Fdigital%2Dmarketing%2Dforums%2Dfor%2Daffiliate%2Dcontent%2Demail%2Dmarketing%2Dtop%2D15%2F
-Depth 2 Crawling https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html
-Depth 2 Crawling https%3A%2F%2Fmedium.com%2F%40b2blgs.com%2Ftop%2D21%2Ddigital%2Dmarketing%2Dforums%2Din%2D2024%2Dd1d575cf4df0
-Depth 2 Crawling https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de
-Depth 2 Crawling https%3A%2F%2Fezeetraffic.com%2Fdigital%2Dmarketing%2Dforums%2F
-Depth 2 Crawling https%3A%2F%2Fwarriorforum.com%2F
-Depth 2 Crawling https%3A%2F%2Fmarketingterms.com%2Fforums%2F
-Depth 2 Crawling https://html.duckduckgo.com/html/
-Depth 2 Crawling https%3A%2F%2Fpitiya.com%2Finternet%2Dmarketing%2Dforums.html
+competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=cosmetics%20forums []}
+Depth 3 Crawling https://html.duckduckgo.com/html?q=cosmetics%20forums
+GET - https://html.duckduckgo.com/html?q=cosmetics%20forums - Status code 200
+Depth 2 Crawling https%3A%2F%2Fcommunity.sephora.com%2F
+Depth 2 Crawling https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F
+Depth 2 Crawling https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2F
 Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
-Depth 2 Crawling https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F
-Depth 2 Crawling https%3A%2F%2Fforums.feedspot.com%2Fmarketing_forums%2F
+Depth 2 Crawling https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F
+Depth 2 Crawling https%3A%2F%2Fmakeuptalk.com%2F
+Depth 2 Crawling https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2Fforum%2Fformulating%2Fcosmetic%2Dindustry%2F
+Depth 2 Crawling https://html.duckduckgo.com/html/
+Depth 2 Crawling https%3A%2F%2Fmakeupalley.com%2F
+Depth 2 Crawling https%3A%2F%2Fskincaretalk.com%2Fforums%2F
+Depth 2 Crawling https%3A%2F%2Fmakeupsubmit.com%2Fforum
+Depth 2 Crawling https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1
 GET - https://html.duckduckgo.com/html/ - Status code 202
 GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
-GET - https%3A%2F%2Fmedium.com%2F%40b2blgs.com%2Ftop%2D21%2Ddigital%2Dmarketing%2Dforums%2Din%2D2024%2Dd1d575cf4df0 - Status code 200
-GET - https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de - Status code 200
+GET - https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F - Status code 200
+GET - https%3A%2F%2Fmakeupalley.com%2F - Status code 200
 ------------ Backlink Found ------------
-https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de->https://firstlaunch.in/blog/
-medium.com -> firstlaunch.in
+https%3A%2F%2Fmakeupalley.com%2F->https://muasupport.zendesk.com/hc/en-us
+makeupalley.com -> muasupport.zendesk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de->https://growth.org/topics/seo
-medium.com -> growth.org
+https%3A%2F%2Fmakeupalley.com%2F->https://threads.net/@realmakeupalley
+makeupalley.com -> threads.net
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de->http://webdesignforums.net/forum/forum.php
-medium.com -> webdesignforums.net
+https%3A%2F%2Fmakeupalley.com%2F->https://tiktok.com/@makeupalleyofficial
+makeupalley.com -> tiktok.com
+----------------------------------------
+GET - https%3A%2F%2Fmakeupsubmit.com%2Fforum - Status code 200
+GET - https%3A%2F%2Fmakeuptalk.com%2F - Status code 200
+------------ Backlink Found ------------
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://specktra.net/
+forums.feedspot.com -> specktra.net
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fmedium.com%2F%40FirstLaunchIn%2F50%2Dmust%2Dfollow%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2Db3fd9de5f0de->http://bestblackhatforum.eu/
-medium.com -> bestblackhatforum.eu
-----------------------------------------
-GET - https%3A%2F%2Fforums.feedspot.com%2Fmarketing_forums%2F - Status code 200
-GET - https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F - Status code 200
-GET - https%3A%2F%2Fit%2Dmaniacs.com%2Fdigital%2Dmarketing%2Dforums%2Dfor%2Daffiliate%2Dcontent%2Demail%2Dmarketing%2Dtop%2D15%2F - Status code 200
-GET - https%3A%2F%2Fezeetraffic.com%2Fdigital%2Dmarketing%2Dforums%2F - Status code 200
-GET - https%3A%2F%2Fmarketingterms.com%2Fforums%2F - Status code 200
-Depth 1 Crawling https://medium.com/threads/v7n-is-worst-webmaster-forum.2686409/
-Depth 1 Crawling https://medium.com/forum
-Depth 1 Crawling https://medium.com/forums/
-Depth 1 Crawling https://medium.com/forum/
-Depth 1 Crawling https://medium.com/tag/forum
-Depth 1 Crawling https://medium.com/tag/digital-marketing-forum
-GET - https://medium.com/tag/forum - Status code 200
-Depth 1 Crawling https://medium.com/forums/seo-and-marketing.8/
-Depth 1 Crawling https://medium.com/forum.php
-Depth 1 Crawling https://medium.com/forums/black-hat-seo.6/
-Depth 1 Crawling https://medium.com/webmaster-forums/
-GET - https://medium.com/threads/v7n-is-worst-webmaster-forum.2686409/ - Status code 200
-Depth 1 Crawling https://medium.com/community/forums/advertising-marketing-social-media.79/
-Depth 1 Crawling https://medium.com/forums/blogging-content-marketing/
-Depth 1 Crawling https://medium.com/forums/social-networking/
-Depth 1 Crawling https://medium.com/tag/digital-marketing-forums
-Depth 1 Crawling https://medium.com/seo-forum/index.php
-GET - https%3A%2F%2Fwarriorforum.com%2F - Status code 200
-GET - https://medium.com/tag/digital-marketing-forum - Status code 200
-GET - https://medium.com/forum - Status code 404
------------- Backlink Found ------------
-https://medium.com/threads/v7n-is-worst-webmaster-forum.2686409/->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
-----------------------------------------
-GET - https://medium.com/forum/ - Status code 404
-GET - https://medium.com/forums/ - Status code 404
-Depth 1 Crawling https://it-maniacs.com/forums-about-wordpress-for-wp-users-developers-top-25/
-Depth 1 Crawling https://it-maniacs.com/best-forums-for-students-high-school-undergrad-grad-school-forums-list/
-Depth 1 Crawling https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/
-Depth 1 Crawling https://it-maniacs.com/forums/
-Depth 1 Crawling https://it-maniacs.com/sharepoint-forums-online-communities-top-10/
-Depth 1 Crawling https://it-maniacs.com/main-internet-marketing-discussion-forum
-Depth 1 Crawling https://it-maniacs.com/robotics-forums-message-boards-online-communities-top-15/
-Depth 1 Crawling https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/
-Depth 1 Crawling https://it-maniacs.com/forum/
-Depth 1 Crawling https://it-maniacs.com/adobe-photoshop-forums-message-boards-online-communities-top-15/
-Depth 1 Crawling https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/
-Depth 1 Crawling https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/
-Depth 1 Crawling https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/
-Depth 1 Crawling https://it-maniacs.com/e-commerce-shopify-forums-message-boards-online-communities-top-15/
-Depth 1 Crawling https://it-maniacs.com/forums/affiliate-programs.22
-Depth 1 Crawling https://it-maniacs.com/making-money-online-forums-message-boards-online-communities-top-25/
-Depth 1 Crawling https://it-maniacs.com/forums/search-engine-optimization.12
-GET - https://medium.com/seo-forum/index.php - Status code 200
-GET - https://medium.com/community/forums/advertising-marketing-social-media.79/ - Status code 404
-GET - https://medium.com/forum.php - Status code 404
------------- Backlink Found ------------
-https://medium.com/forum->https://scottlamb.blog
-medium.com -> scottlamb.blog
-----------------------------------------
-GET - https://medium.com/forums/black-hat-seo.6/ - Status code 200
-GET - https://medium.com/forums/social-networking/ - Status code 200
-GET - https://medium.com/webmaster-forums/ - Status code 404
-GET - https://medium.com/forums/seo-and-marketing.8/ - Status code 200
------------- Backlink Found ------------
-https://medium.com/forum/->https://scottlamb.blog
-medium.com -> scottlamb.blog
-----------------------------------------
-GET - https://medium.com/forums/blogging-content-marketing/ - Status code 200
------------- Backlink Found ------------
-https://medium.com/forums/->https://scottlamb.blog
-medium.com -> scottlamb.blog
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://makeuptalk.com/
+forums.feedspot.com -> makeuptalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fmarketingterms.com%2Fforums%2F->http://ppcchat.co/
-marketingterms.com -> ppcchat.co
-----------------------------------------
-GET - https://medium.com/tag/digital-marketing-forums - Status code 200
------------- Backlink Found ------------
-https://medium.com/forum.php->https://scottlamb.blog
-medium.com -> scottlamb.blog
+https%3A%2F%2Fmakeuptalk.com%2F->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://medium.com/seo-forum/index.php->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://linkedin.com/company/feedspot
+forums.feedspot.com -> linkedin.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://medium.com/community/forums/advertising-marketing-social-media.79/->https://scottlamb.blog
-medium.com -> scottlamb.blog
-----------------------------------------
-GET - https://it-maniacs.com/forums/search-engine-optimization.12 - Status code 404
-GET - https://it-maniacs.com/forums/affiliate-programs.22 - Status code 404
-Depth 1 Crawling https://marketingterms.com/forum.html
-Depth 1 Crawling https://marketingterms.com/forums/affiliate-programs.22/
-Depth 1 Crawling https://marketingterms.com/forum.asp
-Depth 1 Crawling https://marketingterms.com/forums
------------- Backlink Found ------------
-https://medium.com/forums/black-hat-seo.6/->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
-----------------------------------------
-Depth 1 Crawling https://ezeetraffic.com/forums/
------------- Backlink Found ------------
-https://medium.com/webmaster-forums/->https://scottlamb.blog
-medium.com -> scottlamb.blog
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://reddit.com/r/MakeupLounge/
+forums.feedspot.com -> reddit.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://medium.com/forums/seo-and-marketing.8/->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://forum.purseblog.com/forums/make-up.228/
+forums.feedspot.com -> forum.purseblog.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://medium.com/forums/social-networking/->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://reddit.com/r/MakeupAddiction/
+forums.feedspot.com -> reddit.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://medium.com/forums/blogging-content-marketing/->https://scottlamb.blog/?source=post_page--------------------------------------------
-medium.com -> scottlamb.blog
-----------------------------------------
-GET - https://marketingterms.com/forum.asp - Status code 404
-Erorr Get "https://pitiya.com/internet-marketing-forums.html": net/http: TLS handshake timeout making GET request to: https%3A%2F%2Fpitiya.com%2Finternet%2Dmarketing%2Dforums.html
-GET - https://marketingterms.com/forum.html - Status code 404
-GET - https://marketingterms.com/forums - Status code 200
-GET - https://marketingterms.com/forums/affiliate-programs.22/ - Status code 404
------------- Backlink Found ------------
-https://marketingterms.com/forums->http://ppcchat.co/
-marketingterms.com -> ppcchat.co
-----------------------------------------
-GET - https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/ - Status code 200
-GET - https://it-maniacs.com/making-money-online-forums-message-boards-online-communities-top-25/ - Status code 200
-GET - https://it-maniacs.com/best-forums-for-students-high-school-undergrad-grad-school-forums-list/ - Status code 200
-GET - https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/ - Status code 200
-GET - https://it-maniacs.com/main-internet-marketing-discussion-forum - Status code 404
-GET - https://it-maniacs.com/e-commerce-shopify-forums-message-boards-online-communities-top-15/ - Status code 200
-GET - https://it-maniacs.com/adobe-photoshop-forums-message-boards-online-communities-top-15/ - Status code 200
-GET - https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/ - Status code 200
-GET - https://it-maniacs.com/forums-about-wordpress-for-wp-users-developers-top-25/ - Status code 200
-GET - https://ezeetraffic.com/forums/ - Status code 404
-GET - https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/ - Status code 200
-GET - https://it-maniacs.com/forums/ - Status code 200
-GET - https://it-maniacs.com/robotics-forums-message-boards-online-communities-top-15/ - Status code 200
-GET - https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/ - Status code 200
-GET - https://it-maniacs.com/sharepoint-forums-online-communities-top-10/ - Status code 200
------------- Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://asgaros.de/
-it-maniacs.com -> asgaros.de
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://reddit.com/r/Makeup/
+forums.feedspot.com -> reddit.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/wp-symposium-pro/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fforums.feedspot.com%2Fmakeup_forums%2F->https://chemistscorner.com/cosmeticsciencetalk/
+forums.feedspot.com -> chemistscorner.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/support/plugin/wp-discussion-board/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fmakeuptalk.com%2F->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/buddypress/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fmakeuptalk.com%2F->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/cm-answers/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fmakeuptalk.com%2F->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
+----------------------------------------
+GET - https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1 - Status code 200
+GET - https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2F - Status code 200
+GET - https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2Fforum%2Fformulating%2Fcosmetic%2Dindustry%2F - Status code 200
+GET - https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F - Status code 200
+------------ Backlink Found ------------
+https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2F->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://codecanyon.net/item/sabai-discuss-plugin-for-wordpress/3455723
-it-maniacs.com -> codecanyon.net
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/differin/index.htm?drug=Differin&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/anspress-question-answer/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fchemistscorner.com%2Fcosmeticsciencetalk%2Fforum%2Fformulating%2Fcosmetic%2Dindustry%2F->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/vanilla-forums/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/benzoyl/index.htm?drug=Benzoyl&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://codecanyon.net/item/simple-forum-responsive-bulletin-board/13289844
-it-maniacs.com -> codecanyon.net
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/nizoral/index.htm?drug=Nizoral&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/bbpress/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/hydrocortisone/index.htm?drug=Hydrocortisone&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forum-plugins-for-wordpress-top-15/->https://wordpress.org/plugins/dw-question-answer/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/botox/index.htm?drug=Botox&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/making-money-online-forums-message-boards-online-communities-top-25/->https://slickdeals.net/forums/
-it-maniacs.com -> slickdeals.net
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/aspirin/index.htm?drug=Aspirin&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/making-money-online-forums-message-boards-online-communities-top-25/->https://ukbusinessforums.co.uk/
-it-maniacs.com -> ukbusinessforums.co.uk
-----------------------------------------
-GET - https://it-maniacs.com/forum/ - Status code 200
------------- Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://lobste.rs
-it-maniacs.com -> lobste.rs
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/accutane/index.htm?drug=Accutane&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->http://kaskus.co.id/
-it-maniacs.com -> kaskus.co.id
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->https://premierdisability.com/consumer-health-data-privacy-notice
+healthboards.com -> premierdisability.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://saidit.net
-it-maniacs.com -> saidit.net
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/?do=boards&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://phuks.co
-it-maniacs.com -> phuks.co
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/prenatal/index.htm?drug=Prenatal&fid=19
+healthboards.com -> drugtalk.com
+----------------------------------------
+GET - https%3A%2F%2Fcommunity.sephora.com%2F - Status code 200
+------------ Backlink Found ------------
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/retin-a/index.htm?drug=Retin-a&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://notabug.io
-it-maniacs.com -> notabug.io
+https%3A%2F%2Fhealthboards.com%2Fboards%2Fbeauty%2Dcosmetics%2F->http://drugtalk.com/renova/index.htm?drug=Renova&fid=19
+healthboards.com -> drugtalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://archiveofourown.org/
-it-maniacs.com -> archiveofourown.org
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://play.google.com/store/apps/details?id=com.qvc&hl=en
+community.qvc.com -> play.google.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://slickdeals.net/forums/
-it-maniacs.com -> slickdeals.net
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://threads.net/@qvc
+community.qvc.com -> threads.net
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->http://4chan.org/
-it-maniacs.com -> 4chan.org
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://garnethill.com/
+community.qvc.com -> garnethill.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-and-most-popular-forums-message-boards-and-online-communities-top-30/->https://tildes.net
-it-maniacs.com -> tildes.net
-----------------------------------------
-GET - https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html - Status code 200
------------- Backlink Found ------------
-https://it-maniacs.com/best-forums-for-students-high-school-undergrad-grad-school-forums-list/->https://thestudentroom.co.uk/
-it-maniacs.com -> thestudentroom.co.uk
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F23797290954%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink
+community.qvc.com -> messenger.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forums-for-students-high-school-undergrad-grad-school-forums-list/->https://studentedge.org/forums
-it-maniacs.com -> studentedge.org
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://tiktok.com/@qvc
+community.qvc.com -> tiktok.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-forums-for-students-high-school-undergrad-grad-school-forums-list/->https://researchgate.net/
-it-maniacs.com -> researchgate.net
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://linkedin.com/company/qvc-international/
+community.qvc.com -> linkedin.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html->https://i0.wp.com/digitalsuccess.us/blog/wp-content/uploads/2022/06/seo_online_2-1-1.jpg?ssl=1
-digitalsuccess.us -> i0.wp.com
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://hsn.com/
+community.qvc.com -> hsn.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html->https://linkedin.com/company/digital-success-agency
-digitalsuccess.us -> linkedin.com
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://grandinroad.com/
+community.qvc.com -> grandinroad.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html->https://socialsnap.com/?utm_source=WordPress&utm_medium=link&utm_campaign=inthewild
-digitalsuccess.us -> socialsnap.com
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://ballarddesigns.com/
+community.qvc.com -> ballarddesigns.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fdigitalsuccess.us%2Fblog%2F11%2Dpopular%2Ddigital%2Dmarketing%2Dforums%2Devery%2Dmarketer%2Dmust%2Dknow%2Dabout.html->https://i0.wp.com/digitalsuccess.us/blog/wp-content/uploads/2022/01/marketing-digital-technology-business-concept-1.jpg?ssl=1
-digitalsuccess.us -> i0.wp.com
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://itunes.apple.com/us/app/qvc-for-iphone/id340021813?mt=8
+community.qvc.com -> itunes.apple.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/e-commerce-shopify-forums-message-boards-online-communities-top-15/->https://thewholesaleforums.co.uk/forums/e-commerce/
-it-maniacs.com -> thewholesaleforums.co.uk
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://frontgate.com/
+community.qvc.com -> frontgate.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Fforums.feedspot.com%2Fmarketing_forums%2F->http://bestblackhatforum.eu/
-forums.feedspot.com -> bestblackhatforum.eu
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://m.me/QVC
+community.qvc.com -> m.me
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/->https://designernews.co/
-it-maniacs.com -> designernews.co
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://app.impact.com/campaign-promo-signup/QVC.brand?execution=e5s1
+community.qvc.com -> app.impact.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/->https://webdesignerforum.co.uk/
-it-maniacs.com -> webdesignerforum.co.uk
+https%3A%2F%2Fcommunity.qvc.com%2Ft5%2FBeauty%2Fbd%2Dp%2F1->https://careers.qurateretailgroup.com/qvc-us/?multi_select1=QVC&location=United%20States&country=US&radius=25&primary_country=US
+community.qvc.com -> careers.qurateretailgroup.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/->https://wordpress.org/support/forums/
-it-maniacs.com -> wordpress.org
+https%3A%2F%2Fcommunity.sephora.com%2F->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/->https://designerhangout.co/
-it-maniacs.com -> designerhangout.co
+https%3A%2F%2Fcommunity.sephora.com%2F->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
 ----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/best-web-design-forums-web-dev-forums-message-boards-online-communities/->http://twitterbootstrap.net/forum/
-it-maniacs.com -> twitterbootstrap.net
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-about-wordpress-for-wp-users-developers-top-25/->https://freecodecamp.org/news/tag/wordpress/
-it-maniacs.com -> freecodecamp.org
-----------------------------------------
-Depth 1 Crawling https://forums.feedspot.com/forums/
-Depth 1 Crawling https://forums.feedspot.com/forum/
-Depth 1 Crawling https://forums.feedspot.com/forumdisplay.php
-Depth 1 Crawling https://forums.feedspot.com/email_marketing_forums/
-Depth 1 Crawling https://forums.feedspot.com/forum/online-marketing/
-Depth 1 Crawling https://forums.feedspot.com/community/forums/business-marketing-social-media-strategy/
-Depth 1 Crawling https://forums.feedspot.com/sales_forums/
-Depth 1 Crawling https://forums.feedspot.com/business_forums/
-Depth 1 Crawling https://forums.feedspot.com/forums_directory/
+Depth 1 Crawling https://makeupalley.com/board/1/threads/4310844/posts/220999212
+Depth 1 Crawling https://makeupalley.com/board/1/threads/4310857/posts/221002867
+Depth 1 Crawling https://makeupalley.com/board/1/threads/4310845/posts/220999214
+Depth 1 Crawling https://makeupalley.com/board/1/threads/4310850/posts/221001509
+Depth 1 Crawling https://makeupalley.com/board/1/threads/4310838/posts/220996394
+GET - https://makeupalley.com/board/1/threads/4310857/posts/221002867 - Status code 200
+GET - https://makeupalley.com/board/1/threads/4310844/posts/220999212 - Status code 200
+GET - https://makeupalley.com/board/1/threads/4310850/posts/221001509 - Status code 200
+GET - https://makeupalley.com/board/1/threads/4310845/posts/220999214 - Status code 200
+GET - https://makeupalley.com/board/1/threads/4310838/posts/220996394 - Status code 200
+Depth 1 Crawling https://forums.feedspot.com/skincare_forums/
 Depth 1 Crawling https://forums.feedspot.com/recent_changes_forums/
-Depth 1 Crawling https://forums.feedspot.com/affiliate_marketing_forums/
-Depth 1 Crawling https://forums.feedspot.com/pay_per_click_forums/
-Depth 1 Crawling https://forums.feedspot.com/marketing-and-promotion-forums/
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://cracked.to
-it-maniacs.com -> cracked.to
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://ethicalhacker.net/forums/
-it-maniacs.com -> ethicalhacker.net
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://forum.hackthebox.eu/
-it-maniacs.com -> forum.hackthebox.eu
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://unknowncheats.me/forum/
-it-maniacs.com -> unknowncheats.me
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://hackforums.net
-it-maniacs.com -> hackforums.net
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://leakforums.co/
-it-maniacs.com -> leakforums.co
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://0x00sec.org/
-it-maniacs.com -> 0x00sec.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://hackthissite.org/forums/
-it-maniacs.com -> hackthissite.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://nulled.to/
-it-maniacs.com -> nulled.to
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://evilzone.org
-it-maniacs.com -> evilzone.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums-for-hackers-it-sec-pen-testing-hacking-message-discussion-boards-online-communities/->https://zsecurity.org/forums/
-it-maniacs.com -> zsecurity.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forums/->https://freecodecamp.org/news/tag/wordpress/
-it-maniacs.com -> freecodecamp.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://makerpad.co
-it-maniacs.com -> makerpad.co
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://small-business-forum.net/
-it-maniacs.com -> small-business-forum.net
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://creativecow.net/forums/
-it-maniacs.com -> creativecow.net
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://ukbusinessforums.co.uk/
-it-maniacs.com -> ukbusinessforums.co.uk
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://startupschool.org/channels/all
-it-maniacs.com -> startupschool.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/30-websites-forums-for-entrepreneurs-startup-founders-small-business-owners/->https://smallbusinessforum.co/
-it-maniacs.com -> smallbusinessforum.co
-----------------------------------------
+GET - https://forums.feedspot.com/skincare_forums/ - Status code 200
+Depth 1 Crawling https://forums.feedspot.com/forums_directory/
+Depth 1 Crawling https://forums.feedspot.com/beauty_forums/
+Depth 1 Crawling https://makeuptalk.com/forums/makeup-talk.2/
+Depth 1 Crawling https://makeuptalk.com/forums/skin-care-talk.3/
+Depth 1 Crawling https://makeuptalk.com/forums/nail-talk.55/
+Depth 1 Crawling https://makeuptalk.com/forums/fashion-talk.13/
+Depth 1 Crawling https://makeuptalk.com/forums/-/create-thread
 GET - https://forums.feedspot.com/forums_directory/ - Status code 200
------------- Backlink Found ------------
-https://it-maniacs.com/robotics-forums-message-boards-online-communities-top-15/->https://automate.org/robotics/ask-the-experts
-it-maniacs.com -> automate.org
-----------------------------------------
------------- Backlink Found ------------
-https://it-maniacs.com/forum/->https://freecodecamp.org/news/tag/wordpress/
-it-maniacs.com -> freecodecamp.org
-----------------------------------------
-GET - https://forums.feedspot.com/sales_forums/ - Status code 200
------------- Backlink Found ------------
-https://forums.feedspot.com/sales_forums/->https://ukbusinessforums.co.uk/forums/sales-marketing-pr.58/
-forums.feedspot.com -> ukbusinessforums.co.uk
-----------------------------------------
-GET - https://forums.feedspot.com/business_forums/ - Status code 200
------------- Backlink Found ------------
-https://forums.feedspot.com/business_forums/->https://businessforum.uk/
-forums.feedspot.com -> businessforum.uk
-----------------------------------------
------------- Backlink Found ------------
-https://forums.feedspot.com/business_forums/->https://small-business-forum.net/
-forums.feedspot.com -> small-business-forum.net
-----------------------------------------
------------- Backlink Found ------------
-https://forums.feedspot.com/business_forums/->https://creativecow.net/forums/forum/businessmarketing/
-forums.feedspot.com -> creativecow.net
-----------------------------------------
------------- Backlink Found ------------
-https://forums.feedspot.com/business_forums/->https://ukbusinessforums.co.uk/forums/
-forums.feedspot.com -> ukbusinessforums.co.uk
-----------------------------------------
-GET - https://forums.feedspot.com/affiliate_marketing_forums/ - Status code 200
------------- Backlink Found ------------
-https://forums.feedspot.com/affiliate_marketing_forums/->https://forumweb.hosting/152-affiliate-marketing/
-forums.feedspot.com -> forumweb.hosting
-----------------------------------------
-GET - https://forums.feedspot.com/pay_per_click_forums/ - Status code 200
+Depth 1 Crawling https://makeuptalk.com/forums/chit-chat.6/
+Depth 1 Crawling https://makeuptalk.com/forums/-/index.rss
+Depth 1 Crawling https://makeuptalk.com/whats-new/media-comments/
+Depth 1 Crawling https://makeuptalk.com/forums/makeup-nails-classifieds.103/
+Depth 1 Crawling https://makeuptalk.com/forums/makeup-showcase.407/
+Depth 1 Crawling https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/
+Depth 1 Crawling https://makeuptalk.com/forums/new-member-introductions.42/
+Depth 1 Crawling https://makeuptalk.com/forums/hair-care-talk.4/
 GET - https://forums.feedspot.com/recent_changes_forums/ - Status code 200
-GET - https://forums.feedspot.com/forumdisplay.php - Status code 404
-GET - https://forums.feedspot.com/community/forums/business-marketing-social-media-strategy/ - Status code 404
-GET - https://forums.feedspot.com/forum/ - Status code 404
-GET - https://forums.feedspot.com/forum/online-marketing/ - Status code 404
-GET - https://forums.feedspot.com/forums/ - Status code 404
-GET - https://forums.feedspot.com/marketing-and-promotion-forums/ - Status code 404
-GET - https://forums.feedspot.com/email_marketing_forums/ - Status code 200
+GET - https://forums.feedspot.com/beauty_forums/ - Status code 200
+GET - https://makeuptalk.com/forums/-/index.rss - Status code 200
+Depth 1 Crawling https://makeupsubmit.com/forum/questions-and-concerns/which-salon-offer-the-best-manicure-pedicure-in-fresno-ca
+Depth 1 Crawling https://makeupsubmit.com/forum/questions-and-concerns/which-salon-offer-the-best-manicure-pedicure-in-fresno-ca/dl-focus
+Depth 1 Crawling https://makeupsubmit.com/forum/general-discussion
+Depth 1 Crawling https://makeupsubmit.com/forum/general-discussion/what-essential-oils-are-good-for-insomnia
+Depth 1 Crawling https://makeupsubmit.com/forum/questions-and-concerns
+Depth 1 Crawling https://makeupsubmit.com/forum/general-discussion/what-essential-oils-are-good-for-insomnia/dl-focus
+Depth 1 Crawling https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women
+Depth 1 Crawling https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women/dl-focus
+Depth 1 Crawling https://makeupsubmit.com/forum
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/hair/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/advanced-questions/
+Depth 1 Crawling https://chemistscorner.com/discussions/page/684/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/innovation/
+Depth 1 Crawling https://chemistscorner.com/discussions/page/683/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/general/
+GET - https://makeuptalk.com/forums/nail-talk.55/ - Status code 200
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/color-and-makeup/
+Depth 1 Crawling https://chemistscorner.com/discussions/page/2/
+Depth 1 Crawling https://chemistscorner.com/product/join-the-forum/
+Depth 1 Crawling https://chemistscorner.com/discussions/page/682/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/
+Depth 1 Crawling https://chemistscorner.com/discussions/page/3/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/skin/
+GET - https://makeupsubmit.com/forum - Status code 200
+GET - https://makeuptalk.com/forums/skin-care-talk.3/ - Status code 200
+GET - https://makeuptalk.com/forums/makeup-talk.2/ - Status code 200
+GET - https://makeupsubmit.com/forum/questions-and-concerns - Status code 200
+GET - https://makeuptalk.com/whats-new/media-comments/ - Status code 200
+GET - https://makeupsubmit.com/forum/questions-and-concerns/which-salon-offer-the-best-manicure-pedicure-in-fresno-ca - Status code 200
+GET - https://makeupsubmit.com/forum/general-discussion - Status code 200
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/3/
+GET - https://makeuptalk.com/forums/hair-care-talk.4/ - Status code 200
+GET - https://makeuptalk.com/forums/fashion-talk.13/ - Status code 200
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://affilorama.com/
-firstlaunch.in -> affilorama.com
+https://forums.feedspot.com/skincare_forums/->https://realself.com/skin-care/forum
+forums.feedspot.com -> realself.com
+----------------------------------------
+GET - https://makeupsubmit.com/forum/general-discussion/what-essential-oils-are-good-for-insomnia/dl-focus - Status code 200
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/21/
+------------ Backlink Found ------------
+https://forums.feedspot.com/skincare_forums/->https://skincaretalk.com/
+forums.feedspot.com -> skincaretalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://webmasterserve.com/
-firstlaunch.in -> webmasterserve.com
+https://forums.feedspot.com/skincare_forums/->https://reddit.com/r/SkincareAddiction/
+forums.feedspot.com -> reddit.com
+----------------------------------------
+GET - https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/ - Status code 200
+------------ Backlink Found ------------
+https://forums.feedspot.com/forums_directory/->https://linkedin.com/company/feedspot
+forums.feedspot.com -> linkedin.com
+----------------------------------------
+GET - https://makeuptalk.com/forums/makeup-nails-classifieds.103/ - Status code 200
+------------ Backlink Found ------------
+https://forums.feedspot.com/skincare_forums/->https://girlsforum.com/forums/skin-care.60/
+forums.feedspot.com -> girlsforum.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://affiliatefix.com/
-firstlaunch.in -> affiliatefix.com
+https://forums.feedspot.com/skincare_forums/->https://essentialdayspa.com/forum/viewforum.php?f=1
+forums.feedspot.com -> essentialdayspa.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://socialchamps.com/forum/
-firstlaunch.in -> socialchamps.com
+https://forums.feedspot.com/skincare_forums/->https://skinalley.com/
+forums.feedspot.com -> skinalley.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://techrepublic.com/forums/social-networking/
-firstlaunch.in -> techrepublic.com
+https://forums.feedspot.com/skincare_forums/->https://specktra.net/forums/skin-bodycare.22/
+forums.feedspot.com -> specktra.net
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://thefastlaneforum.com/community/forums/advertising-marketing-social-media.79/
-firstlaunch.in -> thefastlaneforum.com
+https://forums.feedspot.com/skincare_forums/->https://makeuptalk.com/forums/skin-care-talk.3/
+forums.feedspot.com -> makeuptalk.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://bestblackhatforum.eu/
-firstlaunch.in -> bestblackhatforum.eu
+https://makeuptalk.com/whats-new/media-comments/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://seo-forum.link-assistant.com/
-firstlaunch.in -> seo-forum.link-assistant.com
+https://makeuptalk.com/forums/nail-talk.55/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://ask.shoutmeloud.com/
-firstlaunch.in -> ask.shoutmeloud.com
+https://forums.feedspot.com/skincare_forums/->https://linkedin.com/company/feedspot
+forums.feedspot.com -> linkedin.com
+----------------------------------------
+GET - https://makeupsubmit.com/forum/general-discussion/what-essential-oils-are-good-for-insomnia - Status code 200
+GET - https://makeuptalk.com/forums/makeup-showcase.407/ - Status code 200
+------------ Backlink Found ------------
+https://forums.feedspot.com/skincare_forums/->http://smartskincare.com/forum/
+forums.feedspot.com -> smartskincare.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://trafficplanet.com/
-firstlaunch.in -> trafficplanet.com
+https://makeuptalk.com/whats-new/media-comments/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+GET - https://makeuptalk.com/forums/-/create-thread - Status code 200
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/22/
+GET - https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women/dl-focus - Status code 200
+GET - https://makeuptalk.com/forums/new-member-introductions.42/ - Status code 200
+------------ Backlink Found ------------
+https://makeuptalk.com/whats-new/media-comments/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://webdevforums.com/
-firstlaunch.in -> webdevforums.com
+https://makeuptalk.com/whats-new/media-comments/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://stmforum.com/
-firstlaunch.in -> stmforum.com
+https://makeuptalk.com/forums/nail-talk.55/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://forums.digitalpoint.com/
-firstlaunch.in -> forums.digitalpoint.com
+https://makeuptalk.com/forums/nail-talk.55/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://dreamteammoney.com/
-firstlaunch.in -> dreamteammoney.com
+https://makeuptalk.com/forums/nail-talk.55/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+GET - https://makeuptalk.com/forums/chit-chat.6/ - Status code 200
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/-/create-thread->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://letsforum.com/
-firstlaunch.in -> letsforum.com
+https://makeuptalk.com/forums/-/create-thread->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://seomastering.com/seo-forum/index.php
-firstlaunch.in -> seomastering.com
+https://makeuptalk.com/forums/makeup-showcase.407/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://linkedin.com/company/firstlaunch/
-firstlaunch.in -> linkedin.com
+https://makeuptalk.com/forums/-/create-thread->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://moz.com/community/q
-firstlaunch.in -> moz.com
+https://makeuptalk.com/forums/makeup-showcase.407/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://en.forums.wordpress.com/
-firstlaunch.in -> en.forums.wordpress.com
+https://makeuptalk.com/forums/makeup-showcase.407/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
+----------------------------------------
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/resources/
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/skin-care-talk.3/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://clicknewz.com/about/
-firstlaunch.in -> clicknewz.com
+https://makeuptalk.com/forums/makeup-showcase.407/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://reddit.com/r/SEO/
-firstlaunch.in -> reddit.com
+https://makeuptalk.com/forums/skin-care-talk.3/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://forums.seomotionz.com/
-firstlaunch.in -> forums.seomotionz.com
+https://makeuptalk.com/forums/-/create-thread->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://smartinsights.com/answers/
-firstlaunch.in -> smartinsights.com
+https://makeuptalk.com/forums/skin-care-talk.3/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://behance.net/firstlaunch
-firstlaunch.in -> behance.net
+https://forums.feedspot.com/recent_changes_forums/->https://linkedin.com/company/feedspot
+forums.feedspot.com -> linkedin.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://productforums.google.com/forum/#!forum/webmasters
-firstlaunch.in -> productforums.google.com
+https://makeuptalk.com/forums/skin-care-talk.3/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://forum.hellboundbloggers.com/
-firstlaunch.in -> forum.hellboundbloggers.com
+https://makeuptalk.com/forums/hair-care-talk.4/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://affplaybook.com/blog/
-firstlaunch.in -> affplaybook.com
+https://makeuptalk.com/forums/hair-care-talk.4/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://ewebdiscussion.com/
-firstlaunch.in -> ewebdiscussion.com
+https://makeuptalk.com/forums/hair-care-talk.4/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://quora.com/
-firstlaunch.in -> quora.com
+https://makeuptalk.com/forums/hair-care-talk.4/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://blackhatnaija.com/forums/black-hat-seo.6/
-firstlaunch.in -> blackhatnaija.com
+https://makeuptalk.com/forums/skin-care-talk.3/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+GET - https://chemistscorner.com/discussions/page/683/ - Status code 200
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-talk.2/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://daniweb.com/
-firstlaunch.in -> daniweb.com
+https://makeuptalk.com/forums/fashion-talk.13/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://ozzu.com/
-firstlaunch.in -> ozzu.com
+https://makeuptalk.com/forums/makeup-talk.2/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://realtydigitalmarketing.com/forums/
-firstlaunch.in -> realtydigitalmarketing.com
+https://makeuptalk.com/forums/makeup-nails-classifieds.103/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://riseforums.com/forums/blogging-content-marketing/
-firstlaunch.in -> riseforums.com
+https://makeuptalk.com/forums/makeup-talk.2/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://webmastersun.com/
-firstlaunch.in -> webmastersun.com
+https://makeuptalk.com/forums/fashion-talk.13/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://webmasterworld.com/
-firstlaunch.in -> webmasterworld.com
+https://makeuptalk.com/forums/chit-chat.6/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
 ----------------------------------------
 ------------ Backlink Found ------------
-https%3A%2F%2Ffirstlaunch.in%2Fblog%2Fbest%2Dforums%2Dfor%2Da%2Ddigital%2Dmarketer%2F->https://wickedfire.com/
-firstlaunch.in -> wickedfire.com
+https://makeuptalk.com/forums/makeup-nails-classifieds.103/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
 ----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-nails-classifieds.103/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-talk.2/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-nails-classifieds.103/->https://paypal.com/donate?hosted_button_id=WQ7UFCN6HERU6
+makeuptalk.com -> paypal.com
+----------------------------------------
+GET - https://chemistscorner.com/discussions/page/2/ - Status code 200
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-talk.2/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/new-member-introductions.42/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/makeup-nails-classifieds.103/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/fashion-talk.13/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/new-member-introductions.42/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/new-member-introductions.42/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/chit-chat.6/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/fashion-talk.13/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/chit-chat.6/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/new-member-introductions.42/->https://ebay.us/QdERXr
+makeuptalk.com -> ebay.us
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/chit-chat.6/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/new-member-introductions.42/->https://amazon.com/gp/search?ie=UTF8&tag=forumyield-20&linkCode=ur2&linkId=47d371178d0a1cc592e7fefea9d1789f&camp=1789&creative=9325&index=automotive&keywords=makeup
+makeuptalk.com -> amazon.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/chit-chat.6/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/->https://paypal.com/donate?hosted_button_id=WQ7UFCN6HERU6
+makeuptalk.com -> paypal.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/->https://us.currentbody.com/?utm_source=Makeup_Talk&utm_medium=affiliates&utm_campaign=Makeup_Talk_Home_Page_Banner
+makeuptalk.com -> us.currentbody.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/->https://jeffreestarcosmetics.com/collections/pricked-collection?utm_source=group_builder&utm_medium=banner&utm_campaign=makeup_talk&utm_id=Pricked+Collection
+makeuptalk.com -> jeffreestarcosmetics.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeuptalk.com/forums/coupons-codes-promos-sales-shopping-tips.16/->https://groupbuilder.com/
+makeuptalk.com -> groupbuilder.com
+----------------------------------------
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/color-and-makeup/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/general/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/hair/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/ - Status code 200
+GET - https://chemistscorner.com/discussions/page/3/ - Status code 200
+------------ Backlink Found ------------
+https://chemistscorner.com/discussions/page/683/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://community.qvc.com/t5/Beauty/bd-p/1
+forums.feedspot.com -> community.qvc.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://indusladies.com/community/forums/beauty
+forums.feedspot.com -> indusladies.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://forum.purseblog.com/forums/the-beauty-bar.31/
+forums.feedspot.com -> forum.purseblog.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://gurugossiper.com/viewforum.php?f=7
+forums.feedspot.com -> gurugossiper.com
+----------------------------------------
+GET - https://chemistscorner.com/discussions/page/684/ - Status code 200
+------------ Backlink Found ------------
+https://chemistscorner.com/discussions/page/2/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://ozbargain.com.au/forum/505
+forums.feedspot.com -> ozbargain.com.au
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://community.sephora.com/
+forums.feedspot.com -> community.sephora.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://makeuptalk.com/
+forums.feedspot.com -> makeuptalk.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://davesgarden.com/community/forums/f/beauty/all/
+forums.feedspot.com -> davesgarden.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://mumsnet.com/Talk/style_and_beauty
+forums.feedspot.com -> mumsnet.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://gransnet.com/forums/style_and_beauty
+forums.feedspot.com -> gransnet.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://city-data.com/forum/fashion-beauty/
+forums.feedspot.com -> city-data.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://mybeautyconsultant.net/forum/
+forums.feedspot.com -> mybeautyconsultant.net
+----------------------------------------
+GET - https://chemistscorner.com/product/join-the-forum/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/21/ - Status code 200
+GET - https://chemistscorner.com/discussions/page/682/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/skin/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/3/ - Status code 200
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://makeupalley.com/board
+forums.feedspot.com -> makeupalley.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://beautyreview.co.nz/forum
+forums.feedspot.com -> beautyreview.co.nz
+----------------------------------------
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/innovation/ - Status code 200
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://reddit.com/r/beauty/
+forums.feedspot.com -> reddit.com
+----------------------------------------
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/advanced-questions/ - Status code 200
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://babycenter.in/c25003387/beauty-and-fashion-forums
+forums.feedspot.com -> babycenter.in
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://specktra.net/
+forums.feedspot.com -> specktra.net
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://linkedin.com/company/feedspot
+forums.feedspot.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://girlsforum.com/forums/style-beauty-fashion-tips.113/
+forums.feedspot.com -> girlsforum.com
+----------------------------------------
+------------ Backlink Found ------------
+https://forums.feedspot.com/beauty_forums/->https://thebeautybrains.com/bbforum/
+forums.feedspot.com -> thebeautybrains.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/hair/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/color-and-makeup/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/general/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/resources/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/22/ - Status code 200
+------------ Backlink Found ------------
+https://chemistscorner.com/discussions/page/3/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/discussions/page/684/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/discussions/page/682/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/advanced-questions/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women/dl-focus->https://officemakeups.com/
+makeupsubmit.com -> officemakeups.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/product/join-the-forum/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/resources/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/21/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/3/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/22/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/skin/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/innovation/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/23/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/starting-a-cosmetic-line/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/career/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/podcast/
+Depth 1 Crawling https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/2/
+GET - https://makeupsubmit.com/forum/questions-and-concerns/which-salon-offer-the-best-manicure-pedicure-in-fresno-ca/dl-focus - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/2/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/career/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/podcast/ - Status code 200
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/starting-a-cosmetic-line/ - Status code 200
+Depth 1 Crawling https://healthboards.com/boards/newthread.php
+GET - https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/23/ - Status code 200
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/2/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/podcast/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/career/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/page/23/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://chemistscorner.com/cosmeticsciencetalk/forum/formulating/cosmetic-industry/starting-a-cosmetic-line/->https://linkedin.com/in/perryromanowski/
+chemistscorner.com -> linkedin.com
+----------------------------------------
+Depth 1 Crawling https://healthboards.com/boards/forumdisplay.php
+Depth 1 Crawling https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts
+GET - https://healthboards.com/boards/newthread.php - Status code 404
+Depth 1 Crawling https://community.qvc.com/t5/Forums/ct-p/forums
+------------ Backlink Found ------------
+https://healthboards.com/boards/newthread.php->https://premierdisability.com/consumer-health-data-privacy-notice
+healthboards.com -> premierdisability.com
+----------------------------------------
+Depth 1 Crawling https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete
+Depth 1 Crawling https://community.qvc.com/t5/forums/postpage/board-id/1
+Depth 1 Crawling https://community.sephora.com/t5/Skincare-Aware/bd-p/skincare-forum-board
+Depth 1 Crawling https://community.sephora.com/t5/forums/postpage/choose-node/true/interaction-style/forum
+GET - https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete - Status code 500
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/5202335
+GET - https://healthboards.com/boards/forumdisplay.php - Status code 500
+Depth 1 Crawling https://community.sephora.com/t5/Nailed-It/bd-p/nail-care-forum-board
+GET - https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/5202335 - Status code 404
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7178304
+Depth 1 Crawling https://community.sephora.com/t5/Deeper-Shades/bd-p/deeper-shades-makeup-tips-forum-board
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/acne-forum-board/message-id/7178246
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://garnethill.com/
+community.qvc.com -> garnethill.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://app.impact.com/campaign-promo-signup/QVC.brand?execution=e5s1
+community.qvc.com -> app.impact.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://frontgate.com/
+community.qvc.com -> frontgate.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://grandinroad.com/
+community.qvc.com -> grandinroad.com
+----------------------------------------
+GET - https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/Acne-Prone-Skin/bd-p/acne-forum-board
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://play.google.com/store/apps/details?id=com.qvc&hl=en
+community.qvc.com -> play.google.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://ballarddesigns.com/
+community.qvc.com -> ballarddesigns.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://threads.net/@qvc
+community.qvc.com -> threads.net
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/7174264
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://itunes.apple.com/us/app/qvc-for-iphone/id340021813?mt=8
+community.qvc.com -> itunes.apple.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://careers.qurateretailgroup.com/qvc-us/?multi_select1=QVC&location=United%20States&country=US&radius=25&primary_country=US
+community.qvc.com -> careers.qurateretailgroup.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F23797290954%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink
+community.qvc.com -> messenger.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://linkedin.com/company/qvc-international/
+community.qvc.com -> linkedin.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/6584693
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://hsn.com/
+community.qvc.com -> hsn.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/5202335->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://m.me/QVC
+community.qvc.com -> m.me
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/5202335->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/forumpage.enableautocomplete:enableautocomplete->https://tiktok.com/@qvc
+community.qvc.com -> tiktok.com
+----------------------------------------
+GET - https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Physical Wellness
+GET - https://community.qvc.com/t5/forums/postpage/board-id/1 - Status code 200
+GET - https://community.sephora.com/t5/forums/postpage/choose-node/true/interaction-style/forum - Status code 200
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://tiktok.com/@qvc
+community.qvc.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://play.google.com/store/apps/details?id=com.qvc&hl=en
+community.qvc.com -> play.google.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://hsn.com/
+community.qvc.com -> hsn.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/Makeup-Is-Life/bd-p/makeup-forum-board
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://ballarddesigns.com/
+community.qvc.com -> ballarddesigns.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F23797290954%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink
+community.qvc.com -> messenger.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://linkedin.com/company/qvc-international/
+community.qvc.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://app.impact.com/campaign-promo-signup/QVC.brand?execution=e5s1
+community.qvc.com -> app.impact.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://frontgate.com/
+community.qvc.com -> frontgate.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7178304 - Status code 404
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://threads.net/@qvc
+community.qvc.com -> threads.net
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://grandinroad.com/
+community.qvc.com -> grandinroad.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://garnethill.com/
+community.qvc.com -> garnethill.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://garnethill.com/
+community.qvc.com -> garnethill.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://itunes.apple.com/us/app/qvc-for-iphone/id340021813?mt=8
+community.qvc.com -> itunes.apple.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://m.me/QVC
+community.qvc.com -> m.me
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://m.me/QVC
+community.qvc.com -> m.me
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://careers.qurateretailgroup.com/qvc-us/?multi_select1=QVC&location=United%20States&country=US&radius=25&primary_country=US
+community.qvc.com -> careers.qurateretailgroup.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/postpage/board-id/1->https://itunes.apple.com/us/app/qvc-for-iphone/id340021813?mt=8
+community.qvc.com -> itunes.apple.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://app.impact.com/campaign-promo-signup/QVC.brand?execution=e5s1
+community.qvc.com -> app.impact.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://tiktok.com/@qvc
+community.qvc.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://grandinroad.com/
+GET - https://community.sephora.com/t5/forums/replypage/board-id/acne-forum-board/message-id/7178246 - Status code 404
+community.qvc.com -> grandinroad.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://ballarddesigns.com/
+community.qvc.com -> ballarddesigns.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://frontgate.com/
+community.qvc.com -> frontgate.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://careers.qurateretailgroup.com/qvc-us/?multi_select1=QVC&location=United%20States&country=US&radius=25&primary_country=US
+community.qvc.com -> careers.qurateretailgroup.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://play.google.com/store/apps/details?id=com.qvc&hl=en
+community.qvc.com -> play.google.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://linkedin.com/company/qvc-international/
+community.qvc.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://threads.net/@qvc
+community.qvc.com -> threads.net
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://hsn.com/
+community.qvc.com -> hsn.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/forums/kudosleaderboardpage/board-id/1/timerange/one_month/page/1/tab/posts->https://messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F23797290954%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink
+community.qvc.com -> messenger.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7178304->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/7174264 - Status code 404
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7178304->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/6584693 - Status code 404
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/acne-forum-board/message-id/7178246->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/acne-forum-board/message-id/7178246->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/searchpage/tab/user
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Emotional Wellness
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Makeup Hauls
+Depth 1 Crawling https://community.sephora.com/t5/Haul-Stars/bd-p/beauty-makeup-hauls-forum-board
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Brush & Tool Hauls
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/7174264->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Gift Sets
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/lipstick-forum-board/message-id/7174264->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/6584693->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5074797
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/6584693->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Physical Wellness - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/Trending-at-Sephora/bd-p/beauty-makeup-trends-forum-board
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7172979
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Physical Wellness->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Physical Wellness->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5074797 - Status code 404
+------------ Backlink Found ------------
+https://makeupsubmit.com/forum/general-discussion/what-are-some-anti-aging-tips-for-women->https://officemakeups.com/
+makeupsubmit.com -> officemakeups.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Unboxing
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5194212
+Depth 1 Crawling https://community.sephora.com/t5/Lip-Lovers/bd-p/lipstick-forum-board
+GET - https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7172979 - Status code 404
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5074797->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5074797->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Makeup Hauls - Status code 200
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Brush & Tool Hauls - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/Beauty-Confidential/bd-p/bic-beauty-confidential-forum-board
+Depth 1 Crawling https://community.sephora.com/t5/Fragrance-Fans/bd-p/fragrance-forum-board
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7172979->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Makeup Hauls->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-hauls-forum-board/message-id/7172979->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Makeup Hauls->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/health-wellness-tips-forum-board/message-id/7173215
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Brush & Tool Hauls->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Brush & Tool Hauls->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Mental Wellness
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/3431045
+Depth 1 Crawling https://community.sephora.com/t5/forums/replypage/board-id/fragrance-forum-board/message-id/7178288
+GET - https://community.qvc.com/t5/Forums/ct-p/forums - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Self-Care
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Wellness Trends
+Depth 1 Crawling https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Skincare Hauls
+GET - https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5194212 - Status code 404
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Emotional Wellness - Status code 200
+Depth 1 Crawling https://community.sephora.com/t5/Wellness-Warriors/bd-p/health-wellness-tips-forum-board
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Gift Sets - Status code 200
+GET - https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/3431045 - Status code 404
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Emotional Wellness->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Gift Sets->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Emotional Wellness->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Gift Sets->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/3431045->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/nail-care-forum-board/message-id/3431045->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5194212->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/beauty-makeup-trends-forum-board/message-id/5194212->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://itunes.apple.com/us/app/qvc-for-iphone/id340021813?mt=8
+community.qvc.com -> itunes.apple.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://garnethill.com/
+community.qvc.com -> garnethill.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://play.google.com/store/apps/details?id=com.qvc&hl=en
+community.qvc.com -> play.google.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://ballarddesigns.com/
+community.qvc.com -> ballarddesigns.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F23797290954%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink
+community.qvc.com -> messenger.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://careers.qurateretailgroup.com/qvc-us/?multi_select1=QVC&location=United%20States&country=US&radius=25&primary_country=US
+community.qvc.com -> careers.qurateretailgroup.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/health-wellness-tips-forum-board/message-id/7173215 - Status code 404
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://tiktok.com/@qvc
+community.qvc.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://hsn.com/
+community.qvc.com -> hsn.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://grandinroad.com/
+community.qvc.com -> grandinroad.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://linkedin.com/company/qvc-international/
+community.qvc.com -> linkedin.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://m.me/QVC
+community.qvc.com -> m.me
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://threads.net/@qvc
+community.qvc.com -> threads.net
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://frontgate.com/
+community.qvc.com -> frontgate.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.qvc.com/t5/Forums/ct-p/forums->https://app.impact.com/campaign-promo-signup/QVC.brand?execution=e5s1
+community.qvc.com -> app.impact.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/replypage/board-id/fragrance-forum-board/message-id/7178288 - Status code 404
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Unboxing - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/health-wellness-tips-forum-board/message-id/7173215->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/health-wellness-tips-forum-board/message-id/7173215->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/fragrance-forum-board/message-id/7178288->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/replypage/board-id/fragrance-forum-board/message-id/7178288->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Unboxing->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Unboxing->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Wellness Trends - Status code 200
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Mental Wellness - Status code 200
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Self-Care - Status code 200
+GET - https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Skincare Hauls - Status code 200
+GET - https://community.sephora.com/t5/Fragrance-Fans/bd-p/fragrance-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Mental Wellness->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Wellness Trends->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Self-Care->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Skincare Hauls->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Mental Wellness->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Self-Care->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/beauty-makeup-hauls-forum-board/label-name/Skincare Hauls->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/filteredbylabelpage/board-id/health-wellness-tips-forum-board/label-name/Wellness Trends->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Fragrance-Fans/bd-p/fragrance-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Fragrance-Fans/bd-p/fragrance-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Skincare-Aware/bd-p/skincare-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Skincare-Aware/bd-p/skincare-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Skincare-Aware/bd-p/skincare-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Haul-Stars/bd-p/beauty-makeup-hauls-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Haul-Stars/bd-p/beauty-makeup-hauls-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Haul-Stars/bd-p/beauty-makeup-hauls-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Nailed-It/bd-p/nail-care-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Nailed-It/bd-p/nail-care-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Nailed-It/bd-p/nail-care-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/forums/searchpage/tab/user - Status code 200
+GET - https://community.sephora.com/t5/Trending-at-Sephora/bd-p/beauty-makeup-trends-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/searchpage/tab/user->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/forums/searchpage/tab/user->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Trending-at-Sephora/bd-p/beauty-makeup-trends-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Trending-at-Sephora/bd-p/beauty-makeup-trends-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Deeper-Shades/bd-p/deeper-shades-makeup-tips-forum-board - Status code 200
+GET - https://community.sephora.com/t5/Wellness-Warriors/bd-p/health-wellness-tips-forum-board - Status code 200
+GET - https://community.sephora.com/t5/Acne-Prone-Skin/bd-p/acne-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Deeper-Shades/bd-p/deeper-shades-makeup-tips-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Deeper-Shades/bd-p/deeper-shades-makeup-tips-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Wellness-Warriors/bd-p/health-wellness-tips-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Wellness-Warriors/bd-p/health-wellness-tips-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Acne-Prone-Skin/bd-p/acne-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Acne-Prone-Skin/bd-p/acne-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Beauty-Confidential/bd-p/bic-beauty-confidential-forum-board - Status code 200
+GET - https://community.sephora.com/t5/Lip-Lovers/bd-p/lipstick-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Beauty-Confidential/bd-p/bic-beauty-confidential-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Beauty-Confidential/bd-p/bic-beauty-confidential-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Lip-Lovers/bd-p/lipstick-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Lip-Lovers/bd-p/lipstick-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https://community.sephora.com/t5/Makeup-Is-Life/bd-p/makeup-forum-board - Status code 200
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Makeup-Is-Life/bd-p/makeup-forum-board->https://snapchat.com/add/sephora
+community.sephora.com -> snapchat.com
+----------------------------------------
+------------ Backlink Found ------------
+https://community.sephora.com/t5/Makeup-Is-Life/bd-p/makeup-forum-board->https://tiktok.com/@sephora
+community.sephora.com -> tiktok.com
+----------------------------------------
+GET - https%3A%2F%2Fskincaretalk.com%2Fforums%2F - Status code 409
+Crawling finished
+0
