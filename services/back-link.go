@@ -35,7 +35,7 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	return cs
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context) int32 {
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context) (int32, map[string]string) {
 
 	cs.wg.Add(1)
 	go func() {
@@ -45,7 +45,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context)
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
 
-	return 0
+	return 0, spider.Backlinks
 }
 
 func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_url string, depth int) {
@@ -82,10 +82,11 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	var absolute, relative []string
 
 	for link, rel := range links {
-		if link == "" {
+		if link == "" || strings.Contains(link, "feedspot") {
 			continue
 		}
 		link = strings.Replace(link, "www.", "", 1)
+		// Different Operations for Absolute and Relative links
 		if strings.HasPrefix(link, "http") {
 			cs.mu.Lock()
 			if checkBacklink(link, current_url, s.CompDomains, s) != "" && depth != s.MaxDepth {
@@ -160,7 +161,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 }
 
-func checkBacklink(link string, current_url string, filterAgainst []string, s *models.Spider) string {
+func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
 
 	_parsed, err := url.QueryUnescape(current_url)
 	if err != nil {
@@ -184,9 +185,10 @@ func checkBacklink(link string, current_url string, filterAgainst []string, s *m
 			return ""
 		}
 	}
-
-	if len(filterAgainst) == 0 {
-		filterAgainst = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "feedspot.com"}
+	comp_flag := true
+	if len(filter) == 0 {
+		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com"}
+		comp_flag = false
 	}
 
 	if strings.Contains(link, "amazon.com/registry/") {
@@ -210,8 +212,15 @@ func checkBacklink(link string, current_url string, filterAgainst []string, s *m
 		// 	return ""
 		// }
 	}
+	var backlinkCondition bool
+	if comp_flag {
+		backlinkCondition = slices.Contains(filter, parsed_link_host)
+		fmt.Println("debugging: ", filter, parsed_link_host)
+	} else {
+		backlinkCondition = !slices.Contains(filter, parsed_link_host)
+	}
 
-	if !slices.Contains(filterAgainst, parsed_link_host) {
+	if backlinkCondition {
 		fmt.Println("------------ Backlink Found ------------")
 		fmt.Println(current_url + "->" + link)
 		fmt.Println(parsed_host, "->", parsed_link_host)

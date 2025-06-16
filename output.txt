@@ -1,0 +1,743 @@
+Opening Sqlite3
+LoadingLoading.Loading..Loading...Loading....Loading.....Opening backlinks table
+Server Listening on port 8080
+comp_domains [homedepot.com ajmadison.com lowes.com bestbuy.com build.com]
+competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=home%20appliance%20-site:doityourself.com [homedepot.com ajmadison.com lowes.com bestbuy.com build.com]}
+Depth 3 Crawling https://html.duckduckgo.com/html?q=home%20appliance%20-site:doityourself.com
+GET - https://html.duckduckgo.com/html?q=home%20appliance%20-site:doityourself.com - Status code 200
+Depth 2 Crawling https%3A%2F%2Fyourhomeappliance.com%2F
+Depth 2 Crawling https%3A%2F%2Fwalmart.com%2Fcp%2Fappliances%2F90548
+Depth 2 Crawling https%3A%2F%2Fgeappliances.com%2F
+Depth 2 Crawling https%3A%2F%2Flowes.com%2Fc%2FAppliances
+Depth 2 Crawling https%3A%2F%2Fbestbuy.com%2Fsite%2Felectronics%2Fhome%2Dappliances%2Fabcat0900000.c%3Fid%3Dabcat0900000
+Depth 2 Crawling https%3A%2F%2Flowes.com%2Fpl%2Fappliances%2Fresidential%2F4294937007%2D4294824045
+Depth 2 Crawling https%3A%2F%2Fus%2Dappliance.com%2F
+Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
+Depth 2 Crawling https%3A%2F%2Fajmadison.com%2F
+Depth 2 Crawling https://html.duckduckgo.com/html/
+Depth 2 Crawling https%3A%2F%2Fthehomeappliancecenter.com%2F
+Depth 2 Crawling https%3A%2F%2Fhomedepot.com%2Fb%2FAppliances%2FN%2D5yc1vZbv1w
+GET - https://html.duckduckgo.com/html/ - Status code 202
+GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
+GET - https%3A%2F%2Fajmadison.com%2F - Status code 403
+Erorr Get "https://www.bestbuy.com/site/electronics/home-appliances/abcat0900000.c?id=abcat0900000": stream error: stream ID 1; INTERNAL_ERROR; received from peer making GET request to: https%3A%2F%2Fbestbuy.com%2Fsite%2Felectronics%2Fhome%2Dappliances%2Fabcat0900000.c%3Fid%3Dabcat0900000
+GET - https%3A%2F%2Fhomedepot.com%2Fb%2FAppliances%2FN%2D5yc1vZbv1w - Status code 200
+Erorr Get "https://www.lowes.com/pl/appliances/residential/4294937007-4294824045": stream error: stream ID 1; INTERNAL_ERROR; received from peer making GET request to: https%3A%2F%2Flowes.com%2Fpl%2Fappliances%2Fresidential%2F4294937007%2D4294824045
+Erorr Get "https://www.lowes.com/c/Appliances": stream error: stream ID 3; INTERNAL_ERROR; received from peer making GET request to: https%3A%2F%2Flowes.com%2Fc%2FAppliances
+GET - https%3A%2F%2Fwalmart.com%2Fcp%2Fappliances%2F90548 - Status code 200
+GET - https%3A%2F%2Fus%2Dappliance.com%2F - Status code 200
+GET - https%3A%2F%2Fthehomeappliancecenter.com%2F - Status code 403
+GET - https%3A%2F%2Fyourhomeappliance.com%2F - Status code 403
+Erorr Get "https://geappliances.com/": dial tcp [2607:7700:0:e:0:2:22c5:57cd]:443: i/o timeout making GET request to: https%3A%2F%2Fgeappliances.com%2F
+Crawling finished
+0
+comp_domains [homedepot.com ajmadison.com lowes.com bestbuy.com build.com]
+competitor Domains &{map[] map[] Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15 3 https://html.duckduckgo.com/html?q=home%20appliance%20forums%20-site:doityourself.com [homedepot.com ajmadison.com lowes.com bestbuy.com build.com]}
+Depth 3 Crawling https://html.duckduckgo.com/html?q=home%20appliance%20forums%20-site:doityourself.com
+GET - https://html.duckduckgo.com/html?q=home%20appliance%20forums%20-site:doityourself.com - Status code 200
+Depth 2 Crawling https%3A%2F%2Fappliancerepairguides.com%2Fforum%2F
+Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=596995708cda547a96fc828165f2e830a452594fe4abbb3b086550c59920515c
+Depth 2 Crawling https://html.duckduckgo.com/html/
+Depth 2 Crawling https%3A%2F%2Fappliance.net%2Fforum
+Depth 2 Crawling https%3A%2F%2Fforum.partsdr.com%2F
+Depth 2 Crawling https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances
+Depth 2 Crawling https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F
+Depth 2 Crawling https%3A%2F%2Fhomerepairforum.com%2F
+Depth 2 Crawling https%3A%2F%2Fappliantology.org%2Fforum%2F4%2Dappliance%2Drepair%2Dtech%2Dforum%2F
+Depth 2 Crawling https://html.duckduckgo.com//duckduckgo.com/feedback.html
+Depth 2 Crawling https%3A%2F%2Fforums.feedspot.com%2Fappliance_forums%2F
+Depth 2 Crawling https%3A%2F%2Fappliancerepairforums.com%2F
+GET - https://html.duckduckgo.com/html/ - Status code 202
+GET - https://html.duckduckgo.com//duckduckgo.com/feedback.html - Status code 200
+GET - https://html.duckduckgo.com//duckduckgo.com/l/?uddg=http%3A%2F%2Fappliance411.com%2Fforum%2F&rut=596995708cda547a96fc828165f2e830a452594fe4abbb3b086550c59920515c - Status code 200
+GET - https%3A%2F%2Fforum.partsdr.com%2F - Status code 200
+GET - https%3A%2F%2Fappliancerepairforums.com%2F - Status code 200
+GET - https%3A%2F%2Fhouzz.com%2Fdiscussions%2Fappliances - Status code 200
+GET - https%3A%2F%2Fforums.feedspot.com%2Fappliance_forums%2F - Status code 200
+Depth 1 Crawling https://forum.partsdr.com/forumdisplay.php
+Depth 1 Crawling https://forum.partsdr.com/forum.php
+Depth 1 Crawling https://forum.partsdr.com/showthread.php
+GET - https://forum.partsdr.com/forum.php - Status code 200
+GET - https%3A%2F%2Fappliancerepairguides.com%2Fforum%2F - Status code 200
+GET - https%3A%2F%2Fhomerepairforum.com%2F - Status code 200
+Depth 1 Crawling https://appliancerepairforums.com/forums/general-appliance-repair-chat.16/
+Depth 1 Crawling https://appliancerepairforums.com/forums/diy-repair-techniques.26/
+Depth 1 Crawling https://appliancerepairforums.com/forums/-/create-thread
+Depth 1 Crawling https://appliancerepairforums.com/forums/microwaves-small-appliances.23/
+Depth 1 Crawling https://appliancerepairforums.com/forums/refrigerators-freezers.20/
+Depth 1 Crawling https://appliancerepairforums.com/forums/washing-machines-dryers.19/
+Depth 1 Crawling https://appliancerepairforums.com/forums/ovens-stoves-ranges.21/
+Depth 1 Crawling https://appliancerepairforums.com/forums/registry.17/
+Depth 1 Crawling https://appliancerepairforums.com/forums/appliance-repair-classifieds-buy-sell-trade.30/
+Depth 1 Crawling https://appliancerepairforums.com/whats-new/media-comments/
+Depth 1 Crawling https://appliancerepairforums.com/forums/introductions.15/
+Depth 1 Crawling https://appliancerepairforums.com/forums/appliance-repair-forum-announcements-support.14/
+Depth 1 Crawling https://appliancerepairforums.com/forums/safety-proper-handling.28/
+Depth 1 Crawling https://appliancerepairforums.com/forums/general-chit-chat.31/
+Depth 1 Crawling https://appliancerepairforums.com/forums/dishwashers.22/
+Depth 1 Crawling https://appliancerepairforums.com/forums/smart-appliances-iot.27/
+Depth 1 Crawling https://appliancerepairforums.com/forums/-/index.rss
+Depth 1 Crawling https://appliancerepairforums.com/forums/replacement-parts-where-to-buy.25/
+GET - https://forum.partsdr.com/showthread.php - Status code 200
+GET - https://appliancerepairforums.com/forums/washing-machines-dryers.19/ - Status code 200
+GET - https://appliancerepairforums.com/forums/microwaves-small-appliances.23/ - Status code 200
+GET - https://appliancerepairforums.com/forums/diy-repair-techniques.26/ - Status code 200
+GET - https://appliancerepairforums.com/forums/safety-proper-handling.28/ - Status code 200
+Depth 1 Crawling https://forums.feedspot.com/diy_forums/
+Depth 1 Crawling https://forums.feedspot.com/home_improvement_forums/
+Depth 1 Crawling https://forums.feedspot.com/forums/general-appliance-discussion.11/
+Depth 1 Crawling https://forums.feedspot.com/kitchen_forums/
+Depth 1 Crawling https://forums.feedspot.com/forum/electric-large-kitchen-home-appliances-1/
+Depth 1 Crawling https://forums.feedspot.com/forum/4-appliance-repair-tech-forum/
+Depth 1 Crawling https://forums.feedspot.com/forums/
+Depth 1 Crawling https://forums.feedspot.com/forums/domestic-white-goods-forum.410/
+Depth 1 Crawling https://forums.feedspot.com/technology_forums/
+Depth 1 Crawling https://forums.feedspot.com/discussions/appliances
+Depth 1 Crawling https://forums.feedspot.com/forum/
+Depth 1 Crawling https://forums.feedspot.com/lg_forums/
+Depth 1 Crawling https://forums.feedspot.com/air_conditioning_forums/
+Depth 1 Crawling https://forums.feedspot.com/viewforum.php
+Depth 1 Crawling https://forums.feedspot.com/forums_directory/
+Depth 1 Crawling https://forums.feedspot.com/forums/electrical-appliances-forum.93/
+Depth 1 Crawling https://forums.feedspot.com/recent_changes_forums/
+Depth 1 Crawling https://forums.feedspot.com/forums/index.php
+Depth 1 Crawling https://forums.feedspot.com/forums/appliances-forum.html
+Depth 1 Crawling https://forums.feedspot.com/food_forums/
+Depth 1 Crawling https://forums.feedspot.com/panasonic_forums/
+Depth 1 Crawling https://forums.feedspot.com/forums/f84/
+Depth 1 Crawling https://forums.feedspot.com/forums/appliances.47/
+GET - https://appliancerepairforums.com/forums/replacement-parts-where-to-buy.25/ - Status code 200
+GET - https://appliancerepairforums.com/whats-new/media-comments/ - Status code 200
+GET - https://appliancerepairforums.com/forums/general-chit-chat.31/ - Status code 200
+GET - https://appliancerepairforums.com/forums/general-appliance-repair-chat.16/ - Status code 200
+GET - https://appliancerepairforums.com/forums/smart-appliances-iot.27/ - Status code 200
+GET - https://appliancerepairforums.com/forums/registry.17/ - Status code 200
+GET - https://appliancerepairforums.com/forums/ovens-stoves-ranges.21/ - Status code 200
+GET - https://appliancerepairforums.com/forums/appliance-repair-forum-announcements-support.14/ - Status code 200
+GET - https://appliancerepairforums.com/forums/dishwashers.22/ - Status code 200
+GET - https://appliancerepairforums.com/forums/refrigerators-freezers.20/ - Status code 200
+GET - https://appliancerepairforums.com/forums/introductions.15/ - Status code 200
+GET - https://appliancerepairforums.com/forums/-/index.rss - Status code 200
+GET - https://appliancerepairforums.com/forums/-/create-thread - Status code 200
+GET - https://appliancerepairforums.com/forums/appliance-repair-classifieds-buy-sell-trade.30/ - Status code 200
+Depth 1 Crawling https://forums.feedspot.com/washing_machine_forums/
+GET - https://forums.feedspot.com/home_improvement_forums/ - Status code 200
+Depth 1 Crawling https://forums.feedspot.com/van_life_forums/
+Depth 1 Crawling https://forums.feedspot.com/discussions/latest.html
+GET - https%3A%2F%2Fappliance.net%2Fforum - Status code 200
+GET - https://forum.partsdr.com/forumdisplay.php - Status code 200
+GET - https%3A%2F%2Fdiychatroom.com%2Fforums%2Fappliances.47%2F - Status code 409
+GET - https://forums.feedspot.com/diy_forums/ - Status code 200
+GET - https://forums.feedspot.com/air_conditioning_forums/ - Status code 200
+GET - https%3A%2F%2Fappliantology.org%2Fforum%2F4%2Dappliance%2Drepair%2Dtech%2Dforum%2F - Status code 200
+GET - https://forums.feedspot.com/forums_directory/ - Status code 200
+GET - https://forums.feedspot.com/forums/index.php - Status code 403
+GET - https://forums.feedspot.com/viewforum.php - Status code 403
+GET - https://forums.feedspot.com/kitchen_forums/ - Status code 200
+GET - https://forums.feedspot.com/technology_forums/ - Status code 200
+GET - https://forums.feedspot.com/recent_changes_forums/ - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/150
+Depth 1 Crawling https://houzz.com/discussions/cleaning-tips
+Depth 1 Crawling https://houzz.com/discussions/other
+Depth 1 Crawling https://houzz.com/discussions/6498970/induction-cooktops-fisher-and-paykel-wolf-ge-vs-miele
+Depth 1 Crawling https://houzz.com/discussions/6498271/jenn-air-column-refrigerator-and-freezer
+Depth 1 Crawling https://houzz.com/discussions/6498949/laundry-room-all-in-one-washer-dryer
+Depth 1 Crawling https://houzz.com/discussions/6498210/microwave-oven-with-outer-door-glass-broken-safe-to-use
+Depth 1 Crawling https://houzz.com/discussions/6498043/any-dishwasher-recomendations
+Depth 1 Crawling https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation
+Depth 1 Crawling https://houzz.com/discussions/woodworking
+Depth 1 Crawling https://houzz.com/discussions/tag=33
+Depth 1 Crawling https://houzz.com/discussions/buying-and-selling-homes
+Depth 1 Crawling https://houzz.com/discussions/5981016/would-you-choose-a-induction-stove-top-or-a-radiant-electric-stove-top
+Depth 1 Crawling https://houzz.com/discussions/6499174/can-you-mix-kitchen-appliance-finishes
+Depth 1 Crawling https://houzz.com/discussions/living-room
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/210
+Depth 1 Crawling https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity
+Depth 1 Crawling https://houzz.com/discussions/flooring
+Depth 1 Crawling https://houzz.com/discussions/landscape-design
+Depth 1 Crawling https://houzz.com/discussions/6497648/dryer-that-sensor-dries-on-low-not-delicate-or-timed-mode
+Depth 1 Crawling https://houzz.com/discussions/6042701/bosch-dishwasher-lettering-wearing-away
+Depth 1 Crawling https://houzz.com/discussions/pools-and-spas
+Depth 1 Crawling https://houzz.com/discussions/2335907/rangetop-vs-cooktopwolf
+Depth 1 Crawling https://houzz.com/discussions/6497786/downdraft-cooktop-cabinet-advice
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/240
+Depth 1 Crawling https://houzz.com/discussions/5986411/heartland-30-retro-fridge
+Depth 1 Crawling https://houzz.com/discussions/4055729/risotto-in-the-steam-oven
+Depth 1 Crawling https://houzz.com/discussions/appliances
+Depth 1 Crawling https://houzz.com/discussions/6495749/48-best-cattura-downdraft-with-1650-max-blower
+Depth 1 Crawling https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft
+GET - https://forums.feedspot.com/panasonic_forums/ - Status code 200
+GET - https://forums.feedspot.com/lg_forums/ - Status code 200
+GET - https://forums.feedspot.com/food_forums/ - Status code 200
+GET - https://forums.feedspot.com/forum/electric-large-kitchen-home-appliances-1/ - Status code 404
+GET - https://forums.feedspot.com/washing_machine_forums/ - Status code 200
+GET - https://forums.feedspot.com/forums/domestic-white-goods-forum.410/ - Status code 404
+GET - https://forums.feedspot.com/forum/4-appliance-repair-tech-forum/ - Status code 404
+GET - https://forums.feedspot.com/forums/electrical-appliances-forum.93/ - Status code 404
+GET - https://forums.feedspot.com/forums/f84/ - Status code 404
+GET - https://forums.feedspot.com/forums/general-appliance-discussion.11/ - Status code 404
+GET - https://forums.feedspot.com/forums/ - Status code 404
+GET - https://forums.feedspot.com/discussions/appliances - Status code 404
+GET - https://forums.feedspot.com/forum/ - Status code 404
+GET - https://forums.feedspot.com/forums/appliances.47/ - Status code 404
+GET - https://forums.feedspot.com/forums/appliances-forum.html - Status code 404
+GET - https://forums.feedspot.com/van_life_forums/ - Status code 200
+GET - https://forums.feedspot.com/discussions/latest.html - Status code 404
+GET - https://houzz.com/discussions/living-room - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/using-houzz
+Depth 1 Crawling https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/30
+Depth 1 Crawling https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback
+Depth 1 Crawling https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it
+Depth 1 Crawling https://houzz.com/discussions/6498078/gas-range-4k-or-under
+Depth 1 Crawling https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/60
+Depth 1 Crawling https://houzz.com/discussions/before-and-after
+Depth 1 Crawling https://houzz.com/discussions/featured-garden-discussions
+Depth 1 Crawling https://houzz.com/discussions
+Depth 1 Crawling https://houzz.com/discussions/6048574/officine-gullo-ranges
+Depth 1 Crawling https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it
+Depth 1 Crawling https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges
+Depth 1 Crawling https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e
+Depth 1 Crawling https://houzz.com/discussions/plumbing
+Depth 1 Crawling https://houzz.com/discussions/5965175/problems-with-zline-range
+Depth 1 Crawling https://houzz.com/discussions/home-repair
+Depth 1 Crawling https://houzz.com/discussions/6498216/kitchen-renovation
+GET - https://houzz.com/discussions/other - Status code 200
+GET - https://houzz.com/discussions/appliances/p/150 - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/heating-and-air-conditioning
+GET - https://houzz.com/discussions/pools-and-spas - Status code 200
+GET - https://houzz.com/discussions/flooring - Status code 200
+GET - https://houzz.com/discussions/appliances/p/210 - Status code 200
+GET - https://houzz.com/discussions/5981016/would-you-choose-a-induction-stove-top-or-a-radiant-electric-stove-top - Status code 200
+GET - https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity - Status code 200
+GET - https://houzz.com/discussions/6497786/downdraft-cooktop-cabinet-advice - Status code 200
+GET - https://houzz.com/discussions/buying-and-selling-homes - Status code 200
+GET - https://houzz.com/discussions/landscape-design - Status code 200
+GET - https://houzz.com/discussions/5986411/heartland-30-retro-fridge - Status code 200
+GET - https://houzz.com/discussions/woodworking - Status code 200
+GET - https://houzz.com/discussions/6498210/microwave-oven-with-outer-door-glass-broken-safe-to-use - Status code 200
+GET - https://houzz.com/discussions/6498043/any-dishwasher-recomendations - Status code 200
+GET - https://houzz.com/discussions/6498949/laundry-room-all-in-one-washer-dryer - Status code 200
+GET - https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation - Status code 200
+GET - https://houzz.com/discussions/6497648/dryer-that-sensor-dries-on-low-not-delicate-or-timed-mode - Status code 200
+GET - https://houzz.com/discussions/tag=33 - Status code 200
+GET - https://houzz.com/discussions/6499174/can-you-mix-kitchen-appliance-finishes - Status code 200
+GET - https://houzz.com/discussions/6498970/induction-cooktops-fisher-and-paykel-wolf-ge-vs-miele - Status code 200
+GET - https://houzz.com/discussions/6498271/jenn-air-column-refrigerator-and-freezer - Status code 200
+GET - https://houzz.com/discussions/2335907/rangetop-vs-cooktopwolf - Status code 200
+GET - https://houzz.com/discussions/appliances/p/240 - Status code 200
+GET - https://houzz.com/discussions/cleaning-tips - Status code 200
+GET - https://houzz.com/discussions/6042701/bosch-dishwasher-lettering-wearing-away - Status code 200
+GET - https://houzz.com/discussions/appliances - Status code 200
+GET - https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft - Status code 200
+GET - https://houzz.com/discussions/6495749/48-best-cattura-downdraft-with-1650-max-blower - Status code 200
+GET - https://houzz.com/discussions/4055729/risotto-in-the-steam-oven - Status code 200
+GET - https://houzz.com/discussions/using-houzz - Status code 200
+GET - https://houzz.com/discussions/featured-garden-discussions - Status code 200
+GET - https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback - Status code 200
+GET - https://houzz.com/discussions/before-and-after - Status code 200
+GET - https://houzz.com/discussions - Status code 200
+GET - https://houzz.com/discussions/appliances/p/60 - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it
+GET - https://houzz.com/discussions/plumbing - Status code 200
+GET - https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah - Status code 200
+GET - https://houzz.com/discussions/6048574/officine-gullo-ranges - Status code 200
+GET - https://houzz.com/discussions/6498078/gas-range-4k-or-under - Status code 200
+GET - https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e - Status code 200
+GET - https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it - Status code 200
+GET - https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range - Status code 200
+GET - https://houzz.com/discussions/6498216/kitchen-renovation - Status code 200
+GET - https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges - Status code 200
+GET - https://houzz.com/discussions/5965175/problems-with-zline-range - Status code 200
+GET - https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it - Status code 200
+GET - https://houzz.com/discussions/home-repair - Status code 200
+GET - https://houzz.com/discussions/appliances/p/30 - Status code 200
+GET - https://houzz.com/discussions/heating-and-air-conditioning - Status code 200
+GET - https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/polls
+GET - https://houzz.com/discussions/polls - Status code 200
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity->https://ajmadison.com/cgi-bin/ajmadison/SOU2300TX.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity->https://ajmadison.com/cgi-bin/ajmadison/HMC54151UC.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity->https://ajmadison.com/cgi-bin/ajmadison/GCWG2438AF.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498761/24-undercounter-built-in-gas-oven-with-1-5-2-square-foot-capacity->https://ajmadison.com/cgi-bin/ajmadison/WSED3023B.html
+houzz.com -> ajmadison.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e
+Depth 1 Crawling https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand
+Depth 1 Crawling https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem
+Depth 1 Crawling https://houzz.com/discussions/windows
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback->https://homedepot.com/p/Broan-NuTone-4-1-2-in-x-18-1-2-in-to-10-in-Round-Galvanized-Steel-Thin-Wall-Duct-Transition-427/202913042
+houzz.com -> homedepot.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop
+Depth 1 Crawling https://houzz.com/discussions/building-a-home
+Depth 1 Crawling https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/90
+GET - https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e - Status code 200
+GET - https://houzz.com/discussions/windows - Status code 200
+GET - https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem - Status code 200
+GET - https://houzz.com/discussions/building-a-home - Status code 200
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498949/laundry-room-all-in-one-washer-dryer->https://ajmadison.com/cgi-bin/ajmadison/WD53DBA900HZ.html
+houzz.com -> ajmadison.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range
+Depth 1 Crawling https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback
+GET - https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand - Status code 200
+GET - https://houzz.com/discussions/appliances/p/90 - Status code 200
+GET - https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop - Status code 200
+GET - https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/the-old-house
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/120
+Depth 1 Crawling https://houzz.com/discussions/6498078/gas-range-4k-or-under
+Depth 1 Crawling https://houzz.com/discussions/furniture
+Depth 1 Crawling https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft
+Depth 1 Crawling https://houzz.com/discussions/bathrooms
+Depth 1 Crawling https://houzz.com/discussions/home-disasters
+Depth 1 Crawling https://houzz.com/discussions/laundry-room
+Depth 1 Crawling https://houzz.com/discussions/diy
+Depth 1 Crawling https://houzz.com/discussions/5965175/problems-with-zline-range
+Depth 1 Crawling https://houzz.com/discussions
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://lowes.com
+houzz.com -> lowes.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://build.com
+houzz.com -> build.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem
+Depth 1 Crawling https://houzz.com/discussions/5965175/problems-with-zline-range
+Depth 1 Crawling https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah
+Depth 1 Crawling https://houzz.com/discussions/6048574/officine-gullo-ranges
+Depth 1 Crawling https://houzz.com/discussions/appliances/p/180
+Depth 1 Crawling https://houzz.com/discussions/kitchens
+GET - https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range - Status code 200
+GET - https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6498216/kitchen-renovation
+Depth 1 Crawling https://houzz.com/discussions/6048574/officine-gullo-ranges
+Depth 1 Crawling https://houzz.com/discussions/home-decorating
+Depth 1 Crawling https://houzz.com/discussions/remodeling
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation->https://lowes.com/pd/Frigidaire-The-Frigidaire-30in-Induction-Front-Control-Freestanding-Range-helps-you-get-dinner-on-the-table-faster-boiling-water-twice-as-fast-as-gas-cooktops/5015841415
+houzz.com -> lowes.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation->https://ajmadison.com/cgi-bin/ajmadison/HIS8055U.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation->https://ajmadison.com/cgi-bin/ajmadison/PHS700AYFS.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498918/recommendation-needed-30-induction-range-for-an-island-installation->https://bestbuy.com/site/lg-6-3-cu-ft-smart-freestanding-electric-induction-true-convection-range-with-easyclean-and-air-fry-printproof-stainless-steel/6561841.p
+houzz.com -> bestbuy.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://build.com
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://lowes.com
+houzz.com -> lowes.com
+----------------------------------------
+GET - https://houzz.com/discussions/furniture - Status code 200
+GET - https://houzz.com/discussions/6498078/gas-range-4k-or-under - Status code 200
+GET - https://houzz.com/discussions/the-old-house - Status code 200
+GET - https://houzz.com/discussions/home-disasters - Status code 200
+GET - https://houzz.com/discussions/laundry-room - Status code 200
+GET - https://houzz.com/discussions/bathrooms - Status code 200
+GET - https://houzz.com/discussions/diy - Status code 200
+GET - https://houzz.com/discussions/5965175/problems-with-zline-range - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/featured-home-discussions
+Depth 1 Crawling https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://homedepot.com/p/ZLINE-Kitchen-and-Bath-24-in-2-8-cu-ft-Induction-Range-with-3-Element-Stove-and-Electric-Oven-in-Stainless-Steel-RAIND-24/322334375
+houzz.com -> homedepot.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->http://build.com
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/help-center/?a=Return-Policy---id--etnonsAVQxCUSVPgBtfqeg
+houzz.com -> ajmadison.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/cgi-bin/ajmadison/BIRU24102SS.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://build.com/blomberg-biru24102/s1931690
+houzz.com -> build.com
+----------------------------------------
+GET - https://houzz.com/discussions/appliances/p/120 - Status code 200
+GET - https://houzz.com/discussions - Status code 200
+GET - https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft - Status code 200
+GET - https://houzz.com/discussions/5965175/problems-with-zline-range - Status code 200
+GET - https://houzz.com/discussions/6498197/hood-noise-internal-vs-remote-blower-on-an-external-wall-maybe-vah - Status code 200
+GET - https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/paint
+Depth 1 Crawling https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand
+Depth 1 Crawling https://houzz.com/discussions/explore-discussions
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://build.com
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6360764/havens-vs-kraus-kohler-workstation-sink-worth-it->http://lowes.com
+houzz.com -> lowes.com
+----------------------------------------
+Depth 1 Crawling https://houzz.com/discussions/design-dilemma
+Depth 1 Crawling https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback
+GET - https://houzz.com/discussions/kitchens - Status code 200
+GET - https://houzz.com/discussions/appliances/p/180 - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/porches-and-decks
+GET - https://houzz.com/discussions/6498216/kitchen-renovation - Status code 200
+GET - https://houzz.com/discussions/home-decorating - Status code 200
+GET - https://houzz.com/discussions/remodeling - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6498216/kitchen-renovation
+GET - https://houzz.com/discussions/6048574/officine-gullo-ranges - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft
+GET - https://houzz.com/discussions/featured-home-discussions - Status code 200
+GET - https://houzz.com/discussions/6048574/officine-gullo-ranges - Status code 200
+GET - https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop - Status code 200
+GET - https://houzz.com/discussions/paint - Status code 200
+GET - https://houzz.com/discussions/6498909/kitchenaid-cooktop-kcgs356e - Status code 200
+GET - https://houzz.com/discussions/explore-discussions - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop
+Depth 1 Crawling https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range
+Depth 1 Crawling https://houzz.com/discussions/electrical-wiring
+Depth 1 Crawling https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem
+GET - https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand - Status code 200
+GET - https://houzz.com/discussions/porches-and-decks - Status code 200
+GET - https://houzz.com/discussions/design-dilemma - Status code 200
+GET - https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback - Status code 200
+GET - https://houzz.com/discussions/6498518/has-anyone-funneled-their-over-range-vent-hood-via-existing-downdraft - Status code 200
+GET - https://houzz.com/discussions/6498216/kitchen-renovation - Status code 200
+GET - https://houzz.com/discussions/electrical-wiring - Status code 200
+GET - https://houzz.com/discussions/6498182/whirlpool-wdf540padm1-problem - Status code 200
+GET - https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand
+Depth 1 Crawling https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges
+GET - https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop - Status code 200
+GET - https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges - Status code 200
+GET - https://houzz.com/discussions/6476610/refrigerator-help-subzero-classic-vs-designer-or-another-brand - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/pets
+GET - https://houzz.com/discussions/pets - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges
+GET - https://houzz.com/discussions/2252270/any-opinions-of-premier-ranges - Status code 200
+Depth 1 Crawling https://houzz.com/discussions/6498078/gas-range-4k-or-under
+GET - https://houzz.com/discussions/6498078/gas-range-4k-or-under - Status code 200
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback->https://homedepot.com/p/Broan-NuTone-4-1-2-in-x-18-1-2-in-to-10-in-Round-Galvanized-Steel-Thin-Wall-Duct-Transition-427/202913042
+houzz.com -> homedepot.com
+----------------------------------------
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/walls-and-wall-coverings
+GET - https://homerepairforum.com/forum/indoor-home-repair/walls-and-wall-coverings - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/decks-and-fences
+GET - https://homerepairforum.com/forum/outdoor-home-repair/decks-and-fences - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/garage-doors-and-openers
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair
+GET - https://homerepairforum.com/forum/outdoor-home-repair/garage-doors-and-openers - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/cabinets-and-shelving
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/gardening-and-landscaping/99993-choosing-the-right-mulch-for-garden-and-pathways
+------------ Backlink Found ------------
+https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop->https://ajmadison.com/cgi-bin/ajmadison/PCCI3080AF.html
+houzz.com -> ajmadison.com
+----------------------------------------
+GET - https://homerepairforum.com/forum/indoor-home-repair/cabinets-and-shelving - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair - Status code 200
+GET - https://homerepairforum.com/forum/outdoor-home-repair/gardening-and-landscaping/99993-choosing-the-right-mulch-for-garden-and-pathways - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/plumbing/100017-recommendations-for-reliable-septic-contractors-in-my-area
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/appliances
+Depth 1 Crawling https://homerepairforum.com/us/app/home-repair-forum-mobile/id1552895477
+GET - https://homerepairforum.com/forum/indoor-home-repair/plumbing/100017-recommendations-for-reliable-septic-contractors-in-my-area - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all
+GET - https://homerepairforum.com/us/app/home-repair-forum-mobile/id1552895477 - Status code 404
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/faux-painting
+GET - https://homerepairforum.com/forum/indoor-home-repair/faux-painting - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/stenciling
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/painting
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/projects-aa
+GET - https://homerepairforum.com/forum/catch-all - Status code 200
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://build.com/blomberg-biru24102/s1931690
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->http://build.com
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://homedepot.com/p/ZLINE-Kitchen-and-Bath-24-in-2-8-cu-ft-Induction-Range-with-3-Element-Stove-and-Electric-Oven-in-Stainless-Steel-RAIND-24/322334375
+houzz.com -> homedepot.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/cgi-bin/ajmadison/BIRU24102SS.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/help-center/?a=Return-Policy---id--etnonsAVQxCUSVPgBtfqeg
+houzz.com -> ajmadison.com
+----------------------------------------
+GET - https://homerepairforum.com/forum/indoor-home-repair/stenciling - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/flooring
+GET - https://homerepairforum.com/forum/outdoor-home-repair/painting - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/plumbing
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/hvac
+GET - https://homerepairforum.com/forum/indoor-home-repair/flooring - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/hvac/toyo-heaters - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/plumbing - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/hvac/monitor-heaters
+GET - https://homerepairforum.com/forum/indoor-home-repair/hvac - Status code 200
+GET - https://homerepairforum.com/forum/outdoor-home-repair/projects-aa - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/hvac/monitor-heaters - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/gardening-and-landscaping
+GET - https://homerepairforum.com/forum/outdoor-home-repair/gardening-and-landscaping - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/forum-news
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/exterior-home-maintenance
+GET - https://homerepairforum.com/forum/indoor-home-repair/appliances - Status code 200
+GET - https://homerepairforum.com/forum/catch-all/forum-news - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/illustrations
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/projects/100042-tidy-diy-solutions-for-hiding-network-cables
+GET - https://homerepairforum.com/forum/catch-all/illustrations - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/computer-repair
+GET - https://homerepairforum.com/forum/outdoor-home-repair/exterior-home-maintenance - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/decks-and-fences/100031-are-hidden-fasteners-a-good-choice-for-deck-boards
+GET - https://homerepairforum.com/forum/catch-all/computer-repair - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/illustrations/schematics
+GET - https://homerepairforum.com/forum/outdoor-home-repair/decks-and-fences/100031-are-hidden-fasteners-a-good-choice-for-deck-boards - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/projects
+GET - https://homerepairforum.com/forum/indoor-home-repair/projects/100042-tidy-diy-solutions-for-hiding-network-cables - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/projects - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/everything-else
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/audio-video
+GET - https://homerepairforum.com/forum/indoor-home-repair/audio-video - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/stenciling/100001-tips-for-making-3d-designs-using-stencils
+GET - https://homerepairforum.com/forum/catch-all/everything-else - Status code 200
+GET - https://homerepairforum.com/forum/catch-all/illustrations/schematics - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/stenciling/100001-tips-for-making-3d-designs-using-stencils - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/catch-all/when-all-else-fails-you-gotta-laugh
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair
+Depth 1 Crawling https://homerepairforum.com/forum/indoor-home-repair/electrical
+GET - https://homerepairforum.com/forum/catch-all/when-all-else-fails-you-gotta-laugh - Status code 200
+GET - https://homerepairforum.com/forum/outdoor-home-repair - Status code 200
+GET - https://homerepairforum.com/forum/indoor-home-repair/electrical - Status code 200
+Depth 1 Crawling https://homerepairforum.com/forum/outdoor-home-repair/projects-aa/100002-roof-inspection-tips
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://homerepairforum.com/forum/outdoor-home-repair/projects-aa/100002-roof-inspection-tips - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/wtw76001xw1-f52-f72-question/
+Depth 1 Crawling https://appliancerepairguides.com/forum/samsung-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/built-in-dishwasher-repair-questions/kitchenaid-kudc10ixwh9-minor-leak/
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/wtw76001xw1-f52-f72-question/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/samsung-dryer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/countertop-microwave-repair-questions/panasonic-microwave-h98-error/
+GET - https://appliancerepairguides.com/forum/built-in-dishwasher-repair-questions/kitchenaid-kudc10ixwh9-minor-leak/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/cooktop-repair-questions/
+GET - https://appliancerepairguides.com/forum/countertop-microwave-repair-questions/panasonic-microwave-h98-error/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/ge-hotpoint-refrigerator-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/lg-dryer-repair-questions/lg-washing-machine-wm20wv26w-serial-108vwey15196/
+Depth 1 Crawling https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-refrigerator-repair-questions/
+GET - https://appliancerepairguides.com/forum/cooktop-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/countertop-microwave-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/sears-kenmore-washer-repair-questions/
+GET - https://appliancerepairguides.com/forum/washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/countertop-microwave-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/sears-kenmore-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ge-hotpoint-refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/lg-dryer-repair-questions/lg-washing-machine-wm20wv26w-serial-108vwey15196/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/recent/
+Depth 1 Crawling https://appliancerepairguides.com/forum/refrigerator-repair-questions/
+GET - https://appliancerepairguides.com/forum/recent/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-washer-repair-questions/i-have-a-20-plus-y-o-maytag-top-load-washer-that-in-agitator-cycle-it-sounds-like-grinding-the-gears-i-have-replaced-the-agitator-the-drive-belt-and-the-thrust-bearing-kit-why-is-it-still-grinding/
+------------ Backlink Found ------------
+https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop->https://ajmadison.com/cgi-bin/ajmadison/PCCI3080AF.html
+houzz.com -> ajmadison.com
+----------------------------------------
+Depth 1 Crawling https://appliancerepairguides.com/forum/kitchenaid-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/frigidaire-electrolux-refrigerator-repair-questions/
+GET - https://appliancerepairguides.com/forum/refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-washer-repair-questions/i-have-a-20-plus-y-o-maytag-top-load-washer-that-in-agitator-cycle-it-sounds-like-grinding-the-gears-i-have-replaced-the-agitator-the-drive-belt-and-the-thrust-bearing-kit-why-is-it-still-grinding/ - Status code 200
+GET - https://appliancerepairguides.com/forum/frigidaire-electrolux-refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/kitchenaid-washer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/portable-dishwasher-repair-questions/
+GET - https://appliancerepairguides.com/forum/portable-dishwasher-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/freezer-repair-questions/
+GET - https://appliancerepairguides.com/forum/freezer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/appliance-parts-questions/the-handle-of-the-oven-is-broken-where-can-i-replace-it/
+GET - https://appliancerepairguides.com/forum/appliance-parts-questions/the-handle-of-the-oven-is-broken-where-can-i-replace-it/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/bosch-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/lg-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/samsung-dryer-repair-questions/4-year-old-samsung-dryer-wont-start-showing-a-clg-erorr/
+GET - https://appliancerepairguides.com/forum/bosch-dryer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/samsung-dryer-repair-questions/4-year-old-samsung-dryer-wont-start-showing-a-clg-erorr/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/lg-dryer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/frigidaire-electrolux-dryer-repair-questions/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/frigidaire-electrolux-dryer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-dryer-repair-questions/maytag-dryer-starts-and-stops-running-after-10-seconds/
+GET - https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-dryer-repair-questions/maytag-dryer-starts-and-stops-running-after-10-seconds/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/crosley-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/slide-in-range-repair-questions/is-there-a-resource-i-can-call-to-fix-my-frigidaire-oven/
+GET - https://appliancerepairguides.com/forum/crosley-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/slide-in-range-repair-questions/is-there-a-resource-i-can-call-to-fix-my-frigidaire-oven/ - Status code 200
+------------ Backlink Found ------------
+https://houzz.com/discussions/6498510/round-to-flat-duct-venting-feedback->https://homedepot.com/p/Broan-NuTone-4-1-2-in-x-18-1-2-in-to-10-in-Round-Galvanized-Steel-Thin-Wall-Duct-Transition-427/202913042
+houzz.com -> homedepot.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/6488631/has-anyone-tried-impulse-labs-30-induction-cooktop->https://ajmadison.com/cgi-bin/ajmadison/PCCI3080AF.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/cgi-bin/ajmadison/BIRU24102SS.html
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://build.com/blomberg-biru24102/s1931690
+houzz.com -> build.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://ajmadison.com/help-center/?a=Return-Policy---id--etnonsAVQxCUSVPgBtfqeg
+houzz.com -> ajmadison.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->https://homedepot.com/p/ZLINE-Kitchen-and-Bath-24-in-2-8-cu-ft-Induction-Range-with-3-Element-Stove-and-Electric-Oven-in-Stainless-Steel-RAIND-24/322334375
+houzz.com -> homedepot.com
+----------------------------------------
+------------ Backlink Found ------------
+https://houzz.com/discussions/4419259/does-anyone-make-a-24-induction-range->http://build.com
+houzz.com -> build.com
+----------------------------------------
+Depth 1 Crawling https://appliancerepairguides.com/forum/lg-refrigerator-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/amana-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/free-standing-range-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/how-to-remove-control-panel-on-model-wtw700gc2/
+Depth 1 Crawling https://appliancerepairguides.com/forum/amana-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/appliance-parts/
+Depth 1 Crawling https://appliancerepairguides.com/forum/ge-hotpoint-dryer-repair-questions/general-electric-dryer-motor-hums-and-wont-spin/
+Depth 1 Crawling https://appliancerepairguides.com/forum/appliance-parts-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/crosley-refrigerator-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/lg-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/samsung-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/slide-in-range-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/ge-hotpoint-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/wall-oven-repair-questions/frigidaire-double-wall-oven-erorr-code-f43/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/appliance-parts-questions/lg-washing-machine-wm20wv26w-serial-108vwey15196-2/
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-refrigerator-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/built-in-microwave-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/amana-washer-repair-questions/amana-washer-showing-nd/
+Depth 1 Crawling https://appliancerepairguides.com/forum/frigidaire-electrolux-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/bosch-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/ge-hotpoint-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/lg-refrigerator-repair-questions/lg-m-n-lrdcs2603s-defrost-heater-watts-and-amps/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/dryer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/built-in-microwave-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/lg-refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/appliance-parts-questions/lg-washing-machine-wm20wv26w-serial-108vwey15196-2/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ge-hotpoint-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ge-hotpoint-dryer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/lg-refrigerator-repair-questions/lg-m-n-lrdcs2603s-defrost-heater-watts-and-amps/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/ - Status code 200
+Erorr Get "https://appliancerepairguides.com/forum/ge-hotpoint-dryer-repair-questions/general-electric-dryer-motor-hums-and-wont-spin/": net/http: TLS handshake timeout making GET request to: https://appliancerepairguides.com/forum/ge-hotpoint-dryer-repair-questions/general-electric-dryer-motor-hums-and-wont-spin/
+Erorr Get "https://appliancerepairguides.com/forum/crosley-refrigerator-repair-questions/": net/http: TLS handshake timeout making GET request to: https://appliancerepairguides.com/forum/crosley-refrigerator-repair-questions/
+Erorr Get "https://appliancerepairguides.com/forum/": net/http: TLS handshake timeout making GET request to: https://appliancerepairguides.com/forum/
+Erorr Get "https://appliancerepairguides.com/forum/wall-oven-repair-questions/frigidaire-double-wall-oven-erorr-code-f43/": net/http: TLS handshake timeout making GET request to: https://appliancerepairguides.com/forum/wall-oven-repair-questions/frigidaire-double-wall-oven-erorr-code-f43/
+Erorr Get "https://appliancerepairguides.com/forum/frigidaire-electrolux-washer-repair-questions/": net/http: TLS handshake timeout making GET request to: https://appliancerepairguides.com/forum/frigidaire-electrolux-washer-repair-questions/
+GET - https://appliancerepairguides.com/forum/lg-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/samsung-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/maytag-magic-chef-admiral-jenn-air-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/bosch-washer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/appliance-parts-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/free-standing-range-repair-questions/lg-range-showing-f3-error/
+Depth 1 Crawling https://appliancerepairguides.com/forum/wall-oven-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/tags/
+Depth 1 Crawling https://appliancerepairguides.com/forum/kitchenaid-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-refrigerator-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/tags/ - Status code 200
+GET - https://appliancerepairguides.com/forum/kitchenaid-dryer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/slide-in-range-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/how-to-remove-control-panel-on-model-wtw700gc2/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/free-standing-range-repair-questions/lg-range-showing-f3-error/ - Status code 200
+GET - https://appliancerepairguides.com/forum/wall-oven-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/appliance-parts/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/amana-washer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+GET - https://appliancerepairguides.com/forum/free-standing-range-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-dryer-repair-questions/wtw7600xw1-f52-and-f72-error-question/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/range-stove-oven-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/dishwasher-repair-questions/
+GET - https://appliancerepairguides.com/forum/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/ge-hotpoint-refrigerator-repair-questions/ge-tfx27rlb-refrigerator-not-cooling/
+GET - https://appliancerepairguides.com/forum/dishwasher-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-dryer-repair-questions/wtw7600xw1-f52-and-f72-error-question/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/wall-oven-repair-questions/ge-wall-oven-f9-error-code/
+GET - https://appliancerepairguides.com/forum/ge-hotpoint-refrigerator-repair-questions/ge-tfx27rlb-refrigerator-not-cooling/ - Status code 200
+GET - https://appliancerepairguides.com/forum/range-stove-oven-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/wall-oven-repair-questions/ge-wall-oven-f9-error-code/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/built-in-dishwasher-repair-questions/ge-dishwasher-flashing-leds-and-wont-start/
+Depth 1 Crawling https://appliancerepairguides.com/forum/crosley-dryer-repair-questions/
+Depth 1 Crawling https://appliancerepairguides.com/forum/amana-refrigerator-repair-questions/
+GET - https://appliancerepairguides.com/forum/built-in-dishwasher-repair-questions/ge-dishwasher-flashing-leds-and-wont-start/ - Status code 200
+GET - https://appliancerepairguides.com/forum/crosley-dryer-repair-questions/ - Status code 200
+GET - https://appliancerepairguides.com/forum/amana-refrigerator-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/f70/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/amana-dryer-repair-questions/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/upright-freezer-repair-questions/bottom-hindge-bearing-ge-fuf20sudrww-replacement/
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+Depth 1 Crawling https://appliancerepairguides.com/forum/sears-kenmore-dryer-repair-questions/
+GET - https://appliancerepairguides.com/forum/whirlpool-roper-estate-washer-repair-questions/f70/ - Status code 200
+Depth 1 Crawling https://appliancerepairguides.com/forum/
+GET - https://appliancerepairguides.com/forum/upright-freezer-repair-questions/bottom-hindge-bearing-ge-fuf20sudrww-replacement/ - Status code 200
