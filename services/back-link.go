@@ -85,42 +85,46 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 		if link == "" || strings.Contains(link, "feedspot") {
 			continue
 		}
-		link = strings.Replace(link, "www.", "", 1)
-		// Different Operations for Absolute and Relative links
-		if strings.HasPrefix(link, "http") {
-			cs.mu.Lock()
-			if checkBacklink(link, current_url, s.CompDomains, s) != "" && depth != s.MaxDepth {
-				cs.mu.Unlock()
-				var dofollow bool
-				if strings.Contains(rel, "nofollow") {
-					dofollow = false
-				} else {
-					dofollow = true
-				}
-				cs.DB.InsertIntoBacklink(&models.Backlink{Source: current_url, Link: link, Dofollow: dofollow})
-				cs.mu.Lock()
-				s.Backlinks[link] = rel
-				cs.mu.Unlock()
-				continue
-			}
-			cs.mu.Unlock()
-			absolute = append(absolute, link)
-
-		} else {
-			relative = append(relative, link)
-		}
 
 		var next_url string
 
-		// Uses conditional for now, TODO will change to interface later
-		if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
-			link_mal := link[strings.Index(link, "https"):]
-			next_url = link_mal[:strings.Index(link_mal, "&")]
-		} else if !strings.Contains(link, "https") {
-			next_url = current_url[:strings.Index(current_url, ".com")+4] + link
+		if depth == s.MaxDepth {
+			// Uses conditional for now, TODO will change to interface later
+			if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
+				link_mal := link[strings.Index(link, "https"):]
+				next_url = link_mal[:strings.Index(link_mal, "&")]
+			} else if !strings.Contains(link, "https") {
+				next_url = current_url[:strings.Index(current_url, ".com")+4] + link
+			}
+
 		}
 
+		link = strings.Replace(link, "www.", "", 1)
+		// Different Operations for Absolute and Relative links
 		if depth < s.MaxDepth {
+			if strings.HasPrefix(link, "http") {
+				cs.mu.Lock()
+				if checkBacklink(link, current_url, s.CompDomains, s) != "" && depth != s.MaxDepth {
+					cs.mu.Unlock()
+					var dofollow bool
+					if strings.Contains(rel, "nofollow") {
+						dofollow = false
+					} else {
+						dofollow = true
+					}
+					cs.DB.InsertIntoBacklink(&models.Backlink{Source: current_url, Link: link, Dofollow: dofollow})
+					cs.mu.Lock()
+					s.Backlinks[link] = rel
+					cs.mu.Unlock()
+					continue
+				}
+				cs.mu.Unlock()
+				absolute = append(absolute, link)
+
+			} else {
+				relative = append(relative, link)
+			}
+
 			parsed_link, err := url.Parse(link)
 			if err != nil {
 				fmt.Println(link)
@@ -191,7 +195,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		comp_flag = false
 	}
 
-	if strings.Contains(link, "amazon.com/registry/") {
+	if strings.Contains(link, "amazon.com/registry/") || strings.Contains(link, "utm") {
 		return ""
 	}
 
