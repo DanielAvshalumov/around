@@ -5,7 +5,6 @@ type Spider struct {
 	Backlinks   map[string]string
 	UserAgent   string
 	MaxDepth    int
-	StartUrl    string
 	CompDomains []string
 }
 
@@ -14,7 +13,6 @@ func NewSpider(startUrl string, maxDepth int, compDomains []string) *Spider {
 		Visited:     make(map[string]bool),
 		Backlinks:   make(map[string]string),
 		CompDomains: compDomains,
-		StartUrl:    startUrl,
 		MaxDepth:    maxDepth,
 		UserAgent:   "AroundBot/1.0",
 		// UserAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.1.2 Safari/605.1.15",

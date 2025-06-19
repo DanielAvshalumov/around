@@ -23,15 +23,30 @@ import (
 // }
 
 type Browser interface {
-	Crawl()
+	CrawlSerp(link string, current_url string) string
+}
+
+type BrowserFactory struct{}
+
+func (bf *BrowserFactory) CreateBrowser(browser string) (Browser, error) {
+	switch browser {
+	case "duckduckgo":
+		return NewDuckDuckGo(browser), nil
+	}
 }
 
 type DuckDuckGo struct {
-	browser Browser
+	StartUrl string
+}
+
+func NewDuckDuckGo(url string) *DuckDuckGo {
+	return &DuckDuckGo{
+		StartUrl: fmt.Sprintf("https://html.duckduckgo?q=%s", url),
+	}
 }
 
 type CrawlerService struct {
-	browser      Browser
+	browser      BrowserFactory
 	DB           *config.Db
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
@@ -46,6 +61,17 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	}
 	cs.limitReached.Store(false)
 	return cs
+}
+
+func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
+	var next_url string
+	if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
+		link_mal := link[strings.Index(link, "https"):]
+		next_url = link_mal[:strings.Index(link_mal, "&")]
+	} else if !strings.Contains(link, "https") {
+		next_url = current_url[:strings.Index(current_url, ".com")+4] + link
+	}
+	return next_url
 }
 
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
@@ -91,6 +117,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
+	// Separate here
 	links := extractAnchorTags(current_url)
 	var absolute, relative []string
 
@@ -103,12 +130,6 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 		if depth == s.MaxDepth {
 			// Uses conditional for now, TODO will change to interface later
-			if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
-				link_mal := link[strings.Index(link, "https"):]
-				next_url = link_mal[:strings.Index(link_mal, "&")]
-			} else if !strings.Contains(link, "https") {
-				next_url = current_url[:strings.Index(current_url, ".com")+4] + link
-			}
 
 		}
 
@@ -258,7 +279,7 @@ func extractAnchorTags(page_url string) map[string]string {
 		if err != nil {
 			fmt.Printf("Error parsing url %s\n", page_url)
 		}
-
+		// Make the Request
 		res, err := http.Get(parsed_url)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
@@ -270,6 +291,7 @@ func extractAnchorTags(page_url string) map[string]string {
 		return string(body)
 	}(page_url)
 
+	// Read Body
 	reader := strings.NewReader(page_html)
 	doc, err := html.Parse(reader)
 	if err != nil {
