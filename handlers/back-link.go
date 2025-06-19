@@ -43,18 +43,15 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// keywords := req.Keywords
-
-	query := "https://html.duckduckgo.com/html?q=" + req.Industry
+	query := "https://html.duckduckgo.com/html?q=\"" + req.Industry + "\"(inurl:forum OR inurl:discussion OR inurl:thread)"
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
 	comp_domain := req.Comp_domains
-
-	fmt.Println("comp_domains", comp_domain)
+	browser := req.Browser
 
 	spider := models.NewSpider(query, 5, comp_domain)
-	fmt.Println("competitor Domains", spider)
 
-	crawlJobId, prospects := b.crawlerService.StartCrawl(spider, r.Context())
+	crawlJobId, prospects := b.crawlerService.StartCrawl(spider, browser, r.Context())
 	fmt.Println(crawlJobId)
 
 	w.WriteHeader(http.StatusOK)

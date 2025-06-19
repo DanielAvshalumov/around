@@ -18,7 +18,20 @@ import (
 	"golang.org/x/net/html"
 )
 
+// type Browser interface {
+// 	extractAnchorTags()
+// }
+
+type Browser interface {
+	Crawl()
+}
+
+type DuckDuckGo struct {
+	browser Browser
+}
+
 type CrawlerService struct {
+	browser      Browser
 	DB           *config.Db
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
@@ -35,7 +48,7 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	return cs
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, ctx context.Context) (int32, map[string]string) {
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
 
 	cs.wg.Add(1)
 	go func() {
@@ -219,7 +232,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	var backlinkCondition bool
 	if comp_flag {
 		backlinkCondition = slices.Contains(filter, parsed_link_host)
-		fmt.Println("debugging: ", filter, parsed_link_host)
+		// fmt.Println("debugging: ", filter, parsed_link_host)
 	} else {
 		backlinkCondition = !slices.Contains(filter, parsed_link_host)
 	}
