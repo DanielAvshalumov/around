@@ -28,11 +28,11 @@ type Browser interface {
 }
 
 type BrowserFactory struct {
-	browser string
+	BrowserString string
 }
 
 func (bf *BrowserFactory) build() Browser {
-	switch bf.browser {
+	switch bf.BrowserString {
 	case "duckduckgo":
 		return NewDuckDuckGo()
 	default:
@@ -46,7 +46,7 @@ type DuckDuckGo struct {
 
 func NewDuckDuckGo() *DuckDuckGo {
 	return &DuckDuckGo{
-		StartUrl: "https://html.duckduckgo?q=",
+		StartUrl: "https://html.duckduckgo.com/html?q=",
 	}
 }
 
@@ -59,7 +59,7 @@ type CrawlerService struct {
 	limitReached atomic.Bool
 }
 
-func NewCrawlerService(db *config.Db, maxThreads int, browserType string) *CrawlerService {
+func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	cs := &CrawlerService{
 		DB:        db,
 		semaphore: make(chan struct{}, maxThreads),
@@ -85,12 +85,13 @@ func (b *DuckDuckGo) GetQuery(query string) string {
 
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
 
-	bf := BrowserFactory{}
+	bf := BrowserFactory{BrowserString: browser}
+	cs.browser = bf.build()
 
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		Crawl(cs, spider, ctx, cs.browser.GetQuery(), spider.MaxDepth)
+		Crawl(cs, spider, ctx, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -141,7 +142,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 		if depth == s.MaxDepth {
 			// Uses conditional for now, TODO will change to interface later
-
+			next_url = cs.browser.CrawlSerp(link, current_url)
 		}
 
 		link = strings.Replace(link, "www.", "", 1)
