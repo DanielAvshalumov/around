@@ -40,6 +40,16 @@ func (bf *BrowserFactory) build() Browser {
 	}
 }
 
+type Google struct {
+	StartUrl string
+}
+
+func NewGoogle() *Google {
+	return &Google{
+		StartUrl: "https://google",
+	}
+}
+
 type DuckDuckGo struct {
 	StartUrl string
 }
@@ -66,6 +76,14 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	}
 	cs.limitReached.Store(false)
 	return cs
+}
+
+func (g *Google) CrawlSerp(link string, current_url string) string {
+	return ""
+}
+
+func (g *Google) GetQuery() string {
+	return ""
 }
 
 func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
