@@ -23,15 +23,20 @@ import (
 // }
 
 type Browser interface {
+	GetQuery(query string) string
 	CrawlSerp(link string, current_url string) string
 }
 
-type BrowserFactory struct{}
+type BrowserFactory struct {
+	browser string
+}
 
-func (bf *BrowserFactory) CreateBrowser(browser string) (Browser, error) {
-	switch browser {
+func (bf *BrowserFactory) build() Browser {
+	switch bf.browser {
 	case "duckduckgo":
-		return NewDuckDuckGo(browser), nil
+		return NewDuckDuckGo()
+	default:
+		return nil
 	}
 }
 
@@ -39,14 +44,14 @@ type DuckDuckGo struct {
 	StartUrl string
 }
 
-func NewDuckDuckGo(url string) *DuckDuckGo {
+func NewDuckDuckGo() *DuckDuckGo {
 	return &DuckDuckGo{
-		StartUrl: fmt.Sprintf("https://html.duckduckgo?q=%s", url),
+		StartUrl: "https://html.duckduckgo?q=",
 	}
 }
 
 type CrawlerService struct {
-	browser      BrowserFactory
+	browser      Browser
 	DB           *config.Db
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
@@ -54,7 +59,7 @@ type CrawlerService struct {
 	limitReached atomic.Bool
 }
 
-func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
+func NewCrawlerService(db *config.Db, maxThreads int, browserType string) *CrawlerService {
 	cs := &CrawlerService{
 		DB:        db,
 		semaphore: make(chan struct{}, maxThreads),
@@ -74,12 +79,18 @@ func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 	return next_url
 }
 
+func (b *DuckDuckGo) GetQuery(query string) string {
+	return fmt.Sprintf("%s%s", b.StartUrl, query)
+}
+
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
+
+	bf := BrowserFactory{}
 
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		Crawl(cs, spider, ctx, spider.StartUrl, spider.MaxDepth)
+		Crawl(cs, spider, ctx, cs.browser.GetQuery(), spider.MaxDepth)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")

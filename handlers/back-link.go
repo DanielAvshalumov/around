@@ -41,9 +41,9 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 			Error: "Invalid JSON",
 		})
 	}
-
+	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	query := "https://html.duckduckgo.com/html?q=\"" + req.Industry + "\"(inurl:forum OR inurl:discussion OR inurl:thread)"
+	query := req.Industry + "\"(inurl:forum OR inurl:discussion OR inurl:thread)"
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
 	comp_domain := req.Comp_domains
