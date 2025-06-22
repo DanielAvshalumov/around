@@ -43,7 +43,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	}
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	query := fmt.Sprintf("%s (inurl:forum OR inurl:discussion OR inurl:thread)", req.Industry)
+	query := fmt.Sprintf("%s forums (inurl:forum OR inurl:discussion OR inurl:thread)", req.Industry)
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
 	// comp_domains could be null

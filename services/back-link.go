@@ -18,21 +18,18 @@ import (
 	"golang.org/x/net/html"
 )
 
-// type Browser interface {
-// 	extractAnchorTags()
-// }
-
 type Browser interface {
 	GetQuery(query string) string
 	CrawlSerp(link string, current_url string) string
 }
 
 type BrowserFactory struct {
-	BrowserString string
 }
 
-func (bf *BrowserFactory) build() Browser {
-	switch bf.BrowserString {
+func (bf *BrowserFactory) build(browser string) Browser {
+	switch browser {
+	case "google":
+		return NewGoogle()
 	case "duckduckgo":
 		return NewDuckDuckGo()
 	default:
@@ -46,7 +43,7 @@ type Google struct {
 
 func NewGoogle() *Google {
 	return &Google{
-		StartUrl: "https://google",
+		StartUrl: "https://google.com/search?hl=en&q=",
 	}
 }
 
@@ -82,8 +79,8 @@ func (g *Google) CrawlSerp(link string, current_url string) string {
 	return ""
 }
 
-func (g *Google) GetQuery() string {
-	return ""
+func (g *Google) GetQuery(query string) string {
+	return fmt.Sprintf("%s%s", g.StartUrl, query)
 }
 
 func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
@@ -103,13 +100,13 @@ func (b *DuckDuckGo) GetQuery(query string) string {
 
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
 
-	bf := BrowserFactory{BrowserString: browser}
-	cs.browser = bf.build()
-
+	bf := BrowserFactory{}
+	cs.browser = bf.build(browser)
+	fmt.Println(cs.browser)
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		Crawl(cs, spider, ctx, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
+		cs.Crawl(spider, ctx, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -117,13 +114,19 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx 
 	return 0, spider.Backlinks
 }
 
-func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_url string, depth int) {
+func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_url string, depth int) {
 	if depth == 0 {
 		return
 	}
+
+	curr_parse, err := url.QueryUnescape(current_url)
+	if err != nil {
+		fmt.Println("Error unescaping url")
+	}
+
 	cs.mu.Lock()
 	switch {
-	case s.Visited[current_url]:
+	case s.Visited[curr_parse]:
 		cs.mu.Unlock()
 		return
 	default:
@@ -142,17 +145,17 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 	}
 
 	cs.mu.Lock()
-	s.Visited[current_url] = true
+	s.Visited[curr_parse] = true
 	cs.mu.Unlock()
 
 	time.Sleep(2 * time.Second)
-	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
+	fmt.Printf("Depth %d Crawling %s\n", depth, curr_parse)
 	// Separate here
-	links := extractAnchorTags(current_url)
-	var absolute, relative []string
 
+	links := extractAnchorTags(curr_parse)
+	var absolute, relative []string
 	for link, rel := range links {
-		if link == "" || strings.Contains(link, "feedspot") {
+		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
 			continue
 		}
 
@@ -160,7 +163,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 		if depth == s.MaxDepth {
 			// Uses conditional for now, TODO will change to interface later
-			next_url = cs.browser.CrawlSerp(link, current_url)
+			next_url = cs.browser.CrawlSerp(link, curr_parse)
 		}
 
 		link = strings.Replace(link, "www.", "", 1)
@@ -168,7 +171,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 		if depth < s.MaxDepth {
 			if strings.HasPrefix(link, "http") {
 				cs.mu.Lock()
-				if checkBacklink(link, current_url, s.CompDomains, s) != "" && depth != s.MaxDepth {
+				if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth {
 					cs.mu.Unlock()
 					var dofollow bool
 					if strings.Contains(rel, "nofollow") {
@@ -176,7 +179,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 					} else {
 						dofollow = true
 					}
-					cs.DB.InsertIntoBacklink(&models.Backlink{Source: current_url, Link: link, Dofollow: dofollow})
+					cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
 					cs.mu.Lock()
 					s.Backlinks[link] = rel
 					cs.mu.Unlock()
@@ -200,7 +203,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 			if !strings.Contains(path_link, "discussions") && !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "threads") && !strings.Contains(path_link, "forums") && !strings.Contains(path_link, "comments") {
 				continue
 			}
-			curr_parse, err := url.QueryUnescape(current_url)
+
 			if path_link[0] != '/' {
 				path_link = "/" + path_link
 			}
@@ -213,7 +216,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
-			Crawl(cs, s, ctx, next_url, depth-1)
+			cs.Crawl(s, ctx, next_url, depth-1)
 		}(next_url)
 	}
 
@@ -231,11 +234,7 @@ func Crawl(cs *CrawlerService, s *models.Spider, ctx context.Context, current_ur
 
 func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
 
-	_parsed, err := url.QueryUnescape(current_url)
-	if err != nil {
-		fmt.Printf("Failed unescaping string or string does not need unescaping %s\n", current_url)
-	}
-	parsed, err := url.Parse(_parsed)
+	parsed, err := url.Parse(current_url)
 	if err != nil {
 		fmt.Printf("Error parsing current_url %s", current_url)
 		return ""
@@ -304,17 +303,13 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 func extractAnchorTags(page_url string) map[string]string {
 	// Get HTML from Page URL
 	page_html := func(page_url string) string {
-
-		parsed_url, err := url.QueryUnescape(page_url)
-		if err != nil {
-			fmt.Printf("Error parsing url %s\n", page_url)
-		}
 		// Make the Request
-		res, err := http.Get(parsed_url)
+		res, err := http.Get(page_url)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 			return ""
 		}
+		// Return Body
 		defer res.Body.Close()
 		fmt.Printf("GET - %s - Status code %d\n", page_url, res.StatusCode)
 		body, err := io.ReadAll(res.Body)
