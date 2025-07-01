@@ -129,6 +129,9 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	case s.Visited[curr_parse]:
 		cs.mu.Unlock()
 		return
+	case s.Backlinks[curr_parse] != "":
+		cs.mu.Unlock()
+		return
 	default:
 		if cs.limitReached.Load() {
 			cs.mu.Unlock()
@@ -171,7 +174,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		if depth < s.MaxDepth {
 			if strings.HasPrefix(link, "http") {
 				cs.mu.Lock()
-				if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth {
+				if checkBacklink(link, curr_parse, s.CompDomains) != "" && depth != s.MaxDepth {
 					cs.mu.Unlock()
 					var dofollow bool
 					if strings.Contains(rel, "nofollow") {
@@ -180,6 +183,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 						dofollow = true
 					}
 					cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
+					// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 					cs.mu.Lock()
 					s.Backlinks[link] = rel
 					cs.mu.Unlock()
@@ -232,7 +236,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 
 }
 
-func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
+func checkBacklink(link string, current_url string, filter []string) string {
 
 	parsed, err := url.Parse(current_url)
 	if err != nil {
@@ -328,13 +332,14 @@ func extractAnchorTags(page_url string) map[string]string {
 	trav = func(node *html.Node) {
 		if node.Type == html.ElementNode && node.Data == "a" {
 			attrs := node.Attr
-			var href, rel string
+			var href string
+			rel := "none"
 			for _, attr := range attrs {
 				//TODO: Somehow find a way to make this more concise put in another method or something
-				if attr.Key == "href" && (!strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
+				if attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
 					href = attr.Val
 				}
-				if attr.Key == "rel" {
+				if attr.Key == "rel" && attr.Val != "" {
 					rel = attr.Val
 				}
 			}

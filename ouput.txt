@@ -1,0 +1,3 @@
+Opening Sqlite3
+LoadingLoading.Loading..Loading...Loading....Loading.....Opening backlinks table
+Server Listening on port 8080

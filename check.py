@@ -15,6 +15,7 @@ with open('output.txt','r', encoding='utf-8') as f:
         except Exception as e:
             print(e)
     print(_map)
+    print(len(lines))
     
 # res = requests.get("https://www.houzz.com/discussions/5965175/problems-with-zline-range")
 # print(res.text)
