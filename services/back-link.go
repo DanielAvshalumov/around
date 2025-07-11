@@ -76,11 +76,14 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 }
 
 func (g *Google) CrawlSerp(link string, current_url string) string {
+	// if strings.Contains()
+	fmt.Println(link, current_url)
 	return ""
 }
 
 func (g *Google) GetQuery(query string) string {
-	return fmt.Sprintf("%s%s", g.StartUrl, query)
+	fmt.Println(fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query)))
+	return fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query))
 }
 
 func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
@@ -152,7 +155,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	cs.mu.Unlock()
 
 	time.Sleep(2 * time.Second)
-	fmt.Printf("Depth %d Crawling %s\n", depth, curr_parse)
+	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	// Separate here
 
 	links := extractAnchorTags(curr_parse)
@@ -167,6 +170,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		if depth == s.MaxDepth {
 			// Uses conditional for now, TODO will change to interface later
 			next_url = cs.browser.CrawlSerp(link, curr_parse)
+			fmt.Println("next url", next_url)
 		}
 
 		link = strings.Replace(link, "www.", "", 1)
@@ -304,10 +308,15 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	return ""
 }
 
-func extractAnchorTags(page_url string) map[string]string {
+func extractAnchorTags(_page_url string) map[string]string {
 	// Get HTML from Page URL
+	page_url, err := url.QueryUnescape(_page_url)
+	if err != nil {
+		fmt.Println(fmt.Sprintf("VERY LOUDLY DONT LIKE THIS URL %s\n", page_url))
+	}
 	page_html := func(page_url string) string {
 		// Make the Request
+
 		res, err := http.Get(page_url)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
