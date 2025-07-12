@@ -101,7 +101,7 @@ func (b *DuckDuckGo) GetQuery(query string) string {
 	return fmt.Sprintf("%s%s", b.StartUrl, query)
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, map[string]string) {
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, []models.BacklinkResponse) {
 
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
@@ -114,7 +114,12 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx 
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
 
-	return 0, spider.Backlinks
+	var res []models.BacklinkResponse
+	for source, target := range spider.Backlinks {
+		res = append(res, models.BacklinkResponse{Source: source, Backlink: target})
+	}
+
+	return 0, res
 }
 
 func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_url string, depth int) {
