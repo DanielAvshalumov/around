@@ -189,7 +189,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 					cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
 					// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 					cs.mu.Lock()
-					s.Backlinks[link] = rel
+					s.Backlinks[link] = curr_parse
 					cs.mu.Unlock()
 					continue
 				}

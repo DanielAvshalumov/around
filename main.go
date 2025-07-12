@@ -23,7 +23,8 @@ func main() {
 	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService)
 
 	// Set Up Endpoints
-	http.HandleFunc("/back-link", BacklinkHandler.GetBacklinks)
+
+	http.Handle("/back-link", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklinks)))
 
 	fmt.Println("Server Listening on port 8080")
 	http.ListenAndServe(":8080", nil)
