@@ -63,6 +63,7 @@ type CrawlerService struct {
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
 	semaphore    chan struct{}
+	count        int32
 	limitReached atomic.Bool
 }
 
@@ -126,7 +127,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	if depth == 0 {
 		return
 	}
-
+	time.Sleep((time.Millisecond * 1200))
 	curr_parse, err := url.QueryUnescape(current_url)
 	if err != nil {
 		fmt.Println("Error unescaping url")
@@ -182,23 +183,25 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		// Different Operations for Absolute and Relative links
 		if depth < s.MaxDepth {
 			if strings.HasPrefix(link, "http") {
-				cs.mu.Lock()
-				if checkBacklink(link, curr_parse, s.CompDomains) != "" && depth != s.MaxDepth {
-					cs.mu.Unlock()
-					var dofollow bool
-					if strings.Contains(rel, "nofollow") {
-						dofollow = false
-					} else {
-						dofollow = true
-					}
-					cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
-					// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
+				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
-					s.Backlinks[link] = curr_parse
+					if checkBacklink(link, curr_parse, s.CompDomains) != "" && depth != s.MaxDepth {
+						cs.mu.Unlock()
+						var dofollow bool
+						if strings.Contains(rel, "nofollow") {
+							dofollow = false
+						} else {
+							dofollow = true
+						}
+						cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
+						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
+						cs.mu.Lock()
+						s.Backlinks[link] = curr_parse
+						cs.mu.Unlock()
+						continue
+					}
 					cs.mu.Unlock()
-					continue
 				}
-				cs.mu.Unlock()
 				absolute = append(absolute, link)
 
 			} else {
@@ -220,6 +223,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 			if path_link[0] != '/' {
 				path_link = "/" + path_link
 			}
+			// TODO add more TLD functionality
 			if !strings.Contains(curr_parse, ".com") {
 				continue
 			}
