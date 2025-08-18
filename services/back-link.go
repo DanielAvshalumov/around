@@ -99,6 +99,7 @@ func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 }
 
 func (b *DuckDuckGo) GetQuery(query string) string {
+	// EscapedQuery := url.QueryEscape(query)
 	return fmt.Sprintf("%s%s", b.StartUrl, query)
 }
 
@@ -107,6 +108,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx 
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
 	fmt.Println(cs.browser)
+	fmt.Println("comp_domains", spider.CompDomains)
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
@@ -132,8 +134,13 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	if err != nil {
 		fmt.Println("Error unescaping url")
 	}
-
 	cs.mu.Lock()
+	currentCount := atomic.LoadInt32(&cs.count)
+	if cs.limitReached.Load() || currentCount >= 10 {
+		fmt.Println("limit reached")
+		cs.mu.Unlock()
+		return
+	}
 	switch {
 	case s.Visited[curr_parse]:
 		cs.mu.Unlock()
@@ -141,11 +148,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	case s.Backlinks[curr_parse] != "":
 		cs.mu.Unlock()
 		return
-	default:
-		if cs.limitReached.Load() {
-			cs.mu.Unlock()
-			return
-		}
 	}
 	cs.mu.Unlock()
 
@@ -164,7 +166,9 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	// Separate here
 
-	links := extractAnchorTags(curr_parse)
+	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
+	links := extractAnchorTags(curr_parse, false, s)
+
 	var absolute, relative []string
 	for link, rel := range links {
 		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
@@ -182,9 +186,11 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		link = strings.Replace(link, "www.", "", 1)
 		// Different Operations for Absolute and Relative links
 		if depth < s.MaxDepth {
+
 			if strings.HasPrefix(link, "http") {
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
+
 					if checkBacklink(link, curr_parse, s.CompDomains) != "" && depth != s.MaxDepth {
 						cs.mu.Unlock()
 						var dofollow bool
@@ -197,8 +203,13 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 						cs.mu.Lock()
 						s.Backlinks[link] = curr_parse
-						cs.mu.Unlock()
-						continue
+						atomic.AddInt32(&cs.count, 1)
+						fmt.Println("The count is now", atomic.LoadInt32(&cs.count))
+						if atomic.LoadInt32(&cs.count) > 9 {
+
+							cs.mu.Unlock()
+							return
+						}
 					}
 					cs.mu.Unlock()
 				}
@@ -229,12 +240,17 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 			}
 			next_url = "https://" + curr_parse[strings.Index(curr_parse, "https://")+8:strings.Index(curr_parse, ".com")+4] + path_link
 		}
-
+		newCurrentCount := atomic.LoadInt32(&cs.count)
+		if newCurrentCount >= 10 || cs.limitReached.Load() {
+			fmt.Println("limit reached")
+			return
+		}
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
 			cs.Crawl(s, ctx, next_url, depth-1)
 		}(next_url)
+
 	}
 
 	// Test Print
@@ -271,7 +287,7 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	}
 	comp_flag := true
 	if len(filter) == 0 {
-		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com"}
+		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com"}
 		comp_flag = false
 	}
 
@@ -307,7 +323,7 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	if backlinkCondition {
 		fmt.Println("------------ Backlink Found ------------")
 		fmt.Println(current_url + "->" + link)
-		fmt.Println(parsed_host, "->", parsed_link_host)
+		fmt.Print(parsed_host, "->", parsed_link_host)
 		fmt.Println("----------------------------------------")
 		return link
 	}
@@ -317,7 +333,7 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	return ""
 }
 
-func extractAnchorTags(_page_url string) map[string]string {
+func extractAnchorTags(_page_url string, proxyFlag bool, s *models.Spider) map[string]string {
 	// Get HTML from Page URL
 	page_url, err := url.QueryUnescape(_page_url)
 	if err != nil {
@@ -325,8 +341,26 @@ func extractAnchorTags(_page_url string) map[string]string {
 	}
 	page_html := func(page_url string) string {
 		// Make the Request
-
-		res, err := http.Get(page_url)
+		var cli *http.Client
+		if proxyFlag {
+			proxy, err := url.Parse("http://209.97.150.167:3128")
+			if err != nil {
+				fmt.Println("Proxy doens't work")
+			}
+			transport := &http.Transport{
+				Proxy: http.ProxyURL(proxy),
+			}
+			client := &http.Client{
+				Timeout:   60 * time.Second,
+				Transport: transport,
+			}
+			cli = client
+		} else {
+			cli = &http.Client{}
+		}
+		req, err := http.NewRequest("GET", page_url, nil)
+		req.Header.Set("User-Agent", s.UserAgent)
+		res, err := cli.Do(req)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 			return ""
