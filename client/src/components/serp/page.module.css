@@ -1,0 +1,201 @@
+/* Your existing styles */
+.container {
+  width: 100%;
+}
+
+.layoutContainer {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  align-items: flex-start;
+  position: relative;
+  padding: 24px;
+}
+
+.originalComponent {
+  transition: transform 0.7s ease-in-out;
+  flex-shrink: 0;
+}
+
+.centered {
+  transform: translateX(calc(50vw - 50% - 0.5rem));
+}
+
+.leftAligned {
+  transform: translateX(0);
+}
+
+.newComponent {
+  transition: all 0.7s ease-in-out;
+  overflow: hidden;
+  height: 8rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 1.5rem;
+  background: linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #9333ea, #ec4899);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  animation: 2s infinite pulse;
+}
+
+.hidden {
+  width: 0;
+  opacity: 0;
+}
+
+.visible {
+  flex: 1;
+  opacity: 1;
+}
+
+/* New table styles */
+.tableContainer {
+  transition: all 0.7s ease-in-out;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 2px solid transparent;
+  background: linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #9333ea, #ec4899);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.tableWrapper {
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHead {
+  background: linear-gradient(90deg, #eff6ff, #faf5ff);
+}
+
+.tableHeader {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.tableBody {
+  background-color: white;
+}
+
+.tableRow {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableCell {
+  padding: 1rem 1.5rem;
+  vertical-align: middle;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.linkContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.linkIcon {
+  width: 1rem;
+  height: 1rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.sourceLink {
+  font-size: 0.875rem;
+  color: #2563eb;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+  display: inline-block;
+}
+
+.sourceLink:hover {
+  color: #1d4ed8;
+}
+
+.daBadge {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.daHigh {
+  color: #059669;
+  background-color: #d1fae5;
+}
+
+.daMedium {
+  color: #d97706;
+  background-color: #fef3c7;
+}
+
+.daLow {
+  color: #ea580c;
+  background-color: #fed7aa;
+}
+
+.daVeryLow {
+  color: #dc2626;
+  background-color: #fecaca;
+}
+
+.bankLinks {
+  font-size: 0.875rem;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+}
+
+.viewButton {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.viewButton:hover {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

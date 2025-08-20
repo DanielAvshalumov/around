@@ -65,9 +65,12 @@ type CrawlerService struct {
 	semaphore    chan struct{}
 	count        int32
 	limitReached atomic.Bool
+	ctx          context.Context
+	cancel       context.CancelFunc
 }
 
 func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
+
 	cs := &CrawlerService{
 		DB:        db,
 		semaphore: make(chan struct{}, maxThreads),
@@ -83,7 +86,7 @@ func (g *Google) CrawlSerp(link string, current_url string) string {
 }
 
 func (g *Google) GetQuery(query string) string {
-	fmt.Println(fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query)))
+	fmt.Printf(fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query)))
 	return fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query))
 }
 
@@ -95,16 +98,24 @@ func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 	} else if !strings.Contains(link, "https") {
 		next_url = current_url[:strings.Index(current_url, ".com")+4] + link
 	}
-	return next_url
+	new_next_url, err := url.PathUnescape(next_url)
+	if err != nil {
+		fmt.Println("error unescaping path from duckduck go impl of CrawlSerp")
+	}
+	return new_next_url
 }
 
 func (b *DuckDuckGo) GetQuery(query string) string {
-	// EscapedQuery := url.QueryEscape(query)
-	return fmt.Sprintf("%s%s", b.StartUrl, query)
+	EscapedQuery := url.PathEscape(query)
+	return fmt.Sprintf("%s%s", b.StartUrl, EscapedQuery)
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx context.Context) (int32, []models.BacklinkResponse) {
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
 
+	cs.count = 0
+	ctx, cancel := context.WithCancel(parentCtx)
+	cs.ctx = ctx
+	cs.cancel = cancel
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
 	fmt.Println(cs.browser)
@@ -112,7 +123,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx 
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		cs.Crawl(spider, ctx, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
+		cs.Crawl(spider, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -125,7 +136,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, ctx 
 	return 0, res
 }
 
-func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_url string, depth int) {
+func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int) {
 	if depth == 0 {
 		return
 	}
@@ -138,6 +149,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	currentCount := atomic.LoadInt32(&cs.count)
 	if cs.limitReached.Load() || currentCount >= 10 {
 		fmt.Println("limit reached")
+		cs.cancel()
 		cs.mu.Unlock()
 		return
 	}
@@ -154,7 +166,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	select {
 	case cs.semaphore <- struct{}{}:
 		defer func() { <-cs.semaphore }()
-	case <-ctx.Done():
+	case <-cs.ctx.Done():
 		return
 	}
 
@@ -167,7 +179,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 	// Separate here
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
-	links := extractAnchorTags(curr_parse, false, s)
+	links := extractAnchorTags(current_url, false, s)
 
 	var absolute, relative []string
 	for link, rel := range links {
@@ -187,7 +199,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		// Different Operations for Absolute and Relative links
 		if depth < s.MaxDepth {
 
-			if strings.HasPrefix(link, "http") {
+			if strings.HasPrefix(link, "https") {
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
@@ -206,7 +218,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 						atomic.AddInt32(&cs.count, 1)
 						fmt.Println("The count is now", atomic.LoadInt32(&cs.count))
 						if atomic.LoadInt32(&cs.count) > 9 {
-
 							cs.mu.Unlock()
 							return
 						}
@@ -243,12 +254,13 @@ func (cs *CrawlerService) Crawl(s *models.Spider, ctx context.Context, current_u
 		newCurrentCount := atomic.LoadInt32(&cs.count)
 		if newCurrentCount >= 10 || cs.limitReached.Load() {
 			fmt.Println("limit reached")
+			cs.cancel()
 			return
 		}
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
-			cs.Crawl(s, ctx, next_url, depth-1)
+			cs.Crawl(s, next_url, depth-1)
 		}(next_url)
 
 	}
@@ -287,7 +299,7 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	}
 	comp_flag := true
 	if len(filter) == 0 {
-		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com"}
+		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com"}
 		comp_flag = false
 	}
 
@@ -333,12 +345,9 @@ func checkBacklink(link string, current_url string, filter []string) string {
 	return ""
 }
 
-func extractAnchorTags(_page_url string, proxyFlag bool, s *models.Spider) map[string]string {
+func extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[string]string {
 	// Get HTML from Page URL
-	page_url, err := url.QueryUnescape(_page_url)
-	if err != nil {
-		fmt.Println(fmt.Sprintf("VERY LOUDLY DONT LIKE THIS URL %s\n", page_url))
-	}
+
 	page_html := func(page_url string) string {
 		// Make the Request
 		var cli *http.Client

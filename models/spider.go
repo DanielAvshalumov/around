@@ -17,9 +17,9 @@ func NewSpider(startUrl string, maxDepth int, compDomains []string) *Spider {
 		Backlinks:   make(map[string]string),
 		CompDomains: compDomains,
 		MaxDepth:    maxDepth,
-		UserAgent:   "NewnappBrowser/1.0",
-		Query:       startUrl,
-		// UserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+		// UserAgent:   "NewnappBrowser/1.0",
+		Query:     startUrl,
+		UserAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
 	}
 }
 
