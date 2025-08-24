@@ -6,12 +6,13 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"slices"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"slices"
+	"golang.org/x/net/proxy"
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
@@ -112,6 +113,8 @@ func (b *DuckDuckGo) GetQuery(query string) string {
 
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
 
+	spider.SetUserAgent()
+	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
 	ctx, cancel := context.WithCancel(parentCtx)
 	cs.ctx = ctx
@@ -179,10 +182,22 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 	// Separate here
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
-	links := extractAnchorTags(current_url, false, s)
+	links := extractAnchorTags(current_url, true, s)
 
 	var absolute, relative []string
 	for link, rel := range links {
+
+		newCurrentCount := atomic.LoadInt32(&cs.count)
+		if newCurrentCount >= 10 || cs.limitReached.Load() {
+			fmt.Println("limit reached")
+			cs.cancel()
+			return
+		}
+
+		if s.Visited[link] {
+			continue
+		}
+
 		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
 			continue
 		}
@@ -251,12 +266,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 			}
 			next_url = "https://" + curr_parse[strings.Index(curr_parse, "https://")+8:strings.Index(curr_parse, ".com")+4] + path_link
 		}
-		newCurrentCount := atomic.LoadInt32(&cs.count)
-		if newCurrentCount >= 10 || cs.limitReached.Load() {
-			fmt.Println("limit reached")
-			cs.cancel()
-			return
-		}
+
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
@@ -332,7 +342,7 @@ func checkBacklink(link string, current_url string, filter []string) string {
 		backlinkCondition = !slices.Contains(filter, parsed_link_host)
 	}
 
-	if backlinkCondition {
+	if backlinkCondition && (strings.Contains(link, "/p/") || strings.Contains(link, "collections") || strings.Contains(link, "product")) {
 		fmt.Println("------------ Backlink Found ------------")
 		fmt.Println(current_url + "->" + link)
 		fmt.Print(parsed_host, "->", parsed_link_host)
@@ -347,26 +357,26 @@ func checkBacklink(link string, current_url string, filter []string) string {
 
 func extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[string]string {
 	// Get HTML from Page URL
-
+	torProxy := "127.0.0.1:9050"
 	page_html := func(page_url string) string {
 		// Make the Request
 		var cli *http.Client
 		if proxyFlag {
-			proxy, err := url.Parse("http://209.97.150.167:3128")
+			dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
 			if err != nil {
-				fmt.Println("Proxy doens't work")
+				fmt.Println("Error with Tor Proxy")
 			}
 			transport := &http.Transport{
-				Proxy: http.ProxyURL(proxy),
+				Dial: dialer.Dial,
 			}
-			client := &http.Client{
-				Timeout:   60 * time.Second,
+			cli = &http.Client{
 				Transport: transport,
+				Timeout:   30 * time.Second,
 			}
-			cli = client
 		} else {
 			cli = &http.Client{}
 		}
+
 		req, err := http.NewRequest("GET", page_url, nil)
 		req.Header.Set("User-Agent", s.UserAgent)
 		res, err := cli.Do(req)
