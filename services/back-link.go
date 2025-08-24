@@ -194,7 +194,11 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 			return
 		}
 
-		if s.Visited[link] {
+		cs.mu.Lock()
+		visited := s.Visited[link]
+		cs.mu.Unlock()
+
+		if visited {
 			continue
 		}
 
@@ -218,7 +222,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains) != "" && depth != s.MaxDepth {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth {
 						cs.mu.Unlock()
 						var dofollow bool
 						if strings.Contains(rel, "nofollow") {
@@ -287,7 +291,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 
 }
 
-func checkBacklink(link string, current_url string, filter []string) string {
+func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
 
 	parsed, err := url.Parse(current_url)
 	if err != nil {
@@ -342,10 +346,18 @@ func checkBacklink(link string, current_url string, filter []string) string {
 		backlinkCondition = !slices.Contains(filter, parsed_link_host)
 	}
 
-	if backlinkCondition && (strings.Contains(link, "/p/") || strings.Contains(link, "collections") || strings.Contains(link, "product")) {
+	if strings.Contains(link, "houzz") {
+		if !strings.Contains(link, "vr~") {
+			return ""
+		}
+		return link
+	}
+
+	if backlinkCondition && (strings.Contains(link, "/p/") || strings.Contains(link, "/collection/") || strings.Contains(link, "/product/")) {
 		fmt.Println("------------ Backlink Found ------------")
 		fmt.Println(current_url + "->" + link)
 		fmt.Print(parsed_host, "->", parsed_link_host)
+		fmt.Print("Visited", s.Visited[link])
 		fmt.Println("----------------------------------------")
 		return link
 	}
@@ -367,11 +379,13 @@ func extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[st
 				fmt.Println("Error with Tor Proxy")
 			}
 			transport := &http.Transport{
-				Dial: dialer.Dial,
+				Dial:                dialer.Dial,
+				MaxIdleConns:        100,
+				MaxIdleConnsPerHost: 10,
 			}
 			cli = &http.Client{
 				Transport: transport,
-				Timeout:   30 * time.Second,
+				Timeout:   15 * time.Second,
 			}
 		} else {
 			cli = &http.Client{}
