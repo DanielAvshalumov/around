@@ -3,8 +3,10 @@ package services
 import (
 	"context"
 	"fmt"
-	"io"
-	"net/http"
+
+	// "io"
+	"log"
+	// "net/http"
 	"net/url"
 	"slices"
 	"strings"
@@ -13,17 +15,22 @@ import (
 	"time"
 
 	"golang.org/x/net/html"
-	"golang.org/x/net/proxy"
+	// "golang.org/x/net/proxy"
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
+
+	"github.com/chromedp/cdproto/network"
+	"github.com/chromedp/chromedp"
+	// "github.com/chromedp/chromedp/network"
 )
 
 type Browser interface {
 	GetQuery(query string) string
 	CrawlSerp(link string, current_url string) string
 	GetReferer() string
+	GetNextPage()
 }
 
 type BrowserFactory struct {
@@ -84,6 +91,14 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 	return cs
 }
 
+func (g *Google) GetNextPage() {
+
+}
+
+func (b *DuckDuckGo) GetNextPage() {
+
+}
+
 func (g *Google) CrawlSerp(link string, current_url string) string {
 	// if strings.Contains()
 	fmt.Println(link, current_url)
@@ -91,7 +106,6 @@ func (g *Google) CrawlSerp(link string, current_url string) string {
 }
 
 func (g *Google) GetQuery(query string) string {
-	fmt.Printf(fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query)))
 	return fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query))
 }
 
@@ -123,16 +137,29 @@ func (b *Google) GetReferer() string {
 	return "https://google.com"
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
-
-	spider.SetUserAgent()
-	fmt.Println("user agent", spider.UserAgent)
-	cs.count = 0
-	ctx, cancel := context.WithCancel(parentCtx)
-	cs.ctx = ctx
-	cs.cancel = cancel
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string) (int32, []models.BacklinkResponse) {
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
+	spider.SetUserAgent()
+	headers := network.Headers(map[string]interface{}{
+		"User-Agent":      spider.UserAgent,
+		"Accept-Language": "en-US,en;q=0.9'",
+		"Referer":         cs.browser.GetReferer(),
+	})
+	page := 2
+	fmt.Println("user agent", spider.UserAgent)
+	cs.count = 0
+
+	ctx, cancel := chromedp.NewContext(context.Background())
+	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
+	if err := chromedp.Run(ctx, network.Enable(), network.SetExtraHTTPHeaders(headers)); err != nil {
+		log.Fatal(err)
+	}
+	// defer cancel()
+
+	cs.ctx = ctx
+	cs.cancel = cancel
+
 	fmt.Println(cs.browser)
 	fmt.Println("comp_domains", spider.CompDomains)
 	if err := lib.RenewIp(); err != nil {
@@ -142,7 +169,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		cs.Crawl(spider, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
+		cs.Crawl(spider, cs.browser.GetQuery(spider.Query), spider.MaxDepth, page)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -155,12 +182,13 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	return 0, res
 }
 
-func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int) {
+func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int, page int) {
 	if depth == 0 {
 		return
 	}
 	time.Sleep((time.Millisecond * 1200))
 	curr_parse, err := url.QueryUnescape(current_url)
+
 	if err != nil {
 		fmt.Println("Error unescaping url")
 	}
@@ -179,6 +207,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 		cs.mu.Unlock()
 		return
 	}
+	s.Visited[curr_parse] = true
+	s.Visited[current_url] = true
 	cs.mu.Unlock()
 
 	select {
@@ -188,10 +218,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 		return
 	}
 
-	cs.mu.Lock()
-	s.Visited[curr_parse] = true
-	cs.mu.Unlock()
-
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
 	// Separate here
@@ -200,6 +226,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 	links := cs.extractAnchorTags(current_url, true, s)
 
 	var absolute, relative []string
+
 	for link, rel := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cs.count)
@@ -248,7 +275,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 						cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 						cs.mu.Lock()
-						s.Backlinks[link] = curr_parse
+						s.Backlinks[curr_parse] = link
 						atomic.AddInt32(&cs.count, 1)
 						fmt.Println("The count is now", atomic.LoadInt32(&cs.count))
 						if atomic.LoadInt32(&cs.count) > 9 {
@@ -289,19 +316,13 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
-			cs.Crawl(s, next_url, depth-1)
+			cs.Crawl(s, next_url, depth-1, page)
 		}(next_url)
 
 	}
 
-	// Test Print
-
-	// for _, name := range absolute {
-	// 	fmt.Println(name)
-	// }
-	// fmt.Println("------------------------------")
-	// for _, name := range relative {
-	// 	fmt.Println(name)
+	// if depth == s.MaxDepth && page > 0{
+	// 	cs.Crawl()
 	// }
 
 }
@@ -384,41 +405,41 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 
 func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[string]string {
 	// Get HTML from Page URL
-	torProxy := "127.0.0.1:9050"
+	// torProxy := "127.0.0.1:9050"
 	page_html := func(page_url string) string {
 		// Make the Request
-		var cli *http.Client
-		if proxyFlag {
-			dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
-			if err != nil {
-				fmt.Println("Error with Tor Proxy")
-			}
-			transport := &http.Transport{
-				Dial:                dialer.Dial,
-				MaxIdleConns:        100,
-				MaxIdleConnsPerHost: 10,
-			}
-			cli = &http.Client{
-				Transport: transport,
-				Timeout:   15 * time.Second,
-			}
-		} else {
-			cli = &http.Client{}
+		// var cli *http.Client
+		// if proxyFlag {
+		// 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
+		// 	if err != nil {
+		// 		fmt.Println("Error with Tor Proxy")
+		// 	}
+		// 	transport := &http.Transport{
+		// 		Dial:                dialer.Dial,
+		// 		MaxIdleConns:        100,
+		// 		MaxIdleConnsPerHost: 10,
+		// 	}
+		// 	cli = &http.Client{
+		// 		Transport: transport,
+		// 		Timeout:   15 * time.Second,
+		// 	}
+		// } else {
+		// 	cli = &http.Client{}
+		// }
+		var body string
+		err := chromedp.Run(cs.ctx,
+			chromedp.Navigate(page_url),
+			chromedp.WaitReady("body", chromedp.ByQuery),
+			chromedp.Sleep(time.Second*1),
+			chromedp.OuterHTML("html", &body, chromedp.ByQuery),
+		)
+		if err != nil {
+			fmt.Printf("Navigation Failed for %s\n%v", page_url, err)
 		}
 
-		req, err := http.NewRequest("GET", page_url, nil)
-		req.Header.Set("User-Agent", s.UserAgent)
-		req.Header.Set("Referer", cs.browser.GetReferer())
-		res, err := cli.Do(req)
-		if err != nil {
-			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
-			return ""
-		}
 		// Return Body
-		defer res.Body.Close()
-		fmt.Printf("GET - %s - Status code %d\n", page_url, res.StatusCode)
-		body, err := io.ReadAll(res.Body)
-		return string(body)
+		fmt.Println(body)
+		return body
 	}(page_url)
 
 	// Read Body
