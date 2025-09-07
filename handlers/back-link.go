@@ -5,17 +5,18 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/services"
 )
 
 type BacklinkHandler struct {
-	crawlerService *services.CrawlerService
+	DB *config.Db
 }
 
-func NewBacklinkHandler(crawler *services.CrawlerService) *BacklinkHandler {
+func NewBacklinkHandler(db *config.Db) *BacklinkHandler {
 	return &BacklinkHandler{
-		crawlerService: crawler,
+		DB: db,
 	}
 }
 
@@ -33,6 +34,8 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	CrawlerService := services.NewCrawlerService(b.DB, 100)
+
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
@@ -43,7 +46,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	}
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	query := fmt.Sprintf("selling %s forums (inurl:forum OR inurl:discussion OR inurl:thread)", req.Industry)
+	query := fmt.Sprintf("%s forums (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
 	// comp_domains could be null
@@ -52,7 +55,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(browser, query)
 	spider := models.NewSpider(query, 4, comp_domain)
 
-	crawlJobId, prospects := b.crawlerService.StartCrawl(spider, browser, r.Context())
+	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, r.Context())
 	fmt.Println(crawlJobId)
 
 	w.WriteHeader(http.StatusOK)

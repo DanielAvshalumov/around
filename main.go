@@ -6,7 +6,6 @@ import (
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/handlers"
-	"github.com/danielavshalumov/around/services"
 )
 
 func main() {
@@ -17,10 +16,9 @@ func main() {
 		fmt.Println(err)
 	}
 	// Initialize Services
-	CrawlerService := services.NewCrawlerService(db, 50)
 
 	// Define Handlers
-	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService)
+	BacklinkHandler := handlers.NewBacklinkHandler(db)
 
 	// Set Up Endpoints
 

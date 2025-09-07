@@ -9,6 +9,7 @@ type Spider struct {
 	UserAgent   string
 	MaxDepth    int
 	CompDomains []string
+	Referrer    string
 }
 
 func NewSpider(startUrl string, maxDepth int, compDomains []string) *Spider {
