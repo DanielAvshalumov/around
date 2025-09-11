@@ -406,41 +406,43 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[string]string {
 	// Get HTML from Page URL
 	// torProxy := "127.0.0.1:9050"
-	page_html := func(page_url string) string {
-		// Make the Request
-		// var cli *http.Client
-		// if proxyFlag {
-		// 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
-		// 	if err != nil {
-		// 		fmt.Println("Error with Tor Proxy")
-		// 	}
-		// 	transport := &http.Transport{
-		// 		Dial:                dialer.Dial,
-		// 		MaxIdleConns:        100,
-		// 		MaxIdleConnsPerHost: 10,
-		// 	}
-		// 	cli = &http.Client{
-		// 		Transport: transport,
-		// 		Timeout:   15 * time.Second,
-		// 	}
-		// } else {
-		// 	cli = &http.Client{}
-		// }
-		var body string
-		err := chromedp.Run(cs.ctx,
-			chromedp.Navigate(page_url),
-			chromedp.WaitReady("body", chromedp.ByQuery),
-			chromedp.Sleep(time.Second*1),
-			chromedp.OuterHTML("html", &body, chromedp.ByQuery),
-		)
-		if err != nil {
-			fmt.Printf("Navigation Failed for %s\n%v", page_url, err)
-		}
+	var page_html string
+	// Make the Request
+	// var cli *http.Client
+	// if proxyFlag {
+	// 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
+	// 	if err != nil {
+	// 		fmt.Println("Error with Tor Proxy")
+	// 	}
+	// 	transport := &http.Transport{
+	// 		Dial:                dialer.Dial,
+	// 		MaxIdleConns:        100,
+	// 		MaxIdleConnsPerHost: 10,
+	// 	}
+	// 	cli = &http.Client{
+	// 		Transport: transport,
+	// 		Timeout:   15 * time.Second,
+	// 	}
+	// } else {
+	// 	cli = &http.Client{}
+	// }
+	ctx, cancel := chromedp.NewContext(context.Background())
+	defer cancel()
+	ctx, cancel = context.WithTimeout(ctx, 30*time.Second)
+	defer cancel()
+	var body string
+	err := chromedp.Run(ctx,
+		chromedp.Navigate(page_url),
+		chromedp.WaitReady("body", chromedp.ByQuery),
+		chromedp.Sleep(time.Second*1),
+		chromedp.OuterHTML("html", &body, chromedp.ByQuery),
+	)
+	if err != nil {
+		fmt.Printf("Navigation Failed for %s\n%v", page_url, err)
+	}
 
-		// Return Body
-		fmt.Println(body)
-		return body
-	}(page_url)
+	// Return Body
+	page_html = string(body)
 
 	// Read Body
 	reader := strings.NewReader(page_html)
