@@ -15,6 +15,7 @@ const MainPage = () => {
     const [loading, setLoading] = useState(false)
     const [backlinks, setBacklinks] = useState<any[]>([])
     const [industry, setIndustry] = useState('');
+    const [competitorDomains, setCompetitorDomains] = useState(['']);
 
     useEffect(() => {
       console.log('hello',industry)
@@ -27,7 +28,7 @@ const MainPage = () => {
       try {
         const api = await getForumProductLinks({
           industry: industry,
-          comp_domains: null,
+          Comp_domains: competitorDomains,
           browser: ''
         })
         // await new Promise(res => setTimeout(res,1500))
@@ -88,7 +89,7 @@ const MainPage = () => {
       </Box>
       <div className={styles.layoutContainer}>
         <div className={`${styles.originalComponent} ${isCentered ? styles.centered : styles.leftAligned}`}>
-          <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry}/>
+          <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry} competitorDomains={competitorDomains} setCompetitorDomains={setCompetitorDomains}/>
         </div>
         <div className={`${styles.newComponent} ${isCentered ? styles.hidden : styles.visible}`}>
 

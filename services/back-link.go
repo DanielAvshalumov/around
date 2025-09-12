@@ -361,14 +361,14 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		backlinkCondition = !slices.Contains(filter, parsed_link_host)
 	}
 
-	if strings.Contains(link, "houzz") {
-		if !strings.Contains(link, "vr~") {
-			return ""
-		}
-		return link
-	}
+	// if strings.Contains(link, "houzz") {
+	// 	if !strings.Contains(link, "vr~") {
+	// 		return ""
+	// 	}
+	// 	return link
+	// }
 
-	if backlinkCondition && (strings.Contains(link, "/p/") || strings.Contains(link, "/collection/") || strings.Contains(link, "/product/") || strings.Contains(link, "/collections/") || strings.Contains(link, "/cgi-bin/")) {
+	if backlinkCondition {
 		fmt.Println("------------ Backlink Found ------------")
 		fmt.Println(current_url + "->" + link)
 		fmt.Print(parsed_host, "->", parsed_link_host)

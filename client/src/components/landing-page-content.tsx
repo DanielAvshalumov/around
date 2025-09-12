@@ -4,9 +4,13 @@ import { Plus, X, Link, Building, Rocket, Trash2 } from 'lucide-react';
 import styles from './page.module.css';
 
 
-export default function BacklinkBuilderForm({ handleBacklink } : any) {
+export default function BacklinkBuilderForm({ handleBacklink, competitorDomains, setCompetitorDomains} : any) {
   const [industry, setIndustry] = useState('');
-  const [competitorDomains, setCompetitorDomains] = useState(['']);
+  
+
+  React.useEffect(() => {
+    console.log(competitorDomains)
+  },[competitorDomains])
 
   const addDomain = () => {
     setCompetitorDomains([...competitorDomains, '']);
