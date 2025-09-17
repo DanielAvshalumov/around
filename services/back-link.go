@@ -1,7 +1,9 @@
 package services
 
 import (
+	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -18,10 +20,12 @@ import (
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type Browser interface {
-	GetQuery(query string) string
+	GetQuery(query string, params bool) string
 	CrawlSerp(link string, current_url string) string
 	GetReferer() string
 }
@@ -65,6 +69,7 @@ func NewDuckDuckGo() *DuckDuckGo {
 type CrawlerService struct {
 	browser      Browser
 	DB           *config.Db
+	RDB          *redis.Client
 	mu           sync.RWMutex
 	wg           sync.WaitGroup
 	semaphore    chan struct{}
@@ -74,10 +79,11 @@ type CrawlerService struct {
 	cancel       context.CancelFunc
 }
 
-func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
+func NewCrawlerService(db *config.Db, rdb *redis.Client, maxThreads int) *CrawlerService {
 
 	cs := &CrawlerService{
 		DB:        db,
+		RDB:       rdb,
 		semaphore: make(chan struct{}, maxThreads),
 	}
 	cs.limitReached.Store(false)
@@ -85,12 +91,11 @@ func NewCrawlerService(db *config.Db, maxThreads int) *CrawlerService {
 }
 
 func (g *Google) CrawlSerp(link string, current_url string) string {
-	// if strings.Contains()
 	fmt.Println(link, current_url)
 	return ""
 }
 
-func (g *Google) GetQuery(query string) string {
+func (g *Google) GetQuery(query string, params bool) string {
 	fmt.Printf(fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query)))
 	return fmt.Sprintf("%s%s", g.StartUrl, url.QueryEscape(query))
 }
@@ -110,9 +115,77 @@ func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 	return new_next_url
 }
 
-func (b *DuckDuckGo) GetQuery(query string) string {
-	EscapedQuery := url.PathEscape(query)
-	return fmt.Sprintf("%s%s", b.StartUrl, EscapedQuery)
+func (b *DuckDuckGo) GetQuery(query string, params bool) string {
+	if params {
+		EscapedQuery := url.PathEscape(query)
+		return fmt.Sprintf("%s%s", b.StartUrl, EscapedQuery)
+	} else {
+		res := b.StartUrl + query + "&"
+		return res
+	}
+}
+
+func (cs *CrawlerService) getNextPageParams(current_url string, s *models.Spider) (url.Values, error) {
+	client := http.Client{}
+	req, err := http.NewRequest("GET", current_url, nil)
+	req.Header.Set("User-Agent", s.UserAgent)
+	req.Header.Set("Referer", cs.browser.GetReferer())
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println("error in getNextPageParams()")
+		return nil, errors.New("Error calling http req to SERP")
+	}
+	defer res.Body.Close()
+
+	body, err := io.ReadAll(res.Body)
+	stringBody := string(body)
+
+	reader := strings.NewReader(stringBody)
+	doc, err := html.Parse(reader)
+	if err != nil {
+		fmt.Printf("Error parsing HTML from page %s", current_url)
+	}
+
+	var trav func(node *html.Node)
+	params := url.Values{}
+	trav = func(node *html.Node) {
+		if node.Type == html.ElementNode && node.Data == "input" {
+			attrs := node.Attr
+			for _, attr := range attrs {
+				if attr.Key == "name" {
+					switch attr.Val {
+					case "s":
+						params.Set("s", node.Attr[2].Val)
+					case "v":
+						params.Set("v", node.Attr[2].Val)
+					case "o":
+						params.Set("o", node.Attr[2].Val)
+					case "dc":
+						params.Set("dc", node.Attr[2].Val)
+					case "api":
+						params.Set("api", node.Attr[2].Val)
+					case "vqd":
+						params.Set("vqd", node.Attr[2].Val)
+					case "kl":
+						params.Set("kl", node.Attr[2].Val)
+					}
+				}
+			}
+		}
+		for c := node.FirstChild; c != nil; c = c.NextSibling {
+			trav(c)
+		}
+	}
+	trav(doc)
+	return params, nil
+	// "q" : ,
+	// "s" : ,
+	// "v" : ,
+	// "o" : ,
+	// "dv": ,
+	// "api": ,
+	// "vqd": ,
+	// "kl": ,
 }
 
 func (b *DuckDuckGo) GetReferer() string {
@@ -139,10 +212,11 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
 	time.Sleep(time.Second * 3)
+	pages := 2
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		cs.Crawl(spider, cs.browser.GetQuery(spider.Query), spider.MaxDepth)
+		cs.Crawl(spider, cs.browser.GetQuery(spider.Query, true), spider.MaxDepth, pages)
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -155,7 +229,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	return 0, res
 }
 
-func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int) {
+func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int, pages int) {
 	if depth == 0 {
 		return
 	}
@@ -179,6 +253,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 		cs.mu.Unlock()
 		return
 	}
+
 	cs.mu.Unlock()
 
 	select {
@@ -194,10 +269,9 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
-	// Separate here
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
-	links := cs.extractAnchorTags(current_url, true, s)
+	links, page_html := cs.extractAnchorTags(current_url, true, s)
 
 	var absolute, relative []string
 	for link, rel := range links {
@@ -237,7 +311,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && s.Backlinks[curr_parse] == "" {
 						cs.mu.Unlock()
 						var dofollow bool
 						if strings.Contains(rel, "nofollow") {
@@ -246,6 +320,11 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 							dofollow = true
 						}
 						cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
+						err := cs.RDB.Publish(cs.ctx, "around-channel", page_html).Err()
+						if err != nil {
+							panic(err)
+						}
+						fmt.Printf(fmt.Sprintf("Message Published from %s", curr_parse))
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 						cs.mu.Lock()
 						s.Backlinks[link] = curr_parse
@@ -255,6 +334,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 							cs.mu.Unlock()
 							return
 						}
+						// Make http call to preprocess.py server
 					}
 					cs.mu.Unlock()
 				}
@@ -289,9 +369,24 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int)
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
-			cs.Crawl(s, next_url, depth-1)
+			cs.Crawl(s, next_url, depth-1, pages)
 		}(next_url)
 
+	}
+
+	if depth == s.MaxDepth && pages > 0 {
+		params, err := cs.getNextPageParams(current_url, s)
+		if err != nil {
+			fmt.Println("failed going to the next page")
+		}
+		next_page_url := strings.ReplaceAll(cs.browser.GetQuery(s.Query, false), " ", "%20")
+		next_page_url += params.Encode()
+		fmt.Println("Next parm url", next_page_url)
+		cs.wg.Add(1)
+		go func(next_page_url string) {
+			defer cs.wg.Done()
+			cs.Crawl(s, next_page_url, depth, pages-1)
+		}(next_page_url)
 	}
 
 	// Test Print
@@ -382,7 +477,15 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	return ""
 }
 
-func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) map[string]string {
+// func stripHtml(page_html string) []string {
+
+// 	var trav
+// 	trav = func()
+
+// 	return ""
+// }
+
+func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string) {
 	// Get HTML from Page URL
 	torProxy := "127.0.0.1:9050"
 	page_html := func(page_url string) string {
@@ -429,8 +532,19 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	}
 
 	res := make(map[string]string)
-	var trav func(node *html.Node)
-	trav = func(node *html.Node) {
+	var trav func(node *html.Node, maxCount int)
+	var maxNode *html.Node
+	trav = func(node *html.Node, maxCount int) {
+		count := 0
+		for c := node.FirstChild; c != nil; c = c.NextSibling {
+			if c.Type == html.ElementNode {
+				count++
+			}
+		}
+		if count > maxCount {
+			maxCount = count
+			maxNode = node
+		}
 		if node.Type == html.ElementNode && node.Data == "a" {
 			attrs := node.Attr
 			var href string
@@ -447,9 +561,18 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			res[href] = rel
 		}
 		for c := node.FirstChild; c != nil; c = c.NextSibling {
-			trav(c)
+			trav(c, maxCount)
 		}
 	}
-	trav(doc)
-	return res
+	trav(doc, 0)
+	var buf bytes.Buffer
+	if err := html.Render(&buf, maxNode); err != nil {
+		panic(err)
+	}
+	output := buf.String()
+	return res, output
+}
+
+func extractForumPosts() {
+
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/handlers"
+	"github.com/redis/go-redis/v9"
 )
 
 func main() {
@@ -15,10 +16,12 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	// Initialize Services
+	rdb := redis.NewClient(&redis.Options{
+		Addr: "localhost:6379",
+	})
 
 	// Define Handlers
-	BacklinkHandler := handlers.NewBacklinkHandler(db)
+	BacklinkHandler := handlers.NewBacklinkHandler(db, rdb)
 
 	// Set Up Endpoints
 

@@ -8,15 +8,18 @@ import (
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/services"
+	"github.com/redis/go-redis/v9"
 )
 
 type BacklinkHandler struct {
-	DB *config.Db
+	DB  *config.Db
+	RDB *redis.Client
 }
 
-func NewBacklinkHandler(db *config.Db) *BacklinkHandler {
+func NewBacklinkHandler(db *config.Db, rdb *redis.Client) *BacklinkHandler {
 	return &BacklinkHandler{
-		DB: db,
+		DB:  db,
+		RDB: rdb,
 	}
 }
 
@@ -34,7 +37,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	CrawlerService := services.NewCrawlerService(b.DB, 100)
+	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 100)
 
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
