@@ -212,7 +212,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
 	time.Sleep(time.Second * 3)
-	pages := 2
+	pages := 3
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
@@ -268,9 +268,10 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	cs.mu.Unlock()
 
 	time.Sleep(2 * time.Second)
-	fmt.Printf("Depth %d Crawling %s\n", depth, current_url)
+	fmt.Printf("Page %d Depth %d Crawling %s\n", pages, depth, current_url)
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
+	// links, page_html := cs.extractAnchorTags(current_url, depth >= s.MaxDepth, s)
 	links, page_html := cs.extractAnchorTags(current_url, true, s)
 
 	var absolute, relative []string
@@ -282,15 +283,28 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 			cs.cancel()
 			return
 		}
-
+		visited_parsed, err := url.QueryUnescape(link)
+		if err != nil {
+			fmt.Println("Error unescaping url")
+		}
 		cs.mu.Lock()
 		visited := s.Visited[link]
+		parsed_visited := s.Visited[visited_parsed]
 		cs.mu.Unlock()
-
-		if visited {
+		cs.mu.Lock()
+		if visited || parsed_visited {
+			cs.mu.Unlock()
 			continue
+		} else {
+			s.Visited[link] = true
 		}
-
+		if parsed_visited {
+			cs.mu.Unlock()
+			continue
+		} else {
+			s.Visited[visited_parsed] = true
+		}
+		cs.mu.Unlock()
 		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
 			continue
 		}
@@ -320,7 +334,19 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 							dofollow = true
 						}
 						cs.DB.InsertIntoBacklink(&models.Backlink{Source: curr_parse, Link: link, Dofollow: dofollow})
-						err := cs.RDB.Publish(cs.ctx, "around-channel", page_html).Err()
+						// Redis Publish and Cleanup
+
+						var cleanPageHtml string
+						lines := strings.Split(page_html, "\n")
+						cleaned := make([]string, 0, len(lines))
+						for _, line := range lines {
+							line = strings.TrimSpace(line)
+							if line != "" {
+								cleaned = append(cleaned, line)
+							}
+						}
+						cleanPageHtml = strings.Join(cleaned, "\n")
+						err := cs.RDB.Publish(cs.ctx, "around-channel", cleanPageHtml).Err()
 						if err != nil {
 							panic(err)
 						}
@@ -334,7 +360,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 							cs.mu.Unlock()
 							return
 						}
-						// Make http call to preprocess.py server
+
 					}
 					cs.mu.Unlock()
 				}
@@ -375,6 +401,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	}
 
 	if depth == s.MaxDepth && pages > 0 {
+		time.Sleep(time.Second * 10)
 		params, err := cs.getNextPageParams(current_url, s)
 		if err != nil {
 			fmt.Println("failed going to the next page")
@@ -402,7 +429,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 }
 
 func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
-
 	parsed, err := url.Parse(current_url)
 	if err != nil {
 		fmt.Printf("Error parsing current_url %s", current_url)
@@ -422,7 +448,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		}
 	}
 	comp_flag := true
-	if len(filter) == 0 {
+	if len(filter) == 1 {
 		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
 		comp_flag = false
 	}
@@ -453,9 +479,8 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		backlinkCondition = slices.Contains(filter, parsed_link_host)
 		// fmt.Println("debugging: ", filter, parsed_link_host)
 	} else {
-		backlinkCondition = !slices.Contains(filter, parsed_link_host)
+		backlinkCondition = !slices.Contains(filter, parsed_link_host) && (strings.Contains(link, "/p/") || strings.Contains(link, "/collection/") || strings.Contains(link, "/product/") || strings.Contains(link, "/collections/") || strings.Contains(link, "/cgi-bin/"))
 	}
-
 	// if strings.Contains(link, "houzz") {
 	// 	if !strings.Contains(link, "vr~") {
 	// 		return ""
@@ -533,29 +558,26 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 
 	res := make(map[string]string)
 	var trav func(node *html.Node, maxCount int)
-	var maxNode *html.Node
+	var maxNode []*html.Node
 	trav = func(node *html.Node, maxCount int) {
-		count := 0
-		for c := node.FirstChild; c != nil; c = c.NextSibling {
-			if c.Type == html.ElementNode {
-				count++
-			}
-		}
-		if count > maxCount {
-			maxCount = count
-			maxNode = node
-		}
+
 		if node.Type == html.ElementNode && node.Data == "a" {
 			attrs := node.Attr
 			var href string
 			rel := "none"
 			for _, attr := range attrs {
-				//TODO: Somehow find a way to make this more concise put in another method or something
-				if attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
-					href = attr.Val
-				}
-				if attr.Key == "rel" && attr.Val != "" {
-					rel = attr.Val
+				if node.Data == "a" {
+					//TODO: Somehow find a way to make this more concise put in another method or something
+					if attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
+						href = attr.Val
+					}
+					if attr.Key == "rel" && attr.Val != "" {
+						rel = attr.Val
+					}
+				} else {
+					if (attr.Key == "class" || attr.Key == "id") && (strings.Contains(attr.Val, "body") && (strings.Contains(attr.Val, "post") || strings.Contains(attr.Val, "message"))) {
+						maxNode = append(maxNode, node)
+					}
 				}
 			}
 			res[href] = rel
@@ -566,13 +588,11 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	}
 	trav(doc, 0)
 	var buf bytes.Buffer
-	if err := html.Render(&buf, maxNode); err != nil {
-		panic(err)
+	for _, node := range maxNode {
+		if err := html.Render(&buf, node); err != nil {
+			panic(err)
+		}
 	}
 	output := buf.String()
 	return res, output
-}
-
-func extractForumPosts() {
-
 }
