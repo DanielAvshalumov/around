@@ -325,7 +325,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && s.Backlinks[curr_parse] == "" {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && s.Backlinks[link] == "" {
+						s.Backlinks[link] = curr_parse
 						cs.mu.Unlock()
 						var dofollow bool
 						if strings.Contains(rel, "nofollow") {
@@ -353,7 +354,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 						fmt.Printf(fmt.Sprintf("Message Published from %s", curr_parse))
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 						cs.mu.Lock()
-						s.Backlinks[link] = curr_parse
 						atomic.AddInt32(&cs.count, 1)
 						fmt.Println("The count is now", atomic.LoadInt32(&cs.count))
 						if atomic.LoadInt32(&cs.count) > 9 {
@@ -557,15 +557,13 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	}
 
 	res := make(map[string]string)
-	var trav func(node *html.Node, maxCount int)
+	var trav func(node *html.Node)
 	var maxNode []*html.Node
-	trav = func(node *html.Node, maxCount int) {
-
-		if node.Type == html.ElementNode && node.Data == "a" {
-			attrs := node.Attr
-			var href string
-			rel := "none"
-			for _, attr := range attrs {
+	trav = func(node *html.Node) {
+		var href string
+		rel := "none"
+		for _, attr := range node.Attr {
+			if node.Type == html.ElementNode && node.Data == "a" {
 				if node.Data == "a" {
 					//TODO: Somehow find a way to make this more concise put in another method or something
 					if attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
@@ -574,19 +572,20 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 					if attr.Key == "rel" && attr.Val != "" {
 						rel = attr.Val
 					}
-				} else {
-					if (attr.Key == "class" || attr.Key == "id") && (strings.Contains(attr.Val, "body") && (strings.Contains(attr.Val, "post") || strings.Contains(attr.Val, "message"))) {
-						maxNode = append(maxNode, node)
-					}
+				}
+			} else {
+				if (attr.Key == "class" || attr.Key == "id") && (strings.Contains(attr.Val, "message") && (strings.Contains(attr.Val, "post") || strings.Contains(attr.Val, "body"))) {
+					maxNode = append(maxNode, node)
 				}
 			}
-			res[href] = rel
 		}
+		res[href] = rel
 		for c := node.FirstChild; c != nil; c = c.NextSibling {
-			trav(c, maxCount)
+			trav(c)
 		}
 	}
-	trav(doc, 0)
+
+	trav(doc)
 	var buf bytes.Buffer
 	for _, node := range maxNode {
 		if err := html.Render(&buf, node); err != nil {
