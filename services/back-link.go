@@ -208,6 +208,10 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	cs.browser = bf.build(browser)
 	fmt.Println(cs.browser)
 	fmt.Println("comp_domains", spider.CompDomains)
+	// successfulSearch := false
+	// for !successfulSearch {
+	// 	successfulSearch =
+	// }
 	if err := lib.RenewIp(); err != nil {
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
@@ -272,8 +276,45 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
 	// links, page_html := cs.extractAnchorTags(current_url, depth >= s.MaxDepth, s)
-	links, page_html := cs.extractAnchorTags(current_url, true, s)
 
+	failed := true
+	var links map[string]string
+	var page_html string
+	var statusCode int
+	if depth == s.MaxDepth {
+
+		for failed {
+			_links, _page_html, _statusCode := cs.extractAnchorTags(current_url, true, s)
+			statusCode = _statusCode
+			// fmt.Printf("LINKS LENGTH %d Status Code %d", len(_links), statusCode)
+			linkCount := 0
+			for _link, _ := range _links {
+				// fmt.Println(_link)
+				// fmt.Println(len(_link))
+				if len(_link) != 0 {
+					linkCount++
+				}
+			}
+			if statusCode != 200 || linkCount < 4 {
+				fmt.Println("FAILED SERP SEARCH")
+				if err := lib.RenewIp(); err != nil {
+					fmt.Printf("Failed to renew IP\nError: %v\n", err)
+				}
+				s.SetUserAgent()
+				time.Sleep(time.Second * 1)
+			} else {
+				links = _links
+				page_html = _page_html
+				failed = false
+			}
+		}
+
+	} else {
+		links, page_html, statusCode = cs.extractAnchorTags(current_url, true, s)
+	}
+	// fmt.Println("LINKS CHECK")
+	// fmt.Println(links)
+	var backlinkFound bool
 	var absolute, relative []string
 	for link, rel := range links {
 
@@ -325,7 +366,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && s.Backlinks[link] == "" {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && !backlinkFound {
+						backlinkFound = true
 						s.Backlinks[link] = curr_parse
 						cs.mu.Unlock()
 						var dofollow bool
@@ -340,6 +382,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 						var cleanPageHtml string
 						lines := strings.Split(page_html, "\n")
 						cleaned := make([]string, 0, len(lines))
+						cleaned = append(cleaned, link)
 						for _, line := range lines {
 							line = strings.TrimSpace(line)
 							if line != "" {
@@ -356,11 +399,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 						cs.mu.Lock()
 						atomic.AddInt32(&cs.count, 1)
 						fmt.Println("The count is now", atomic.LoadInt32(&cs.count))
-						if atomic.LoadInt32(&cs.count) > 9 {
-							cs.mu.Unlock()
-							return
-						}
-
+						cs.mu.Unlock()
+						return
 					}
 					cs.mu.Unlock()
 				}
@@ -429,6 +469,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 }
 
 func checkBacklink(link string, current_url string, filter []string, s *models.Spider) string {
+
 	parsed, err := url.Parse(current_url)
 	if err != nil {
 		fmt.Printf("Error parsing current_url %s", current_url)
@@ -449,7 +490,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	}
 	comp_flag := true
 	if len(filter) == 1 {
-		filter = []string{"youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
+		filter = []string{"flic.kr", "youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
 		comp_flag = false
 	}
 
@@ -510,10 +551,10 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 // 	return ""
 // }
 
-func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string) {
+func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
 	// Get HTML from Page URL
 	torProxy := "127.0.0.1:9050"
-	page_html := func(page_url string) string {
+	page_html, statusCode := func(page_url string) (string, int) {
 		// Make the Request
 		var cli *http.Client
 		if proxyFlag {
@@ -540,13 +581,13 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		res, err := cli.Do(req)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
-			return ""
+			return "", 0
 		}
 		// Return Body
 		defer res.Body.Close()
 		fmt.Printf("GET - %s - Status code %d\n", page_url, res.StatusCode)
 		body, err := io.ReadAll(res.Body)
-		return string(body)
+		return string(body), res.StatusCode
 	}(page_url)
 
 	// Read Body
@@ -593,5 +634,5 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		}
 	}
 	output := buf.String()
-	return res, output
+	return res, output, statusCode
 }
