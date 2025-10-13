@@ -89,7 +89,7 @@ const LoadingTable = ({ isCentered }) => {
                   <th style={styles.tableHeader}>Source Link</th>
                   <th style={{...styles.tableHeader, ...styles.tableHeaderCenter}}>Domain Authority</th>
                   <th style={styles.tableHeader}>Bank Links</th>
-                  <th style={{...styles.tableHeader, ...styles.tableHeaderCenter}}>Action</th>
+                  <th style={{...styles.tableHeader, ...styles.tableHeaderCenter}}>Add to Training Data</th>
                 </tr>
               </thead>
               <tbody>

@@ -4,29 +4,7 @@ import { ExternalLink } from 'lucide-react';
 import styles from './page.module.css';
 
 const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentered: boolean}) => {
-  // Sample data - replace with your actual data
-  const sourceData = [
-    {
-      sourceLink: "https://example.com/article-1",
-      domainAuthority: 85,
-      bankLinks: "chase.com, bankofamerica.com"
-    },
-    {
-      sourceLink: "https://another-site.com/news",
-      domainAuthority: 72,
-      bankLinks: "wellsfargo.com, citibank.com"
-    },
-    {
-      sourceLink: "https://finance-blog.com/post",
-      domainAuthority: 58,
-      bankLinks: "usbank.com, pnc.com"
-    },
-    {
-      sourceLink: "https://news-outlet.com/report",
-      domainAuthority: 91,
-      bankLinks: "jpmorgan.com, goldmansachs.com"
-    }
-  ];
+  
 
   const handleViewSource = (url) => {
     window.open(url, '_blank');
@@ -49,7 +27,7 @@ const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentere
                 <th className={styles.tableHeader}>Source Link</th>
                 <th className={`${styles.tableHeader} ${styles.textCenter}`}>Domain Authority</th>
                 <th className={styles.tableHeader}>Bank Links</th>
-                <th className={`${styles.tableHeader} ${styles.textCenter}`}>Action</th>
+                <th className={`${styles.tableHeader} ${styles.textCenter}`}>Add to Training Data</th>
               </tr>
             </thead>
             <tbody className={styles.tableBody}>

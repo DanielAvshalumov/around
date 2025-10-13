@@ -102,11 +102,14 @@ func (g *Google) GetQuery(query string, params bool) string {
 
 func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 	var next_url string
-	if strings.HasPrefix(link, "//duckduckgo") && strings.Contains(link, "https") {
+	if !strings.Contains(link, "https") {
+		return ""
+	}
+	if strings.Contains(link, "duckduckgo") && strings.Contains(link, "https") {
 		link_mal := link[strings.Index(link, "https"):]
 		next_url = link_mal[:strings.Index(link_mal, "&")]
-	} else if !strings.Contains(link, "https") {
-		next_url = current_url[:strings.Index(current_url, ".com")+4] + link
+	} else {
+		next_url = link
 	}
 	new_next_url, err := url.PathUnescape(next_url)
 	if err != nil {
@@ -289,18 +292,21 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 			// fmt.Printf("LINKS LENGTH %d Status Code %d", len(_links), statusCode)
 			linkCount := 0
 			for _link, _ := range _links {
-				// fmt.Println(_link)
+				fmt.Println(_link)
 				// fmt.Println(len(_link))
 				if len(_link) != 0 {
 					linkCount++
 				}
 			}
+			fmt.Printf("SERP COUNT %d", linkCount)
 			if statusCode != 200 || linkCount < 4 {
 				fmt.Println("FAILED SERP SEARCH")
 				if err := lib.RenewIp(); err != nil {
 					fmt.Printf("Failed to renew IP\nError: %v\n", err)
 				}
+				cs.mu.Lock()
 				s.SetUserAgent()
+				cs.mu.Unlock()
 				time.Sleep(time.Second * 1)
 			} else {
 				links = _links
@@ -310,6 +316,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		}
 
 	} else {
+		// fmt.Printf("Before extrctAnchor %s\n", current_url)
+
 		links, page_html, statusCode = cs.extractAnchorTags(current_url, true, s)
 	}
 	// fmt.Println("LINKS CHECK")
@@ -324,28 +332,28 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 			cs.cancel()
 			return
 		}
-		visited_parsed, err := url.QueryUnescape(link)
+		// visited_parsed, err := url.QueryUnescape(link)
 		if err != nil {
 			fmt.Println("Error unescaping url")
 		}
-		cs.mu.Lock()
-		visited := s.Visited[link]
-		parsed_visited := s.Visited[visited_parsed]
-		cs.mu.Unlock()
-		cs.mu.Lock()
-		if visited || parsed_visited {
-			cs.mu.Unlock()
-			continue
-		} else {
-			s.Visited[link] = true
-		}
-		if parsed_visited {
-			cs.mu.Unlock()
-			continue
-		} else {
-			s.Visited[visited_parsed] = true
-		}
-		cs.mu.Unlock()
+		// cs.mu.Lock()
+		// visited := s.Visited[link]
+		// parsed_visited := s.Visited[visited_parsed]
+		// cs.mu.Unlock()
+		// cs.mu.Lock()
+		// if visited || parsed_visited {
+		// 	cs.mu.Unlock()
+		// 	continue
+		// } else {
+		// 	s.Visited[link] = true
+		// }
+		// if parsed_visited {
+		// 	cs.mu.Unlock()
+		// 	continue
+		// } else {
+		// 	s.Visited[visited_parsed] = true
+		// }
+		// cs.mu.Unlock()
 		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
 			continue
 		}
@@ -354,6 +362,10 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 
 		if depth == s.MaxDepth {
 			// Uses conditional for now, TODO will change to interface later
+			// _link, err := url.QueryUnescape(link)
+			if err != nil {
+				fmt.Println(err)
+			}
 			next_url = cs.browser.CrawlSerp(link, curr_parse)
 			fmt.Println("next url", next_url)
 		}
@@ -490,7 +502,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	}
 	comp_flag := true
 	if len(filter) == 1 {
-		filter = []string{"flic.kr", "youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
+		filter = []string{"capterra.com", "flic.kr", "youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
 		comp_flag = false
 	}
 
@@ -553,6 +565,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 
 func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
 	// Get HTML from Page URL
+	// fmt.Printf("before page_html %s\n", page_url)
 	torProxy := "127.0.0.1:9050"
 	page_html, statusCode := func(page_url string) (string, int) {
 		// Make the Request
@@ -574,11 +587,14 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		} else {
 			cli = &http.Client{}
 		}
-
+		// fmt.Printf("before http call %s\n", page_url)
 		req, err := http.NewRequest("GET", page_url, nil)
+		cs.mu.Lock()
 		req.Header.Set("User-Agent", s.UserAgent)
+		cs.mu.Unlock()
 		req.Header.Set("Referer", cs.browser.GetReferer())
 		res, err := cli.Do(req)
+		// fmt.Printf("after http call %s\n", page_url)
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 			return "", 0
@@ -607,9 +623,12 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			if node.Type == html.ElementNode && node.Data == "a" {
 				if node.Data == "a" {
 					//TODO: Somehow find a way to make this more concise put in another method or something
-					if attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
+					cs.mu.Lock()
+					if s.Visited[attr.Val] == false && attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
 						href = attr.Val
+						s.Visited[href] = true
 					}
+					cs.mu.Unlock()
 					if attr.Key == "rel" && attr.Val != "" {
 						rel = attr.Val
 					}
@@ -620,6 +639,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 				}
 			}
 		}
+
 		res[href] = rel
 		for c := node.FirstChild; c != nil; c = c.NextSibling {
 			trav(c)
