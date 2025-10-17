@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/danielavshalumov/around/models/auth"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/markbates/goth/gothic"
 )
@@ -14,18 +15,24 @@ func HandleAuthStart(w http.ResponseWriter, r *http.Request) {
 	gothic.BeginAuthHandler(w, r)
 }
 
-func handleAuthCallback(w http.ResponseWriter, r *http.Request) {
+func HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
 	user, err := gothic.CompleteUserAuth(w, r)
 	if err != nil {
 		log.Printf("Auth Error %v", err)
 		http.Redirect(w, r, fmt.Sprintf("http://localhost:3000/auth/error?messages=%s", err.Error()), http.StatusTemporaryRedirect)
 		return
 	}
-
+	token, err := generateJwt(user.UserID, user.Email, user.Name, user.Provider)
+	if err != nil {
+		fmt.Printf("JWT generation error: %v", err)
+		http.Redirect(w, r, "http://localhost/auth/error?message=token_generation_failed", http.StatusTemporaryRedirect)
+		return
+	}
+	http.Redirect(w, r, fmt.Sprintf("http://localhost:3000/auth/google/callback?token=%s", token), http.StatusTemporaryRedirect)
 }
 
 func generateJwt(userId, email, name, provider string) (string, error) {
-	claims := Claims{
+	claims := auth.Claims{
 		UserId:   userId,
 		Email:    email,
 		Name:     name,
@@ -36,4 +43,6 @@ func generateJwt(userId, email, name, provider string) (string, error) {
 			NotBefore: jwt.NewNumericDate(time.Now()),
 		},
 	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString("jwtSecret")
 }

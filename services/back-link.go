@@ -105,7 +105,7 @@ func (b *DuckDuckGo) CrawlSerp(link string, current_url string) string {
 	if !strings.Contains(link, "https") {
 		return ""
 	}
-	if strings.Contains(link, "duckduckgo") && strings.Contains(link, "https") {
+	if strings.Contains(link, "duckduckgo") && strings.Contains(link, "https") && strings.Contains(link, "&") {
 		link_mal := link[strings.Index(link, "https"):]
 		next_url = link_mal[:strings.Index(link_mal, "&")]
 	} else {
@@ -237,11 +237,13 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 }
 
 func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int, pages int) {
+
 	if depth == 0 {
 		return
 	}
 	time.Sleep((time.Millisecond * 1200))
 	curr_parse, err := url.QueryUnescape(current_url)
+
 	if err != nil {
 		fmt.Println("Error unescaping url")
 	}
@@ -253,14 +255,14 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	}
 	cs.mu.Lock()
 	switch {
-	case s.Visited[curr_parse]:
+	case s.Visited[curr_parse] == true:
 		cs.mu.Unlock()
 		return
 	case s.Backlinks[curr_parse] != "":
+		fmt.Println("Backlinks Reaached")
 		cs.mu.Unlock()
 		return
 	}
-
 	cs.mu.Unlock()
 
 	select {
@@ -373,7 +375,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		link = strings.Replace(link, "www.", "", 1)
 		// Different Operations for Absolute and Relative links
 		if depth < s.MaxDepth {
-
 			if strings.HasPrefix(link, "https") {
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
@@ -626,7 +627,6 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 					cs.mu.Lock()
 					if s.Visited[attr.Val] == false && attr.Key == "href" && (!strings.Contains(attr.Val, "latest") && !strings.Contains(attr.Val, "page-") && !strings.Contains(attr.Val, "post-") && !strings.Contains(attr.Val, "#post") && !strings.HasPrefix(attr.Val, "javascript") && !strings.HasPrefix(attr.Val, "data:") && !strings.HasPrefix(attr.Val, "#") && !strings.HasPrefix(attr.Val, "tel")) {
 						href = attr.Val
-						s.Visited[href] = true
 					}
 					cs.mu.Unlock()
 					if attr.Key == "rel" && attr.Val != "" {
