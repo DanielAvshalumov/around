@@ -4825,7 +4825,7 @@ list index out of range
 ['link', '/forums/-/index.rss\n']
 list index out of range
 ['HOSTNAME', 'https://whatsbestforum.com/threads/ranges.5744/\n']
-list index out of range
+list index out of rang
 ['link', '/forums/modern-field-coil-loudspeakers-by-ken-songer.412/\n']
 list index out of range
 ['HOSTNAME', 'https://whatsbestforum.com/threads/ranges.5744/\n']

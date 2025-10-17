@@ -15,12 +15,15 @@ import (
 	"time"
 
 	"golang.org/x/net/html"
-	"golang.org/x/net/proxy"
+	// "golang.org/x/net/proxy"
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
 
+	// "github.com/chromedp/cdproto/cdp"
+
+	"github.com/chromedp/chromedp"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -204,7 +207,44 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	spider.SetUserAgent()
 	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
-	ctx, cancel := context.WithCancel(parentCtx)
+	opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.DisableGPU,
+		chromedp.NoDefaultBrowserCheck,
+		chromedp.NoFirstRun,
+		chromedp.Flag("headless", true),
+		chromedp.Flag("disable-background-networking", true),
+		chromedp.UserAgent(spider.UserAgent),
+		chromedp.Flag("disable-blink-features", "AutomationControlled"),
+		chromedp.WindowSize(1920, 1080),
+		chromedp.Flag("lang", "en-US,en"),
+		chromedp.Flag("disable-dev-shm-usage", true),
+		chromedp.Flag("disable-background-timer-throttling", true),
+		chromedp.Flag("disable-backgrounding-occluded-windows", true),
+		chromedp.Flag("disable-breakpad", true),
+		chromedp.Flag("disable-client-side-phishing-detection", true),
+		chromedp.Flag("disable-default-apps", true),
+		chromedp.Flag("disable-extensions", true),
+		chromedp.Flag("disable-features", "site-per-process,TranslateUI,BlinkGenPropertyTrees,IsolateOrigins"),
+		chromedp.Flag("disable-hang-monitor", true),
+		chromedp.Flag("disable-ipc-flooding-protection", true),
+		chromedp.Flag("disable-popup-blocking", true),
+		chromedp.Flag("disable-prompt-on-repost", true),
+		chromedp.Flag("disable-renderer-backgrounding", true),
+		chromedp.Flag("disable-sync", true),
+		chromedp.Flag("metrics-recording-only", true),
+		chromedp.Flag("no-sandbox", true),
+		chromedp.Flag("safebrowsing-disable-auto-update", true),
+		chromedp.Flag("password-store", "basic"),
+		chromedp.Flag("disable-setuid-sandbox", true),
+		chromedp.Flag("disable-web-security", true),
+	)
+
+	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer cancel()
+
+	// Create browser context (like Playwright's browser instance)
+	ctx, cancel := chromedp.NewContext(allocCtx)
+	defer cancel()
 	cs.ctx = ctx
 	cs.cancel = cancel
 	bf := BrowserFactory{}
@@ -285,7 +325,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	failed := true
 	var links map[string]string
 	var page_html string
-	var statusCode int
+	var statusCode int64
 	if depth == s.MaxDepth {
 
 		for failed {
@@ -407,7 +447,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 						if err != nil {
 							panic(err)
 						}
-						fmt.Printf(fmt.Sprintf("Message Published from %s", curr_parse))
+						fmt.Printf("Message Published from %s", curr_parse)
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
 						cs.mu.Lock()
 						atomic.AddInt32(&cs.count, 1)
@@ -495,7 +535,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	}
 
 	// Checks domain for similarities
-	for _, value := range strings.Split(parsed_link.Hostname(), ".") {
+	for value := range strings.SplitSeq(parsed_link.Hostname(), ".") {
 
 		if strings.Contains(value, strings.Replace(parsed.Hostname(), ".com", "", 1)) {
 			return ""
@@ -564,48 +604,89 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 // 	return ""
 // }
 
-func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
+func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int64) {
 	// Get HTML from Page URL
 	// fmt.Printf("before page_html %s\n", page_url)
-	torProxy := "127.0.0.1:9050"
-	page_html, statusCode := func(page_url string) (string, int) {
-		// Make the Request
-		var cli *http.Client
-		if proxyFlag {
-			dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
-			if err != nil {
-				fmt.Println("Error with Tor Proxy")
-			}
-			transport := &http.Transport{
-				Dial:                dialer.Dial,
-				MaxIdleConns:        100,
-				MaxIdleConnsPerHost: 10,
-			}
-			cli = &http.Client{
-				Transport: transport,
-				Timeout:   15 * time.Second,
-			}
-		} else {
-			cli = &http.Client{}
-		}
-		// fmt.Printf("before http call %s\n", page_url)
-		req, err := http.NewRequest("GET", page_url, nil)
-		cs.mu.Lock()
-		req.Header.Set("User-Agent", s.UserAgent)
-		cs.mu.Unlock()
-		req.Header.Set("Referer", cs.browser.GetReferer())
-		res, err := cli.Do(req)
-		// fmt.Printf("after http call %s\n", page_url)
-		if err != nil {
-			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
-			return "", 0
-		}
-		// Return Body
-		defer res.Body.Close()
-		fmt.Printf("GET - %s - Status code %d\n", page_url, res.StatusCode)
-		body, err := io.ReadAll(res.Body)
-		return string(body), res.StatusCode
-	}(page_url)
+	// torProxy := "127.0.0.1:9050"
+
+	// Make the Request
+	cs.semaphore <- struct{}{}
+	defer func() { <-cs.semaphore }()
+
+	ctx, tabCancel := chromedp.NewContext(cs.ctx)
+
+	ctx, timeoutCancel := context.WithTimeout(ctx, 30*time.Second)
+	// defer timeoutCancel()
+	// defer tabCancel()
+	// responseChan := make(chan int64)
+	var htmlContent string
+	// chromedp.ListenTarget(ctx, func(ev interface{}) {
+	// 	switch ev := ev.(type) {
+	// 	case *network.EventResponseReceived:
+	// 		resp := ev.Response
+	// 		if len(resp.Headers) != 0 {
+	// 			responseChan <- resp.Status
+	// 		}
+	// 	}
+	// })
+	fmt.Println()
+	err := chromedp.Run(ctx,
+
+		// network.Enable(),
+
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			err := chromedp.Evaluate(`
+                // Override webdriver property
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined
+                });
+                
+                // Override chrome property
+                window.chrome = {
+                    runtime: {}
+                };
+                
+                // Override permissions
+                const originalQuery = window.navigator.permissions.query;
+                window.navigator.permissions.query = (parameters) => (
+                    parameters.name === 'notifications' ?
+                    Promise.resolve({ state: Notification.permission }) :
+                    originalQuery(parameters)
+                );
+                
+                // Override plugins
+                Object.defineProperty(navigator, 'plugins', {
+                    get: () => [1, 2, 3, 4, 5]
+                });
+                
+                // Override languages
+                Object.defineProperty(navigator, 'languages', {
+                    get: () => ['en-US', 'en']
+                });
+            `, nil).Do(ctx)
+			return err
+		}),
+
+		chromedp.Navigate(page_url),
+		// chromedp.WaitReady("body"),
+		chromedp.OuterHTML("body", &htmlContent),
+	)
+
+	var statusCode int64
+	// fmt.Printf("after http call %s\n", page_url)
+	if err != nil {
+		fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
+		statusCode = 0
+		go timeoutCancel()
+		go tabCancel()
+		return nil, "", statusCode
+	}
+	// Return Body
+	statusCode = 200
+	// responseStatus := <-responseChan
+	fmt.Printf("GET - %s - Status code %d\n", page_url, statusCode)
+
+	page_html := htmlContent
 
 	// Read Body
 	reader := strings.NewReader(page_html)
@@ -613,7 +694,6 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	if err != nil {
 		fmt.Printf("Error parsing HTML from page %s", page_url)
 	}
-
 	res := make(map[string]string)
 	var trav func(node *html.Node)
 	var maxNode []*html.Node
@@ -654,5 +734,13 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		}
 	}
 	output := buf.String()
+
+	fmt.Println("DEBUG: About to cancel contexts (success path)")
+	fmt.Println("DEBUG: Timeout cancelled")
+	go timeoutCancel()
+	go tabCancel()
+
+	fmt.Println("Right before XAT function ends")
+
 	return res, output, statusCode
 }
