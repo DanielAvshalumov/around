@@ -207,54 +207,26 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	spider.SetUserAgent()
 	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
+
 	opts := append(chromedp.DefaultExecAllocatorOptions[:],
-		chromedp.DisableGPU,
-		chromedp.NoDefaultBrowserCheck,
-		chromedp.NoFirstRun,
 		chromedp.Flag("headless", true),
-		chromedp.Flag("disable-background-networking", true),
-		chromedp.UserAgent(spider.UserAgent),
 		chromedp.Flag("disable-blink-features", "AutomationControlled"),
+		chromedp.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) ..."),
 		chromedp.WindowSize(1920, 1080),
 		chromedp.Flag("lang", "en-US,en"),
-		chromedp.Flag("disable-dev-shm-usage", true),
-		chromedp.Flag("disable-background-timer-throttling", true),
-		chromedp.Flag("disable-backgrounding-occluded-windows", true),
-		chromedp.Flag("disable-breakpad", true),
-		chromedp.Flag("disable-client-side-phishing-detection", true),
-		chromedp.Flag("disable-default-apps", true),
-		chromedp.Flag("disable-extensions", true),
-		chromedp.Flag("disable-features", "site-per-process,TranslateUI,BlinkGenPropertyTrees,IsolateOrigins"),
-		chromedp.Flag("disable-hang-monitor", true),
-		chromedp.Flag("disable-ipc-flooding-protection", true),
-		chromedp.Flag("disable-popup-blocking", true),
-		chromedp.Flag("disable-prompt-on-repost", true),
-		chromedp.Flag("disable-renderer-backgrounding", true),
-		chromedp.Flag("disable-sync", true),
-		chromedp.Flag("metrics-recording-only", true),
-		chromedp.Flag("no-sandbox", true),
-		chromedp.Flag("safebrowsing-disable-auto-update", true),
-		chromedp.Flag("password-store", "basic"),
-		chromedp.Flag("disable-setuid-sandbox", true),
-		chromedp.Flag("disable-web-security", true),
+		chromedp.UserDataDir("/tmp/chrome-profile"),
 	)
 
-	allocCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
-	defer cancel()
+	alloCtx, alloCancel := chromedp.NewExecAllocator(context.Background(), opts...)
 
-	// Create browser context (like Playwright's browser instance)
-	ctx, cancel := chromedp.NewContext(allocCtx)
-	defer cancel()
-	cs.ctx = ctx
-	cs.cancel = cancel
+	browserCtx, browserCancel := chromedp.NewContext(alloCtx)
+
+	cs.ctx = browserCtx
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
 	fmt.Println(cs.browser)
 	fmt.Println("comp_domains", spider.CompDomains)
-	// successfulSearch := false
-	// for !successfulSearch {
-	// 	successfulSearch =
-	// }
+
 	if err := lib.RenewIp(); err != nil {
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
@@ -262,7 +234,8 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	pages := 3
 	cs.wg.Add(1)
 	go func() {
-		defer cs.wg.Done()
+		defer alloCancel()
+		defer browserCancel()
 		cs.Crawl(spider, cs.browser.GetQuery(spider.Query, true), spider.MaxDepth, pages)
 	}()
 	cs.wg.Wait()
@@ -303,6 +276,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		cs.mu.Unlock()
 		return
 	}
+	s.Visited[curr_parse] = true
 	cs.mu.Unlock()
 
 	select {
@@ -311,10 +285,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	case <-cs.ctx.Done():
 		return
 	}
-
-	cs.mu.Lock()
-	s.Visited[curr_parse] = true
-	cs.mu.Unlock()
 
 	time.Sleep(2 * time.Second)
 	fmt.Printf("Page %d Depth %d Crawling %s\n", pages, depth, current_url)
@@ -330,6 +300,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 
 		for failed {
 			_links, _page_html, _statusCode := cs.extractAnchorTags(current_url, true, s)
+			fmt.Println("EXits XAT")
 			statusCode = _statusCode
 			// fmt.Printf("LINKS LENGTH %d Status Code %d", len(_links), statusCode)
 			linkCount := 0
@@ -609,66 +580,21 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	// fmt.Printf("before page_html %s\n", page_url)
 	// torProxy := "127.0.0.1:9050"
 
-	// Make the Request
-	cs.semaphore <- struct{}{}
-	defer func() { <-cs.semaphore }()
+	tabCtx, tabCancel := chromedp.NewContext(cs.ctx)
+	defer tabCancel()
 
-	ctx, tabCancel := chromedp.NewContext(cs.ctx)
-
-	ctx, timeoutCancel := context.WithTimeout(ctx, 30*time.Second)
-	// defer timeoutCancel()
-	// defer tabCancel()
-	// responseChan := make(chan int64)
 	var htmlContent string
-	// chromedp.ListenTarget(ctx, func(ev interface{}) {
-	// 	switch ev := ev.(type) {
-	// 	case *network.EventResponseReceived:
-	// 		resp := ev.Response
-	// 		if len(resp.Headers) != 0 {
-	// 			responseChan <- resp.Status
-	// 		}
-	// 	}
-	// })
-	fmt.Println()
-	err := chromedp.Run(ctx,
 
-		// network.Enable(),
-
-		chromedp.ActionFunc(func(ctx context.Context) error {
-			err := chromedp.Evaluate(`
-                // Override webdriver property
-                Object.defineProperty(navigator, 'webdriver', {
-                    get: () => undefined
-                });
-                
-                // Override chrome property
-                window.chrome = {
-                    runtime: {}
-                };
-                
-                // Override permissions
-                const originalQuery = window.navigator.permissions.query;
-                window.navigator.permissions.query = (parameters) => (
-                    parameters.name === 'notifications' ?
-                    Promise.resolve({ state: Notification.permission }) :
-                    originalQuery(parameters)
-                );
-                
-                // Override plugins
-                Object.defineProperty(navigator, 'plugins', {
-                    get: () => [1, 2, 3, 4, 5]
-                });
-                
-                // Override languages
-                Object.defineProperty(navigator, 'languages', {
-                    get: () => ['en-US', 'en']
-                });
-            `, nil).Do(ctx)
-			return err
-		}),
-
+	err := chromedp.Run(tabCtx,
 		chromedp.Navigate(page_url),
-		// chromedp.WaitReady("body"),
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			go func() {
+				time.Sleep(time.Second * 3)
+				chromedp.Stop().Do(ctx)
+			}()
+			return nil
+		}),
+		chromedp.WaitVisible("body"),
 		chromedp.OuterHTML("body", &htmlContent),
 	)
 
@@ -677,8 +603,6 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	if err != nil {
 		fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 		statusCode = 0
-		go timeoutCancel()
-		go tabCancel()
 		return nil, "", statusCode
 	}
 	// Return Body
@@ -714,6 +638,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 					}
 				}
 			} else {
+				// Gets all forum posts
 				if (attr.Key == "class" || attr.Key == "id") && (strings.Contains(attr.Val, "message") && (strings.Contains(attr.Val, "post") || strings.Contains(attr.Val, "body"))) {
 					maxNode = append(maxNode, node)
 				}
@@ -735,12 +660,19 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	}
 	output := buf.String()
 
-	fmt.Println("DEBUG: About to cancel contexts (success path)")
-	fmt.Println("DEBUG: Timeout cancelled")
-	go timeoutCancel()
-	go tabCancel()
+	// fmt.Println("DEBUG: About to cancel contexts (success path)")
+	// fmt.Println("DEBUG: Timeout cancelled")
+	// go timeoutCancel()
+	// go tabCancel()
 
-	fmt.Println("Right before XAT function ends")
+	select {
+	case <-cs.ctx.Done():
+		fmt.Println("DEBUG: parent ctx is already canceled!")
+	default:
+		fmt.Println("DEBUG: parent ctx is still alive")
+	}
+
+	fmt.Println(htmlContent)
 
 	return res, output, statusCode
 }

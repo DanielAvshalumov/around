@@ -1,9 +1,11 @@
 package handlers
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
@@ -58,8 +60,10 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	browser := req.Browser
 	fmt.Println(browser, query)
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
-
-	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, r.Context())
+	parentCtx := r.Context()
+	ctx, cancel := context.WithTimeout(parentCtx, time.Second*30)
+	defer cancel()
+	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, ctx)
 	fmt.Println(crawlJobId)
 
 	w.WriteHeader(http.StatusOK)
