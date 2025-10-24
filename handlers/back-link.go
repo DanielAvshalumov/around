@@ -49,8 +49,8 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	}
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	// query := fmt.Sprintf("%s forums (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
-	query := fmt.Sprintf("%s forums inurl:reccomendation", req.Industry)
+	query := fmt.Sprintf("%s forums (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
+	// query := fmt.Sprintf("%s forums inurl:reccomendation", req.Industry)
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
 	// comp_domains could be null

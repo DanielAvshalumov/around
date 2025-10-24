@@ -21,6 +21,7 @@ import (
 	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
 
+	"github.com/chromedp/chromedp"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -75,6 +76,7 @@ type CrawlerService struct {
 	semaphore    chan struct{}
 	count        int32
 	limitReached atomic.Bool
+	browserCtx   context.Context
 	ctx          context.Context
 	cancel       context.CancelFunc
 }
@@ -202,19 +204,38 @@ func (b *Google) GetReferer() string {
 func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
 
 	spider.SetUserAgent()
+
+	opts := append(chromedp.DefaultExecAllocatorOptions[:],
+		chromedp.Flag("headless", true),
+		chromedp.Flag("disable-blink-features", "AutomationControlled"),
+		chromedp.Flag("exclude-switches", "enable-automation"),
+		chromedp.Flag("disable-extensions", false),
+		chromedp.Flag("disable-dev-shm-usage", true),
+		chromedp.Flag("no-sandbox", true),
+		chromedp.Flag("disable-setuid-sandbox", true),
+		chromedp.Flag("disable-web-security", true),
+		chromedp.Flag("disable-features", "IsolateOrigins,site-per-process"),
+		chromedp.UserAgent(spider.UserAgent),
+		chromedp.WindowSize(1920, 1080),
+	)
+
+	alloCtx, alloCancel := chromedp.NewExecAllocator(context.Background(), opts...)
+	defer alloCancel()
+	// Set timeout
+	// ctx, cancel = context.WithTimeout(ctx, 5*time.Minute)
+	// defer cancel()
+
 	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
-	ctx, cancel := context.WithCancel(parentCtx)
-	cs.ctx = ctx
-	cs.cancel = cancel
+	requestCtx, requestCancel := context.WithCancel(parentCtx)
+	cs.browserCtx = alloCtx
+	cs.ctx = requestCtx
+	cs.cancel = requestCancel
 	bf := BrowserFactory{}
 	cs.browser = bf.build(browser)
 	fmt.Println(cs.browser)
 	fmt.Println("comp_domains", spider.CompDomains)
-	// successfulSearch := false
-	// for !successfulSearch {
-	// 	successfulSearch =
-	// }
+
 	if err := lib.RenewIp(); err != nil {
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
@@ -224,6 +245,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	go func() {
 		defer cs.wg.Done()
 		cs.Crawl(spider, cs.browser.GetQuery(spider.Query, true), spider.MaxDepth, pages)
+		fmt.Println("Crawling finished inside go function")
 	}()
 	cs.wg.Wait()
 	fmt.Println("Crawling finished")
@@ -248,7 +270,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		fmt.Println("Error unescaping url")
 	}
 	currentCount := atomic.LoadInt32(&cs.count)
-	if cs.limitReached.Load() || currentCount >= 20 {
+	if cs.limitReached.Load() || currentCount >= 10 {
 		fmt.Println("limit reached")
 		cs.cancel()
 		return
@@ -329,7 +351,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	for link, rel := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cs.count)
-		if newCurrentCount >= 20 || cs.limitReached.Load() {
+		if newCurrentCount >= 10 || cs.limitReached.Load() {
 			fmt.Println("limit reached")
 			cs.cancel()
 			return
@@ -379,7 +401,12 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 				if depth < s.MaxDepth-1 {
 					cs.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && !backlinkFound {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && !backlinkFound && s.Backlinks[link] == "" {
+						fmt.Println("------------ Backlink Found ------------")
+						fmt.Println(current_url + "->" + link)
+						// fmt.Print(parsed_host, "->", parsed_link_host)
+						fmt.Print("Visited", s.Visited[link])
+						fmt.Println("----------------------------------------")
 						backlinkFound = true
 						s.Backlinks[link] = curr_parse
 						cs.mu.Unlock()
@@ -543,11 +570,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	// }
 
 	if backlinkCondition {
-		fmt.Println("------------ Backlink Found ------------")
-		fmt.Println(current_url + "->" + link)
-		fmt.Print(parsed_host, "->", parsed_link_host)
-		fmt.Print("Visited", s.Visited[link])
-		fmt.Println("----------------------------------------")
+
 		return link
 	}
 
@@ -599,6 +622,37 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		if err != nil {
 			fmt.Printf("Erorr %v making GET request to: %s\n", err, page_url)
 			return "", 0
+		}
+
+		if res.StatusCode != 200 {
+			ctx, cancel := chromedp.NewContext(cs.browserCtx)
+			defer cancel()
+			ctx, cancel = context.WithTimeout(ctx, time.Second*60)
+			defer cancel()
+			var htmlContent string
+
+			err := chromedp.Run(ctx,
+				chromedp.Navigate(page_url),
+				chromedp.ActionFunc(func(ctx context.Context) error {
+					_err := chromedp.Evaluate(`
+            // Override the navigator.webdriver property
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => false
+            });
+            
+        `, nil).Do(ctx)
+					return _err
+				}),
+				chromedp.WaitVisible("body"),
+				chromedp.OuterHTML("body", &htmlContent),
+			)
+			if err != nil {
+				fmt.Printf("Chromedp faield for %s - %v\n", page_url, err)
+				return "", 400
+			}
+			fmt.Println(htmlContent)
+			fmt.Printf("GET - %s\n", page_url)
+			return htmlContent, 200
 		}
 		// Return Body
 		defer res.Body.Close()
