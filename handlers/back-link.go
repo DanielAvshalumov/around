@@ -37,7 +37,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 100)
+	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 20)
 
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
@@ -60,6 +60,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
 
 	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, r.Context())
+	fmt.Println("In the handler now after crawling")
 	fmt.Println(crawlJobId)
 
 	w.WriteHeader(http.StatusOK)
