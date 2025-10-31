@@ -218,6 +218,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-web-security", true),
 		chromedp.Flag("disable-features", "IsolateOrigins,site-per-process"),
+		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.UserAgent(spider.UserAgent),
 		chromedp.WindowSize(1920, 1080),
 	)
@@ -225,8 +226,8 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	alloCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer cancel()
 	// defer alloCancel()
-	browserCtx, browserCancel := chromedp.NewContext(alloCtx)
-	defer browserCancel()
+	browserCtx, _ := chromedp.NewContext(alloCtx)
+	// defer browserCancel()
 
 	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
@@ -260,6 +261,30 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		res = append(res, models.BacklinkResponse{Source: source, Backlink: target})
 	}
 	fmt.Println(res)
+	chromedp.Cancel(browserCtx)
+	chromedp.Cancel(alloCtx)
+	// browserCancel()
+	// cancel()
+	fmt.Println("After the cancel")
+
+	select {
+	case <-browserCtx.Done():
+		er := browserCtx.Err()
+		fmt.Printf("browser Cancelled erro: %v\n", er)
+	default:
+		fmt.Println("browser Context has not been cancelled and is still runnning")
+		fmt.Println(browserCtx)
+	}
+
+	select {
+	case <-alloCtx.Done():
+		er := alloCtx.Err()
+		fmt.Printf("Allo Cancelled erro: %v\n", er)
+	default:
+		fmt.Println("Allo Context has not been cancelled and is still runnning")
+		fmt.Println(alloCtx)
+	}
+
 	return 0, res
 }
 
@@ -283,7 +308,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 		cs.cancel()
-		cs.browserCtx.Done()
 		return
 	}
 	cs.mu.Lock()
@@ -662,6 +686,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			)
 			if err != nil {
 				fmt.Printf("Chromedp faield for %s - %v\n", page_url, err)
+				chromedp.Cancel(tabContext)
 				return "", 400
 			}
 
@@ -680,7 +705,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 
 			// fmt.Println(htmlContent)
 			fmt.Printf("GET - chromedp - %s\n", page_url)
-
+			chromedp.Cancel(tabContext)
 			select {
 			case <-tabContext.Done():
 				er := tabContext.Err()
@@ -690,6 +715,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			}
 
 			// go cancel()
+			fmt.Println(htmlContent)
 			test = true
 			return htmlContent, 200
 		}

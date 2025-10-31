@@ -37,7 +37,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 20)
+	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 100)
 
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
