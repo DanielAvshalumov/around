@@ -68,26 +68,32 @@ func NewDuckDuckGo() *DuckDuckGo {
 }
 
 type CrawlerService struct {
-	browser      Browser
-	DB           *config.Db
-	RDB          *redis.Client
-	mu           sync.RWMutex
-	wg           sync.WaitGroup
-	semaphore    chan struct{}
-	count        int32
-	threadCount  int32
-	limitReached atomic.Bool
-	browserCtx   context.Context
-	ctx          context.Context
-	cancel       context.CancelFunc
+	browser          Browser
+	DB               *config.Db
+	RDB              *redis.Client
+	mu               sync.RWMutex
+	wg               sync.WaitGroup
+	semaphore        chan struct{}
+	chromedpThrottle chan struct{}
+	count            int32
+	threadCount      int32
+	limitReached     atomic.Bool
+	browserCtx       context.Context
+	ctx              context.Context
+	browserCancel    context.CancelFunc
+	cancel           context.CancelFunc
+	crawlmu          sync.RWMutex
+	tabs             map[int]context.CancelFunc
+	tabCounter       int
 }
 
 func NewCrawlerService(db *config.Db, rdb *redis.Client, maxThreads int) *CrawlerService {
 
 	cs := &CrawlerService{
-		DB:        db,
-		RDB:       rdb,
-		semaphore: make(chan struct{}, maxThreads),
+		DB:               db,
+		RDB:              rdb,
+		semaphore:        make(chan struct{}, maxThreads),
+		chromedpThrottle: make(chan struct{}, maxThreads/5),
 	}
 	cs.limitReached.Store(false)
 	return cs
@@ -223,17 +229,19 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		chromedp.WindowSize(1920, 1080),
 	)
 
-	alloCtx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
-	defer cancel()
+	alloCtx, _ := chromedp.NewExecAllocator(context.Background(), opts...)
+	// defer cancel()
 	// defer alloCancel()
-	browserCtx, _ := chromedp.NewContext(alloCtx)
+	browserCtx, browserCancel := chromedp.NewContext(alloCtx)
 	// defer browserCancel()
-
+	_tabs := make(map[int]context.CancelFunc)
+	cs.tabs = _tabs
 	fmt.Println("user agent", spider.UserAgent)
 	cs.count = 0
 	cs.threadCount = 0
 	requestCtx, requestCancel := context.WithCancel(parentCtx)
 	cs.browserCtx = browserCtx
+	cs.browserCancel = browserCancel
 	cs.ctx = requestCtx
 	cs.cancel = requestCancel
 	bf := BrowserFactory{}
@@ -261,11 +269,20 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		res = append(res, models.BacklinkResponse{Source: source, Backlink: target})
 	}
 	fmt.Println(res)
+
 	chromedp.Cancel(browserCtx)
 	chromedp.Cancel(alloCtx)
 	// browserCancel()
 	// cancel()
 	fmt.Println("After the cancel")
+	fmt.Println("Open threads")
+	fmt.Println(cs.tabs)
+	fmt.Println("closed threads")
+
+	// for id, tabCancel := range cs.tabs {
+	// 	fmt.Printf("cancelling context %d", id)
+	// 	tabCancel()
+	// }
 
 	select {
 	case <-browserCtx.Done():
@@ -282,7 +299,9 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		fmt.Printf("Allo Cancelled erro: %v\n", er)
 	default:
 		fmt.Println("Allo Context has not been cancelled and is still runnning")
-		fmt.Println(alloCtx)
+
+		chromedp.Cancel(alloCtx)
+		fmt.Println(alloCtx.Err())
 	}
 
 	return 0, res
@@ -292,6 +311,14 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 
 	atomic.AddInt32(&cs.threadCount, 1)
 	defer atomic.AddInt32(&cs.threadCount, -1)
+
+	currentCount := atomic.LoadInt32(&cs.count)
+	if cs.limitReached.Load() || currentCount >= 2 {
+		fmt.Println("limit reached")
+		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
+		cs.cancel()
+		return
+	}
 
 	if depth == 0 {
 		return
@@ -303,13 +330,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	if err != nil {
 		fmt.Println("Error unescaping url")
 	}
-	currentCount := atomic.LoadInt32(&cs.count)
-	if cs.limitReached.Load() || currentCount >= 2 {
-		fmt.Println("limit reached")
-		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
-		cs.cancel()
-		return
-	}
+
 	cs.mu.Lock()
 	switch {
 	case s.Visited[curr_parse] == true:
@@ -662,12 +683,33 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		}
 
 		if res.StatusCode != 200 && !strings.Contains(page_url, "duckduckgo") {
+			go func() {
+				cs.chromedpThrottle <- struct{}{}
+				defer func() { <-cs.chromedpThrottle }()
+			}()
+
+			browserErr := cs.ctx.Err()
+
+			if browserErr != nil {
+				return "", 400
+			}
 
 			var htmlContent string
 
 			tabContext, cancel := chromedp.NewContext(cs.browserCtx)
 			tabContext, cancel = context.WithTimeout(tabContext, time.Second*30)
 			defer cancel()
+
+			cs.crawlmu.Lock()
+			id := cs.tabCounter
+			cs.tabCounter++
+			cs.tabs[id] = cancel
+			cs.crawlmu.Unlock()
+			defer func(id int) {
+				cs.crawlmu.Lock()
+				delete(cs.tabs, id)
+				cs.crawlmu.Unlock()
+			}(id)
 
 			err := chromedp.Run(tabContext,
 				chromedp.Navigate(page_url),
@@ -684,7 +726,8 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 				// chromedp.WaitVisible("body"),
 				chromedp.OuterHTML("body", &htmlContent, chromedp.ByQuery),
 			)
-			if err != nil {
+			browserErr = cs.ctx.Err()
+			if err != nil || browserErr != nil {
 				fmt.Printf("Chromedp faield for %s - %v\n", page_url, err)
 				chromedp.Cancel(tabContext)
 				return "", 400
