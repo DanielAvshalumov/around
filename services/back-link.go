@@ -225,6 +225,8 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		chromedp.Flag("disable-web-security", true),
 		chromedp.Flag("disable-features", "IsolateOrigins,site-per-process"),
 		chromedp.Flag("disable-setuid-sandbox", true),
+		chromedp.Flag("disable-background-networking", true),
+		chromedp.Flag("disable-default-apps", true),
 		chromedp.UserAgent(spider.UserAgent),
 		chromedp.WindowSize(1920, 1080),
 	)
@@ -253,11 +255,11 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
 	time.Sleep(time.Second * 3)
-	pages := 3
+	pages := 1
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
-		cs.Crawl(spider, cs.browser.GetQuery(spider.Query, true), spider.MaxDepth, pages)
+		cs.Crawl(spider, cs.browser.GetQuery(spider.Query, true), spider.MaxDepth, pages-1)
 		fmt.Println("Crawling finished inside go function")
 	}()
 	cs.wg.Wait()
@@ -313,7 +315,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	defer atomic.AddInt32(&cs.threadCount, -1)
 
 	currentCount := atomic.LoadInt32(&cs.count)
-	if cs.limitReached.Load() || currentCount >= 2 {
+	if cs.limitReached.Load() || currentCount >= 5 {
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 		cs.cancel()
@@ -354,7 +356,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	s.Visited[curr_parse] = true
 	cs.mu.Unlock()
 
-	time.Sleep(2 * time.Second)
 	fmt.Printf("Page %d Depth %d Crawling %s\n", pages, depth, current_url)
 
 	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
@@ -407,7 +408,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	for link, rel := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cs.count)
-		if newCurrentCount >= 2 || cs.limitReached.Load() {
+		if newCurrentCount >= 5 || cs.limitReached.Load() {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 			cs.cancel()
@@ -417,24 +418,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		if err != nil {
 			fmt.Println("Error unescaping url")
 		}
-		// cs.mu.Lock()
-		// visited := s.Visited[link]
-		// parsed_visited := s.Visited[visited_parsed]
-		// cs.mu.Unlock()
-		// cs.mu.Lock()
-		// if visited || parsed_visited {
-		// 	cs.mu.Unlock()
-		// 	continue
-		// } else {
-		// 	s.Visited[link] = true
-		// }
-		// if parsed_visited {
-		// 	cs.mu.Unlock()
-		// 	continue
-		// } else {
-		// 	s.Visited[visited_parsed] = true
-		// }
-		// cs.mu.Unlock()
+
 		if link == "" || strings.Contains(link, "feedspot") || strings.Contains(link, "feedburner") {
 			continue
 		}
@@ -442,8 +426,6 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		var next_url string
 
 		if depth == s.MaxDepth {
-			// Uses conditional for now, TODO will change to interface later
-			// _link, err := url.QueryUnescape(link)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -514,6 +496,10 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 				continue
 			}
 			path_link := parsed_link.Path
+
+			if strings.Contains(path_link, "/reply") {
+				continue
+			}
 
 			if !strings.Contains(path_link, "discussion") && !strings.Contains(path_link, "thread") && !strings.Contains(path_link, "forum") && !strings.Contains(path_link, "comment") && !strings.Contains(path_link, "/t") && !strings.Contains(path_link, "view") {
 				continue
@@ -683,10 +669,6 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		}
 
 		if res.StatusCode != 200 && !strings.Contains(page_url, "duckduckgo") {
-			go func() {
-				cs.chromedpThrottle <- struct{}{}
-				defer func() { <-cs.chromedpThrottle }()
-			}()
 
 			browserErr := cs.ctx.Err()
 
@@ -697,12 +679,13 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			var htmlContent string
 
 			tabContext, cancel := chromedp.NewContext(cs.browserCtx)
-			tabContext, cancel = context.WithTimeout(tabContext, time.Second*30)
+			tabContext, cancel = context.WithTimeout(tabContext, time.Second*90)
 			defer cancel()
 
 			cs.crawlmu.Lock()
 			id := cs.tabCounter
 			cs.tabCounter++
+			fmt.Printf("Chrome Tab # %d\n", cs.tabCounter)
 			cs.tabs[id] = cancel
 			cs.crawlmu.Unlock()
 			defer func(id int) {
