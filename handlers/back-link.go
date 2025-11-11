@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"runtime"
+	"time"
 
 	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
@@ -37,7 +39,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 100)
+	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 50)
 
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
@@ -58,10 +60,19 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	browser := req.Browser
 	fmt.Println(browser, query)
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
-
+	goroutineCount := runtime.NumGoroutine()
+	fmt.Printf("Number of go runtime that still exist before starting %d\n", goroutineCount)
 	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, r.Context())
 	fmt.Println("In the handler now after crawling")
+	goroutineCount = runtime.NumGoroutine()
+	fmt.Printf("Number of go runtime that still exist %d\n", goroutineCount)
+
 	fmt.Println(crawlJobId)
+	go func() {
+		time.Sleep(time.Second * 10)
+		goroutineCount = runtime.NumGoroutine()
+		fmt.Printf("Number of go runtime that still exist %d\n", goroutineCount)
+	}()
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(prospects)

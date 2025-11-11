@@ -227,6 +227,23 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		chromedp.Flag("disable-setuid-sandbox", true),
 		chromedp.Flag("disable-background-networking", true),
 		chromedp.Flag("disable-default-apps", true),
+		chromedp.Flag("renderer-process-limit", "1"),
+		chromedp.Flag("process-per-site", true),
+		chromedp.Flag("disable-background-timer-throttling", true),
+		chromedp.Flag("disable-backgrounding-occluded-windows", true),
+		chromedp.Flag("disable-renderer-backgrounding", true),
+		chromedp.Flag("disable-breakpad", true),
+		chromedp.Flag("disable-client-side-phishing-detection", true),
+		chromedp.Flag("disable-component-update", true),
+		chromedp.Flag("disable-hang-monitor", true),
+		chromedp.Flag("disable-ipc-flooding-protection", true),
+		chromedp.Flag("disable-popup-blocking", true),
+		chromedp.Flag("disable-prompt-on-repost", true),
+		chromedp.Flag("disable-sync", true),
+		chromedp.Flag("disable-translate", true),
+		chromedp.Flag("metrics-recording-only", true),
+		chromedp.Flag("mute-audio", true),
+		chromedp.Flag("max-old-space-size", "256"),
 		chromedp.UserAgent(spider.UserAgent),
 		chromedp.WindowSize(1920, 1080),
 	)
@@ -235,6 +252,12 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	// defer cancel()
 	// defer alloCancel()
 	browserCtx, browserCancel := chromedp.NewContext(alloCtx)
+	err := chromedp.Run(browserCtx,
+		chromedp.Navigate("https://html.duckduckgo.com"))
+	if err != nil {
+		fmt.Println("Error")
+		fmt.Println(err)
+	}
 	// defer browserCancel()
 	_tabs := make(map[int]context.CancelFunc)
 	cs.tabs = _tabs
@@ -515,6 +538,14 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 			next_url = "https://" + curr_parse[strings.Index(curr_parse, "https://")+8:strings.Index(curr_parse, ".com")+4] + path_link
 		}
 
+		currentCount := atomic.LoadInt32(&cs.count)
+		if cs.limitReached.Load() || currentCount >= 5 {
+			fmt.Println("limit reached")
+			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
+			cs.cancel()
+			return
+		}
+
 		cs.wg.Add(1)
 		go func(next_url string) {
 			defer cs.wg.Done()
@@ -603,7 +634,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		backlinkCondition = slices.Contains(filter, parsed_link_host)
 		// fmt.Println("debugging: ", filter, parsed_link_host)
 	} else {
-		backlinkCondition = !slices.Contains(filter, parsed_link_host) && (strings.Contains(link, "/p/") || strings.Contains(link, "/collection/") || strings.Contains(link, "/product/") || strings.Contains(link, "/collections/") || strings.Contains(link, "/cgi-bin/"))
+		backlinkCondition = !slices.Contains(filter, parsed_link_host) && (strings.Contains(link, "/p/") || strings.Contains(link, "/collection/") || strings.Contains(link, "/product/") || strings.Contains(link, "/collections/") || strings.Contains(link, "/cgi-bin/") || strings.Contains(link, "sku"))
 	}
 	// if strings.Contains(link, "houzz") {
 	// 	if !strings.Contains(link, "vr~") {
@@ -669,7 +700,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 		}
 
 		if res.StatusCode != 200 && !strings.Contains(page_url, "duckduckgo") {
-
+			fmt.Printf("Page url: %s, failed with status code %d -> Chromedp time\n", page_url, res.StatusCode)
 			browserErr := cs.ctx.Err()
 
 			if browserErr != nil {
@@ -681,6 +712,13 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			tabContext, cancel := chromedp.NewContext(cs.browserCtx)
 			tabContext, cancel = context.WithTimeout(tabContext, time.Second*90)
 			defer cancel()
+			defer func() {
+				if r := recover(); r != nil {
+					fmt.Printf("Panic Recovered: %v deleting context\n", r)
+					chromedp.Cancel(tabContext)
+					time.Sleep(1 * time.Second)
+				}
+			}()
 
 			cs.crawlmu.Lock()
 			id := cs.tabCounter
@@ -693,7 +731,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 				delete(cs.tabs, id)
 				cs.crawlmu.Unlock()
 			}(id)
-
+			fmt.Println("Run started")
 			err := chromedp.Run(tabContext,
 				chromedp.Navigate(page_url),
 				// 		chromedp.ActionFunc(func(ctx context.Context) error {
@@ -713,6 +751,7 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			if err != nil || browserErr != nil {
 				fmt.Printf("Chromedp faield for %s - %v\n", page_url, err)
 				chromedp.Cancel(tabContext)
+				fmt.Println("run Completed")
 				return "", 400
 			}
 
@@ -741,8 +780,10 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 			}
 
 			// go cancel()
-			fmt.Println(htmlContent)
+			// fmt.Println(htmlContent)
 			test = true
+			fmt.Println("run Completed")
+
 			return htmlContent, 200
 		}
 		// Return Body
