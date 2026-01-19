@@ -1,0 +1,48 @@
+package services
+
+import (
+	"database/sql"
+	"errors"
+	"fmt"
+
+	"github.com/danielavshalumov/around/config"
+	"github.com/danielavshalumov/around/models/auth"
+)
+
+type UserService struct {
+	DB *config.Db
+}
+
+func CreateUserService(db *config.Db) *UserService {
+	return &UserService{
+		DB: db,
+	}
+}
+
+func (u UserService) GetUserById(userId int64) (*auth.User, error) {
+	fmt.Println(userId)
+	user, err := u.DB.GetUserById(userId)
+	if err != nil {
+		fmt.Println("Error in User service getting User from UserId", err)
+		return nil, err
+	}
+	return user, nil
+}
+
+func (u UserService) GetUserFromOAuth(dto auth.UserDTO) (*auth.User, error) {
+	user, err := u.DB.GetUser(dto.Sub)
+	if err != nil && !errors.Is(err, sql.ErrNoRows) {
+		fmt.Println("Database Error", err)
+	}
+	fmt.Println("existing user", user)
+	if user != nil {
+		return user, nil
+	}
+	newUser, err := u.DB.CreateUser(dto.Email, dto.Sub)
+	newUser.Email = dto.Email
+	newUser.GoogleSub = dto.Sub
+	if err != nil {
+		fmt.Println("Error Creating User", err)
+	}
+	return newUser, nil
+}

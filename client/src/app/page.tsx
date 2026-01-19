@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Container, Box, Typography, Button, AppBar, Toolbar, TextField } from '@mui/material';
 import styles from "./page.module.css"
 import BacklinkBuilderForm from '@/components/landing-page-content';
@@ -7,19 +8,33 @@ import SourceLinkTable from '@/components/serp/serp';
 import CoolLoadingScreen from '@/components/serp/loading/serp-loading';
 import getForumProductLinks from '../../lib/backlink';
 import SEOAIPromo from '@/components/page-component-one';
+import getBacklinkDomains from '../../lib/hugHelper';
+import { AuthService } from '../../lib/auth';
 
 // {source:"",backlink:"",dofollow:false}
 const MainPage = () => {
 
     const [isCentered, setIsCentered] = useState(true);
-    const [loading, setLoading] = useState(false)
-    const [backlinks, setBacklinks] = useState<any[]>([])
+    const [loading, setLoading] = useState(false);
+    const [domainLoad, setDomainLoad] = useState(false);
+    const [backlinks, setBacklinks] = useState<any[]>([]);
     const [industry, setIndustry] = useState('');
     const [competitorDomains, setCompetitorDomains] = useState(['']);
 
-    useEffect(() => {
-      console.log('hello',industry)
-    },[industry])
+    
+
+    const handleDomainsNames = async () => {
+      console.log('more work')
+      setDomainLoad(true)
+      try {
+        const api = await getBacklinkDomains(industry)
+        setCompetitorDomains(api)
+      } catch(err) {
+        console.log(err)
+      } finally {
+        setDomainLoad(false)
+      }
+    }
 
     const handleBacklink = async () => {
       console.log("work")
@@ -48,6 +63,8 @@ const MainPage = () => {
 
   return (
     <Box display='flex' flexDirection='column' minHeight='84.3vh' gap={2}>
+      <SEOAIPromo />
+
       <Box 
         sx={{ 
           padding: 5, 
@@ -79,7 +96,7 @@ const MainPage = () => {
           <Button variant="contained" color="primary" size="large">
             Backlink Builder
           </Button>
-          <Button variant="contained" color="primary" size="large">
+          <Button variant="contained" color="primary" size="large" onClick={handleDomainsNames}>
             Ad Copy Generator
           </Button>
           <Button variant="contained" color="primary" size="large" onClick={handleBacklink}>
@@ -96,7 +113,6 @@ const MainPage = () => {
           {loading ? <CoolLoadingScreen isCentered={false} /> : <SourceLinkTable backlinks={backlinks} isCentered={false}/>}
         </div>
       </div>
-      <SEOAIPromo />
     </Box>
   );
 };

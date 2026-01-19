@@ -7,6 +7,10 @@ import Logo from "../../images/logo.png"
 import Image from 'next/image';
 import './globals.css'
 import MatrixBackground from '@/components/matrix';
+import { AuthService } from '../../lib/auth';
+import { AuthProvider, useAuth } from '@/context/AuthContext';
+
+
 
 const theme = createTheme({
   palette: {
@@ -16,25 +20,30 @@ const theme = createTheme({
 })
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+
+  const { user } = useAuth()
+
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AppBar position="static" color="inherit">
-            <Toolbar>
-              <div style={{flexGrow: 1}}>
-                <Image src={Logo} alt={''} priority/>
-              </div>
-              <Button variant='contained' color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-          <MatrixBackground />
-          {children}
-          <Box sx={{ backgroundColor: '#333', color: '#fff', padding: 3, textAlign: 'center' }}>
-            <Typography variant="body2">© 2023 Company Name. All rights reserved.</Typography>
-          </Box>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AppBar position="static" color="inherit">
+              <Toolbar>
+                <div style={{flexGrow: 1}}>
+                  <Image src={Logo} alt={''} priority/>
+                </div>
+                <Button variant='contained' color="inherit" onClick={AuthService.login}>{user?.UserID ? "Login" : "Sign out" }</Button>
+              </Toolbar>
+            </AppBar>
+            <MatrixBackground />
+            {children}
+            <Box sx={{ backgroundColor: '#333', color: '#fff', padding: 3, textAlign: 'center' }}>
+              <Typography variant="body2">© 2023 Company Name. All rights reserved.</Typography>
+            </Box>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   )

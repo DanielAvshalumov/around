@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
+
+	// "log"
 	"net/http"
 	"net/url"
 	"slices"
@@ -68,6 +70,9 @@ func NewDuckDuckGo() *DuckDuckGo {
 }
 
 type CrawlerService struct {
+}
+
+type CrawlerWorker struct {
 	browser          Browser
 	DB               *config.Db
 	RDB              *redis.Client
@@ -87,9 +92,9 @@ type CrawlerService struct {
 	tabCounter       int
 }
 
-func NewCrawlerService(db *config.Db, rdb *redis.Client, maxThreads int) *CrawlerService {
+func NewCrawlerWorker(db *config.Db, rdb *redis.Client, maxThreads int) *CrawlerWorker {
 
-	cs := &CrawlerService{
+	cs := &CrawlerWorker{
 		DB:               db,
 		RDB:              rdb,
 		semaphore:        make(chan struct{}, maxThreads),
@@ -137,7 +142,7 @@ func (b *DuckDuckGo) GetQuery(query string, params bool) string {
 	}
 }
 
-func (cs *CrawlerService) getNextPageParams(current_url string, s *models.Spider) (url.Values, error) {
+func (cs *CrawlerWorker) getNextPageParams(current_url string, s *models.Spider) (url.Values, error) {
 	client := http.Client{}
 	req, err := http.NewRequest("GET", current_url, nil)
 	req.Header.Set("User-Agent", s.UserAgent)
@@ -208,7 +213,7 @@ func (b *Google) GetReferer() string {
 	return "https://google.com"
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
+func (cs *CrawlerWorker) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
 
 	spider.SetUserAgent()
 
@@ -278,7 +283,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 		fmt.Printf("Failed to renew IP\nError: %v\n", err)
 	}
 	time.Sleep(time.Second * 3)
-	pages := 1
+	pages := 3
 	cs.wg.Add(1)
 	go func() {
 		defer cs.wg.Done()
@@ -332,13 +337,13 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	return 0, res
 }
 
-func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int, pages int) {
+func (cs *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, pages int) {
 
 	atomic.AddInt32(&cs.threadCount, 1)
 	defer atomic.AddInt32(&cs.threadCount, -1)
 
 	currentCount := atomic.LoadInt32(&cs.count)
-	if cs.limitReached.Load() || currentCount >= 5 {
+	if cs.limitReached.Load() || currentCount >= 10 {
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 		cs.cancel()
@@ -431,7 +436,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 	for link, rel := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cs.count)
-		if newCurrentCount >= 5 || cs.limitReached.Load() {
+		if newCurrentCount >= 10 || cs.limitReached.Load() {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 			cs.cancel()
@@ -494,7 +499,8 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 						cleanPageHtml = strings.Join(cleaned, "\n")
 						err := cs.RDB.Publish(cs.ctx, "around-channel", cleanPageHtml).Err()
 						if err != nil {
-							panic(err)
+							message := fmt.Sprintf("Link: %s\nCurr_parse:%s\nError:%v", link, curr_parse, err)
+							panic(message)
 						}
 						fmt.Printf(fmt.Sprintf("Message Published from %s", curr_parse))
 						// Was thinkgin to making the value into an array, but this is probably and the top switch case is the reason for dupes
@@ -539,7 +545,7 @@ func (cs *CrawlerService) Crawl(s *models.Spider, current_url string, depth int,
 		}
 
 		currentCount := atomic.LoadInt32(&cs.count)
-		if cs.limitReached.Load() || currentCount >= 5 {
+		if cs.limitReached.Load() || currentCount >= 10 {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cs.threadCount))
 			cs.cancel()
@@ -603,7 +609,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 		}
 	}
 	comp_flag := true
-	if len(filter) == 1 {
+	if len(filter) <= 1 {
 		filter = []string{"capterra.com", "flic.kr", "youtube.com", "facebook.com", "twitter.com", "instagram.com", "pinterest.com", "google.com", "internetbrands.com", "xenforo.com", "wpforo.com", "futureplc.com", "tiktok.com", "linkedin.com", "vbulletin.com", "twitch"}
 		comp_flag = false
 	}
@@ -644,6 +650,22 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	// }
 
 	if backlinkCondition {
+		res, err := http.Get(link)
+		if err != nil {
+			return ""
+		}
+		defer res.Body.Close()
+		body, err := io.ReadAll(res.Body)
+		if err != nil {
+			return ""
+		}
+		HtmlBody := strings.ToLower(string(body))
+		// sIndex := strings.Index(BodyLower,"<title>")
+		fmt.Println(HtmlBody)
+		// fmt.Printf("%s\n%s\n", link, HtmlBody)
+
+		// title := HtmlBody[strings.Index(HtmlBody, "<title>")+7 : strings.Index(HtmlBody, "</title>")]
+		// fmt.Printf("The title is %s", title)
 
 		return link
 	}
@@ -661,7 +683,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 // 	return ""
 // }
 
-func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
+func (cs *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
 	// Get HTML from Page URL
 	// fmt.Printf("before page_html %s\n", page_url)
 	test := false
@@ -796,7 +818,6 @@ func (cs *CrawlerService) extractAnchorTags(page_url string, proxyFlag bool, s *
 	if test == true {
 		fmt.Println("Chromedp go thread - still inside function but outside anonymous part 1")
 	}
-	fmt.Printf("check now for %t\n", test)
 
 	// Read Body
 	reader := strings.NewReader(page_html)

@@ -39,8 +39,6 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	CrawlerService := services.NewCrawlerService(b.DB, b.RDB, 50)
-
 	// Acquire Payload
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
@@ -49,9 +47,12 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 			Error: "Invalid JSON",
 		})
 	}
+
+	CrawlerWorker := services.NewCrawlerWorker(b.DB, b.RDB, 50)
+
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	query := fmt.Sprintf("%s forums (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
+	query := fmt.Sprintf("buying %s forum reccomendations (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
 	// query := fmt.Sprintf("%s forums inurl:reccomendation", req.Industry)
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 
@@ -62,7 +63,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
 	goroutineCount := runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist before starting %d\n", goroutineCount)
-	crawlJobId, prospects := CrawlerService.StartCrawl(spider, browser, r.Context())
+	crawlJobId, prospects := CrawlerWorker.StartCrawl(spider, browser, r.Context())
 	fmt.Println("In the handler now after crawling")
 	goroutineCount = runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist %d\n", goroutineCount)

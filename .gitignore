@@ -1,4 +1,5 @@
-db/*.db
+config/*.db
+config/*.sql
 output.txt
-client
 hug
+.env
