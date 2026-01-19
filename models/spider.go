@@ -5,7 +5,7 @@ import "math/rand"
 type Spider struct {
 	Query       string
 	Visited     map[string]bool
-	Backlinks   map[string]string
+	Backlinks   map[string][2]string
 	UserAgent   string
 	MaxDepth    int
 	CompDomains []string
@@ -16,7 +16,7 @@ type Spider struct {
 func NewSpider(startUrl string, maxDepth int, compDomains []string, industry string) *Spider {
 	return &Spider{
 		Visited:     make(map[string]bool),
-		Backlinks:   make(map[string]string),
+		Backlinks:   make(map[string][2]string),
 		CompDomains: compDomains,
 		MaxDepth:    maxDepth,
 		// UserAgent:   "NewnappBrowser/1.0",

@@ -29,10 +29,11 @@ func main() {
 
 	// Define Services
 	UserService := services.CreateUserService(db)
+	CrawlerService := services.NewCrawlerService(db, rdb)
 
 	// Define Handlers
 	AuthHandler := handlers.NewAuthHandler(UserService)
-	BacklinkHandler := handlers.NewBacklinkHandler(db, rdb)
+	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService)
 
 	// Set Up Endpoints
 	http.Handle("/api/auth/me", config.CORS("http://localhost:3000")(http.HandlerFunc(AuthHandler.HandleMe)))

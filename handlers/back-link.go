@@ -7,21 +7,17 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/danielavshalumov/around/config"
 	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/services"
-	"github.com/redis/go-redis/v9"
 )
 
 type BacklinkHandler struct {
-	DB  *config.Db
-	RDB *redis.Client
+	cs *services.CrawlerService
 }
 
-func NewBacklinkHandler(db *config.Db, rdb *redis.Client) *BacklinkHandler {
+func NewBacklinkHandler(cs *services.CrawlerService) *BacklinkHandler {
 	return &BacklinkHandler{
-		DB:  db,
-		RDB: rdb,
+		cs: cs,
 	}
 }
 
@@ -48,8 +44,6 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 
-	CrawlerWorker := services.NewCrawlerWorker(b.DB, b.RDB, 50)
-
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
 	query := fmt.Sprintf("buying %s forum reccomendations (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
@@ -63,7 +57,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
 	goroutineCount := runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist before starting %d\n", goroutineCount)
-	crawlJobId, prospects := CrawlerWorker.StartCrawl(spider, browser, r.Context())
+	crawlJobId, prospects := b.cs.StartCrawl(spider, browser, r.Context())
 	fmt.Println("In the handler now after crawling")
 	goroutineCount = runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist %d\n", goroutineCount)

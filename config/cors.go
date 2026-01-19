@@ -24,7 +24,7 @@ func CORS(allowedOrigin string) func(http.Handler) http.Handler {
 			if r.Method == http.MethodOptions {
 				fmt.Println("Options")
 				w.WriteHeader(http.StatusNoContent)
-				// return
+				return
 			}
 
 			next.ServeHTTP(w, r)
