@@ -34,12 +34,22 @@ func InitDB() (*Db, error) {
 	return Db, nil
 }
 
+func (db *Db) CreateNewCrawlSession(userId int64) (int64, error) {
+	query := "INSERT INTO crawl_session (user_id) VALUES (?)"
+	res, err := db.Exec(query, userId)
+	if err != nil {
+		fmt.Println("DB Error - Failed to create session", err.Error())
+		return 0, err
+	}
+	return res.LastInsertId()
+}
+
 func (db *Db) InsertIntoBacklink(backlink *models.Backlink) (int64, error) {
 	query := `
-		INSERT INTO backlinks (source, link, dofollow)
-		VALUES (?, ?, ?)
+		INSERT INTO backlinks (source, link, dofollow, s_id)
+		VALUES (?, ?, ?, ?)
 	`
-	res, err := db.Exec(query, backlink.Source, backlink.Link, backlink.Dofollow)
+	res, err := db.Exec(query, backlink.Source, backlink.Link, backlink.Dofollow, backlink.Session)
 	if err != nil {
 		fmt.Printf("DB Error - Failed to insert backlinks %s -> %s", backlink.Source, backlink.Link)
 		return 0, err

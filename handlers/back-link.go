@@ -3,10 +3,12 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
+	"net"
 	"net/http"
 	"runtime"
 	"time"
 
+	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/services"
 )
@@ -35,8 +37,19 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	ip, port, err := net.SplitHostPort(r.RemoteAddr)
+	userId, err := lib.GetUserIdFromCookie(r)
+	if err != nil {
+		fmt.Println("Cookie error in bcaklink handler", err)
+	}
+	fmt.Printf("User Id in Backlink Handler %d\n", userId)
+	if err != nil {
+		fmt.Println("Error splitting ip and port")
+	}
+	fmt.Printf("HostPort %s:%s\n", ip, port)
+	fmt.Println()
 	// Acquire Payload
-	err := json.NewDecoder(r.Body).Decode(&req)
+	err = json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(models.SimpleError{
@@ -57,7 +70,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 	spider := models.NewSpider(query, 4, comp_domain, req.Industry)
 	goroutineCount := runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist before starting %d\n", goroutineCount)
-	crawlJobId, prospects := b.cs.StartCrawl(spider, browser, r.Context())
+	crawlJobId, prospects := b.cs.StartCrawl(spider, browser, userId, r.Context())
 	fmt.Println("In the handler now after crawling")
 	goroutineCount = runtime.NumGoroutine()
 	fmt.Printf("Number of go runtime that still exist %d\n", goroutineCount)

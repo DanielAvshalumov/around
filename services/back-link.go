@@ -219,7 +219,7 @@ func (b *Google) GetReferer() string {
 	return "https://google.com"
 }
 
-func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, parentCtx context.Context) (int32, []models.BacklinkResponse) {
+func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, userId int64, parentCtx context.Context) (int32, []models.BacklinkResponse) {
 
 	worker := NewCrawlerWorker(50)
 	spider.SetUserAgent()
@@ -301,10 +301,13 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, pare
 	fmt.Println("Crawling finished")
 	// fmt.Println(c1.Browser.LostConnection)
 	// c1.Allocator.Wait()
+
+	session_id, err := cs.DB.CreateNewCrawlSession(userId)
+
 	var res []models.BacklinkResponse
 	for source, target := range spider.Backlinks {
 		res = append(res, models.BacklinkResponse{Source: source, Backlink: target[0]})
-		cs.DB.InsertIntoBacklink(&models.Backlink{Source: source, Link: target[0], Dofollow: false})
+		cs.DB.InsertIntoBacklink(&models.Backlink{Source: source, Link: target[0], Dofollow: false, Session: session_id})
 		cs.AddToMLQueue(source, target[0], target[1], parentCtx)
 	}
 	fmt.Println(res)
@@ -393,11 +396,6 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	s.Visited[curr_parse] = true
 	cw.mu.Unlock()
 
-	fmt.Printf("Page %d Depth %d Crawling %s\n", pages, depth, current_url)
-
-	// links := extractAnchorTags(curr_parse, (depth == s.MaxDepth))
-	// links, page_html := cw.extractAnchorTags(current_url, depth >= s.MaxDepth, s)
-
 	failed := true
 	var links map[string]string
 	var page_html string
@@ -407,11 +405,9 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		for failed {
 			_links, _page_html, _statusCode := cw.extractAnchorTags(current_url, true, s)
 			statusCode = _statusCode
-			// fmt.Printf("LINKS LENGTH %d Status Code %d", len(_links), statusCode)
 			linkCount := 0
 			for _link, _ := range _links {
 				fmt.Println(_link)
-				// fmt.Println(len(_link))
 				if len(_link) != 0 {
 					linkCount++
 				}
@@ -434,15 +430,14 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		}
 
 	} else {
-		// fmt.Printf("Before extrctAnchor %s\n", current_url)
-
 		links, page_html, statusCode = cw.extractAnchorTags(current_url, true, s)
 	}
-	// fmt.Println("LINKS CHECK")
-	// fmt.Println(links)
+
+	fmt.Printf("Page %d Depth %d Crawling %s - %s \n", pages, depth, current_url, curr_parse)
+
 	var backlinkFound bool
 	var absolute, relative []string
-	for link, _ := range links {
+	for link := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cw.count)
 		if newCurrentCount >= 10 || cw.limitReached.Load() {
@@ -451,7 +446,6 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 			cw.cancel()
 			return
 		}
-		// visited_parsed, err := url.QueryUnescape(link)
 		if err != nil {
 			fmt.Println("Error unescaping url")
 		}
@@ -537,6 +531,8 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 			return
 		}
 
+		fmt.Printf("Next Page %s \n", next_url)
+
 		cw.wg.Add(1)
 		go func(next_url string) {
 			defer cw.wg.Done()
@@ -554,6 +550,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		next_page_url := strings.ReplaceAll(cw.browser.GetQuery(s.Query, false), " ", "%20")
 		next_page_url += params.Encode()
 		fmt.Println("Next parm url", next_page_url)
+
 		cw.wg.Add(1)
 		go func(next_page_url string) {
 			defer cw.wg.Done()

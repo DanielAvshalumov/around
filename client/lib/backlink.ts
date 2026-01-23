@@ -9,7 +9,7 @@ type Payload = {
 export default async function getForumProductLinks(payload?: Payload) {
     try {
         // const res = await axios.post("http://localhost:8080/back-link",{"comp_domains":["amazon.com","ajmadison.com","homedepot.com","bestbuy.com","build.com","lowes.com"],"industry":`${payload?.industry}`,"browser":"duckduckgo"},{'headers':{'Content-Type' : 'application/json'}})
-        const res = await axios.post("http://localhost:8080/back-link",{"industry":`${payload?.industry}`,"browser":"duckduckgo","comp_domains":payload?.Comp_domains},{'headers':{'Content-Type' : 'application/json'}})
+        const res = await axios.post("http://localhost:8080/back-link",{"industry":`${payload?.industry}`,"browser":"duckduckgo","comp_domains":payload?.Comp_domains},{'headers':{'Content-Type' : 'application/json'}, withCredentials: true})
         const data = await res.data
         return data;
     } catch (error: any) {

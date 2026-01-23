@@ -5,4 +5,5 @@ type Backlink struct {
 	Link     string
 	Dofollow bool
 	PageHtml string
+	Session  int64
 }

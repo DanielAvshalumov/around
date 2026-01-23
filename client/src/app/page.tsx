@@ -10,6 +10,7 @@ import getForumProductLinks from '../../lib/backlink';
 import SEOAIPromo from '@/components/page-component-one';
 import getBacklinkDomains from '../../lib/hugHelper';
 import { AuthService } from '../../lib/auth';
+import BacklinkScraperBanner from '@/components/front-page-banner';
 
 // {source:"",backlink:"",dofollow:false}
 const MainPage = () => {
@@ -21,6 +22,7 @@ const MainPage = () => {
     const [industry, setIndustry] = useState('');
     const [competitorDomains, setCompetitorDomains] = useState(['']);
 
+    
     
 
     const handleDomainsNames = async () => {
@@ -61,11 +63,16 @@ const MainPage = () => {
       }
     }
 
+    const backlinkForm = 
+    <div className={`${styles.originalComponent} ${isCentered ? styles.centered : styles.leftAligned}`}>
+      <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry} competitorDomains={competitorDomains} setCompetitorDomains={setCompetitorDomains}/>
+    </div>
+
   return (
     <Box display='flex' flexDirection='column' minHeight='84.3vh' gap={2}>
       <SEOAIPromo />
 
-      <Box 
+      {/* <Box 
         sx={{ 
           padding: 5, 
           backgroundColor: 'rgba(135, 206, 235, 0.8)', 
@@ -103,13 +110,14 @@ const MainPage = () => {
             Page Rank Finder
           </Button>
         </div>
-      </Box>
+      </Box> */}
+
+      <BacklinkScraperBanner />
       <div className={styles.layoutContainer}>
         <div className={`${styles.originalComponent} ${isCentered ? styles.centered : styles.leftAligned}`}>
           <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry} competitorDomains={competitorDomains} setCompetitorDomains={setCompetitorDomains}/>
         </div>
         <div className={`${styles.newComponent} ${isCentered ? styles.hidden : styles.visible}`}>
-
           {loading ? <CoolLoadingScreen isCentered={false} /> : <SourceLinkTable backlinks={backlinks} isCentered={false}/>}
         </div>
       </div>

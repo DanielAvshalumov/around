@@ -29,13 +29,12 @@
   transition: all 0.7s ease-in-out;
   overflow: hidden;
   height: 8rem;
-  border-radius: 0.5rem;
+  border-radius: 5.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   border: 2px solid transparent;
-  border-radius: 1.5rem;
   background: linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #9333ea, #ec4899);
   background-origin: border-box;
   background-clip: content-box, border-box;
@@ -56,7 +55,7 @@
 .tableContainer {
   transition: all 0.7s ease-in-out;
   overflow: hidden;
-  border-radius: 0.75rem;
+  border-radius: 1.5rem;
   border: 2px solid transparent;
   background: linear-gradient(white, white), linear-gradient(90deg, #3b82f6, #9333ea, #ec4899);
   background-origin: border-box;
@@ -65,7 +64,7 @@
 
 .tableWrapper {
   background-color: white;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
   overflow: hidden;
 }
 
@@ -79,7 +78,7 @@
 }
 
 .tableHeader {
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
   text-align: left;
   font-size: 0.875rem;
   font-weight: 600;
@@ -139,7 +138,7 @@
 .daBadge {
   display: inline-flex;
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  /* border-radius: 9999px; */
   font-size: 0.875rem;
   font-weight: 500;
 }

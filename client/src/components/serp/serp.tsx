@@ -6,15 +6,8 @@ import styles from './page.module.css';
 const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentered: boolean}) => {
   
 
-  const handleViewSource = (url) => {
+  const handleViewSource = (url: string) => {
     window.open(url, '_blank');
-  };
-
-  const getDomainAuthorityClass = (da) => {
-    if (da >= 80) return styles.daHigh;
-    if (da >= 60) return styles.daMedium;
-    if (da >= 40) return styles.daLow;
-    return styles.daVeryLow;
   };
 
   return (

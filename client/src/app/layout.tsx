@@ -3,12 +3,11 @@
 
 import { AppBar, Box, Button, CssBaseline, ThemeProvider, Toolbar, Typography, createTheme } from '@mui/material'
 import type { ReactNode } from 'react'
-import Logo from "../../images/logo.png"
-import Image from 'next/image';
+
 import './globals.css'
 import MatrixBackground from '@/components/matrix';
-import { AuthService } from '../../lib/auth';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
+import Navbar from '@/components/navbar';
 
 
 
@@ -21,22 +20,13 @@ const theme = createTheme({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 
-  const { user } = useAuth()
-
   return (
     <html lang="en">
       <body>
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AppBar position="static" color="inherit">
-              <Toolbar>
-                <div style={{flexGrow: 1}}>
-                  <Image src={Logo} alt={''} priority/>
-                </div>
-                <Button variant='contained' color="inherit" onClick={AuthService.login}>{user?.UserID ? "Login" : "Sign out" }</Button>
-              </Toolbar>
-            </AppBar>
+            <Navbar />
             <MatrixBackground />
             {children}
             <Box sx={{ backgroundColor: '#333', color: '#fff', padding: 3, textAlign: 'center' }}>

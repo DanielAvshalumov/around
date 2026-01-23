@@ -4,13 +4,16 @@ import { Plus, X, Link, Building, Rocket, Trash2 } from 'lucide-react';
 import styles from './page.module.css';
 
 
-export default function BacklinkBuilderForm({ handleBacklink, competitorDomains, setCompetitorDomains} : any) {
-  const [industry, setIndustry] = useState('');
+export default function BacklinkBuilderForm({ handleBacklink, competitorDomains, setCompetitorDomains, industry, setIndustry} : any) {
   
 
   React.useEffect(() => {
     console.log(competitorDomains)
   },[competitorDomains])
+
+  React.useEffect(() => {
+    console.log(industry)
+  })
 
   const addDomain = () => {
     setCompetitorDomains([...competitorDomains, '']);
@@ -162,8 +165,8 @@ export default function BacklinkBuilderForm({ handleBacklink, competitorDomains,
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  disabled={!isFormValid}
-                  className={`${styles.submitButton} ${isFormValid ? styles.submitButtonEnabled : styles.submitButtonDisabled}`}
+                  // disabled={!isFormValid}
+                  className={`${styles.submitButton} ${styles.submitButtonEnabled}`}
                    onClick={handleBacklink}
                 >
                   <Rocket className={`${styles.submitIcon} ${isFormValid ? styles.submitIconAnimated : ''}`} />

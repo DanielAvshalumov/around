@@ -1,0 +1,260 @@
+.banner {
+  position: relative;
+  background: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.backgroundPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+}
+
+.bgCircleTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+}
+
+.bgCircleBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+}
+
+.container {
+  position: relative;
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+  margin-bottom: 1.5rem;
+}
+
+.badgeIcon {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.badgeText {
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  color: #4b5563;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  line-height: 1.75;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #374151;
+}
+
+.featureIcon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.featureText {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.visualContainer {
+  position: relative;
+  display: none;
+}
+
+.visualWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 24rem;
+  margin: 0 auto;
+}
+
+.circlesContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circleLarge {
+  position: absolute;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  border: 2px solid rgb(59, 130, 246);
+  opacity: 0.2;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.circleMedium {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  border: 2px solid rgb(29, 78, 216);
+  opacity: 0.3;
+}
+
+.circleSmall {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+  opacity: 0.4;
+}
+
+.floatingIcon {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background: white; */
+  animation: bounce 3s infinite;
+}
+
+.floatingIcon1 {
+  top: 2rem;
+  right: 2rem;
+  animation-duration: 3s;
+}
+
+.floatingIcon2 {
+  bottom: 3rem;
+  left: 2rem;
+  animation-duration: 4s;
+  animation-delay: 0.5s;
+}
+
+.floatingIcon3 {
+  top: 50%;
+  right: 1rem;
+  animation-duration: 3.5s;
+  animation-delay: 1s;
+}
+
+.floatingIconSvg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgb(59, 130, 246);
+}
+
+.floatingIcon2 .floatingIconSvg {
+  color: rgb(29, 78, 216);
+}
+
+.floatingIcon3 .floatingIconSvg {
+  color: rgb(59, 130, 246);
+}
+
+.accentLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(59, 130, 246), rgb(29, 78, 216), transparent);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (min-width: 768px) {
+  .banner {
+    padding: 3rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .heading {
+    font-size: 3rem;
+  }
+
+  .visualContainer {
+    display: block;
+  }
+}

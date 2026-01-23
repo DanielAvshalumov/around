@@ -1,11 +1,15 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, X, Link, Building, Rocket, Trash2 } from 'lucide-react';
 import styles from './page.module.css';
 
-export default function BacklinkBuilderForm() {
-  const [industry, setIndustry] = useState('');
+export default function BacklinkBuilderForm({ handleBacklink, }:{handleBacklink: any, industry: string, setIndustry: any} ) {
   const [competitorDomains, setCompetitorDomains] = useState(['']);
+  const [industry, setIndustry] = useState('')
+  
+  useEffect(() => {
+      console.log('industry',industry)
+    },[industry])
 
   const addDomain = () => {
     setCompetitorDomains([...competitorDomains, '']);
@@ -31,6 +35,10 @@ export default function BacklinkBuilderForm() {
       }
     }
   };
+
+  const handleIndustry = (e: any) => {
+    setIndustry(e.target.value)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +95,7 @@ export default function BacklinkBuilderForm() {
                   <input
                     type="text"
                     value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
+                    onChange={(e) => {console.log(e)}}
                     placeholder="e.g., Digital Marketing, SaaS, E-commerce"
                     className={styles.input}
                   />

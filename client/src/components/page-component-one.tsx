@@ -267,7 +267,6 @@ const SEOAIPromo = () => {
           </div>
         </div>
       </div>
-
       <style jsx>{`
         @media (max-width: 768px) {
           .main-section {

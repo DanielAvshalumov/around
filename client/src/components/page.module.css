@@ -528,6 +528,364 @@
   font-size: 0.875rem;
 }
 
+/* NavBar */
+/* Navbar Container */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0.75rem 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgb(59, 130, 246), rgb(29, 78, 216));
+  opacity: 0.95;
+  transition: opacity 0.4s;
+}
+
+.navbar.scrolled::before {
+  opacity: 0.98;
+  backdrop-filter: blur(12px);
+}
+
+.navbar.scrolled {
+  padding: 0.5rem 0;
+  box-shadow: 0 8px 32px rgba(29, 78, 216, 0.2);
+}
+
+/* Gradient Overlay for depth */
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* Subtle noise texture for premium feel */
+.noiseTexture {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Bottom border accent */
+.navBorder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 100%
+  );
+}
+
+.navContent {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+/* Logo Section */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logoContainer:hover {
+  transform: translateY(-1px);
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logoIcon::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: logoShine 3s infinite;
+}
+
+@keyframes logoShine {
+  0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.logoIconInner {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.logoBeta {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.15rem 0.4rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Navigation Center Links */
+.navCenter {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: navItemFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+  animation-delay: var(--delay);
+  overflow: hidden;
+}
+
+@keyframes navItemFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navLink::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.navLink:hover::before {
+  opacity: 1;
+}
+
+.navLink:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.navIcon {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.navLink:hover .navIcon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.navLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.navLinkGlow {
+  position: absolute;
+  inset: -2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s;
+  z-index: 0;
+}
+
+.navLink:hover .navLinkGlow {
+  opacity: 0.6;
+}
+
+/* Action Buttons */
+.navActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.secondaryButton {
+  padding: 0.625rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.secondaryButton:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.primaryButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.5rem;
+  background: white;
+  color: rgb(29, 78, 216);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(29, 78, 216, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.primaryButton:hover::before {
+  opacity: 1;
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.buttonShine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  animation: buttonShine 3s infinite;
+}
+
+@keyframes buttonShine {
+  0% { left: -100%; }
+  20%, 100% { left: 100%; }
+}
+
+.buttonText {
+  position: relative;
+  z-index: 1;
+}
+
+.buttonArrow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.primaryButton:hover .buttonArrow {
+  transform: translateX(3px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .navCenter {
+    gap: 0.25rem;
+  }
+  
+  .navLink {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .navIcon {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navContent {
+    padding: 0 1.5rem;
+  }
+  
+  .navCenter {
+    display: none;
+  }
+  
+  .secondaryButton {
+    display: none;
+  }
+}
+/*  */
+
 /* Animations */
 @keyframes slideInFade {
   from {

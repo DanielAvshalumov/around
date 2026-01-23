@@ -18,23 +18,28 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [user, setIsUser] = useState({})
+    const [user, setUser] = useState({})
 
     const checkAuth = async () => {
         try {
             const url = 'http://localhost:8080/api/auth/me'
             const res = await axios.get(url,{withCredentials: true})
-            if (res.status == 401) {
+            
+            const userData = await res.data
+            setIsAuthenticated(true)
+            console.log('after call',isAuthenticated)
+            setUser(userData)
+            console.log(userData)
+            console.log('hey');
+        } catch(err: any) {
+            console.log("error", err)
+            if (err?.response.status == 401) {
                 console.log('Unauthorized')
+                console.log(isAuthenticated)
                 setIsAuthenticated(false)
                 return
             }
-            const userData = await res.data
-            setIsAuthenticated(true)
-            setIsUser(res.data)
-            console.log(userData)
-        } catch(err) {
-            console.log("error", err)
+            console.log(isAuthenticated)
         } finally {
             setIsLoading(false)
         }
@@ -42,7 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         checkAuth()
-    },[])
+        console.log('after effect',isAuthenticated)
+    },[isAuthenticated])
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, isLoading, user}}>
