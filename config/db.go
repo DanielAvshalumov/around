@@ -143,3 +143,36 @@ func (db *Db) CreateUser(email string, googleSub string) (*auth.User, error) {
 	user.UserId = id
 	return user, nil
 }
+
+func (db *Db) GetUserBacklinks(userId int64) ([]models.Backlink, error) {
+	var userBacklinks []models.Backlink
+	query := `SELECT b.* FROM backlinks b inner join user_backlink ub on ub.backlink_id = b.id where ub.user_id = ?`
+
+	rows, err := db.Query(query, userId)
+	if err != nil {
+		fmt.Println("failed to get rows from user_backlink")
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var userBacklink models.Backlink
+		err = rows.Scan(
+			&userBacklink.Id,
+			&userBacklink.Source,
+			&userBacklink.Link,
+			&userBacklink.Dofollow,
+			&userBacklink.Session,
+			&userBacklink.Title,
+		)
+		if err != nil {
+			fmt.Println("Error seriazliing a row for User backlinks")
+			return nil, err
+		}
+		userBacklinks = append(userBacklinks, userBacklink)
+	}
+	err = rows.Err()
+	if err != nil {
+		fmt.Println("Error after looping through all rows for user backlinks")
+	}
+	return userBacklinks, nil
+}

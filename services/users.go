@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/danielavshalumov/around/config"
+	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/models/auth"
 )
 
@@ -54,4 +55,13 @@ func (u UserService) SaveBacklink(backlink_id int, user_id int64, response strin
 		return 0, err
 	}
 	return id, nil
+}
+
+func (u UserService) GetUserBacklinks(userId int64) ([]models.Backlink, error) {
+	userBacklinks, err := u.DB.GetUserBacklinks(userId)
+	if err != nil {
+		fmt.Println("UserService - error getting user bckloinks from db call")
+		return nil, err
+	}
+	return userBacklinks, nil
 }

@@ -1,7 +1,8 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BarChart3, ExternalLink, MousePointerClick, Eye, TrendingUp, Calendar } from 'lucide-react';
 import styles from './page.module.css';
+import { getBacklinks } from '../../../lib/backlink';
 
 export default function Dashboard() {
   const [dashboardData] = useState({
@@ -30,6 +31,13 @@ export default function Dashboard() {
     avgCtr: 27.8
   });
 
+  const [userBacklinks, setUserBacklinks] = useState([{Id: 0, Source: "", Link: ""}])
+
+  const getUserBacklinks = async () => {
+    const res = await getBacklinks()
+    setUserBacklinks(res)
+  }
+
   const handleViewAnalytics = () => {
     alert('Analytics view opened');
   };
@@ -37,6 +45,14 @@ export default function Dashboard() {
   const formatNumber = (num) => {
     return num.toLocaleString();
   };
+
+  useEffect(() => {
+    getUserBacklinks()
+  },[])
+
+  useEffect(() => {
+    console.log(userBacklinks)
+  },[userBacklinks])
 
   return (
     <div className={styles.container}>
@@ -126,48 +142,48 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {dashboardData.urls.map((item) => (
-                    <tr key={item.id}>
+                  {userBacklinks.map((item) => (
+                    <tr key={item.Id}>
                       <td>
                         <div className={styles.urlCell}>
-                          <span className={styles.urlText}>{item.url}</span>
-                          <span className={styles.urlId}>ID: {item.id}</span>
+                          <span className={styles.urlText}>{item.Link}</span>
+                          <span className={styles.urlId}>ID: {item.Id}</span>
                         </div>
                       </td>
                       <td>
                         <a 
-                          href={item.url}
+                          href={item.Link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.shortLink}
                         >
-                          {item.shortUrl}
+                          {item.Link}
                           <ExternalLink className={styles.linkIcon} />
                         </a>
                       </td>
                       <td>
                         <div className={styles.metricCell}>
-                          <span className={styles.metricValue}>{formatNumber(item.clicks)}</span>
+                          <span className={styles.metricValue}>0</span>
                           <MousePointerClick className={styles.metricIcon} />
                         </div>
                       </td>
                       <td>
                         <div className={styles.metricCell}>
-                          <span className={styles.metricValue}>{formatNumber(item.impressions)}</span>
+                          <span className={styles.metricValue}>0</span>
                           <Eye className={styles.metricIcon} />
                         </div>
                       </td>
                       <td>
                         <div className={styles.metricCell}>
                           <div className={styles.ctrBadge}>
-                            <span className={styles.ctrValue}>{item.ctr}%</span>
+                            <span className={styles.ctrValue}>0%</span>
                           </div>
                         </div>
                       </td>
                       <td>
                         <span className={styles.trendCell}>
                           <TrendingUp className={styles.trendCellIcon} />
-                          {item.trend}
+                          0%
                         </span>
                       </td>
                     </tr>

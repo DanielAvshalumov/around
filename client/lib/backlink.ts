@@ -24,6 +24,12 @@ export async function getBacklink(id: string) {
     return data;
 }
 
+export async function getBacklinks() {
+    const res = await axios.get('http://localhost:8080/api/user/backlinks', {withCredentials: true})
+    const data = await res.data;
+    return data
+}
+
 export async function getGenAIReply(url: string) {
     const queryParam = encodeURI(url)
     const res = await axios.get(`http://localhost:8000/reply?url=${queryParam}`)

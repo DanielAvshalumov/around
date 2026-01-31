@@ -77,3 +77,29 @@ func (u UserHandler) SaveBacklink(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(rowsAffected)
 
 }
+
+func (u UserHandler) GetUserBacklinks(w http.ResponseWriter, r *http.Request) {
+	userId, err := lib.GetUserIdFromCookie(r)
+	if err != nil {
+		fmt.Println("error getting user from cookie", err.Error())
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Unauthorized",
+		})
+		return
+	}
+
+	userBacklinks, err := u.UserService.GetUserBacklinks(userId)
+	if err != nil {
+		fmt.Println("User Handler - Error getting data from the service layer", err.Error())
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Bad request",
+		})
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(userBacklinks)
+
+}
