@@ -27,10 +27,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             
             const userData = await res.data
             setIsAuthenticated(true)
-            console.log('after call',isAuthenticated)
             setUser(userData)
             console.log(userData)
-            console.log('hey');
         } catch(err: any) {
             console.log("error", err)
             if (err?.response.status == 401) {
@@ -48,7 +46,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         checkAuth()
         console.log('after effect',isAuthenticated)
-    },[isAuthenticated])
+    },[])
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, isLoading, user}}>

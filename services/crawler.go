@@ -306,11 +306,13 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, user
 
 	var res []models.BacklinkResponse
 	for source, target := range spider.Backlinks {
-		res = append(res, models.BacklinkResponse{Source: source, Backlink: target[0]})
-		cs.DB.InsertIntoBacklink(&models.Backlink{Source: source, Link: target[0], Dofollow: false, Session: session_id})
+		b_id, err := cs.DB.InsertIntoBacklink(&models.Backlink{Source: source, Link: target[0], Dofollow: false, Session: session_id, Title: target[2]})
+		if err != nil {
+			fmt.Println("Error insterting backlink from service", err.Error())
+		}
+		res = append(res, models.BacklinkResponse{Source: source, Backlink: target[0], Id: b_id})
 		cs.AddToMLQueue(source, target[0], target[1], parentCtx)
 	}
-	fmt.Println(res)
 
 	chromedp.Cancel(browserCtx)
 	chromedp.Cancel(alloCtx)
@@ -320,6 +322,7 @@ func (cs *CrawlerService) StartCrawl(spider *models.Spider, browser string, user
 	fmt.Println("Open threads")
 	fmt.Println(worker.tabs)
 	fmt.Println("closed threads")
+	fmt.Println(spider.Backlinks)
 
 	// for id, tabCancel := range cw.tabs {
 	// 	fmt.Printf("cancelling context %d", id)
@@ -355,7 +358,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	defer atomic.AddInt32(&cw.threadCount, -1)
 
 	currentCount := atomic.LoadInt32(&cw.count)
-	if cw.limitReached.Load() || currentCount >= 10 {
+	if cw.limitReached.Load() || currentCount >= 5 {
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 		cw.cancel()
@@ -400,14 +403,15 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	var links map[string]string
 	var page_html string
 	var statusCode int
+	var title string
 	if depth == s.MaxDepth {
 
 		for failed {
-			_links, _page_html, _statusCode := cw.extractAnchorTags(current_url, true, s)
+			_links, _page_html, _statusCode, _title := cw.extractAnchorTags(current_url, true, s)
 			statusCode = _statusCode
 			linkCount := 0
-			for _link, _ := range _links {
-				fmt.Println(_link)
+			for _link := range _links {
+				fmt.Println(_link, _title)
 				if len(_link) != 0 {
 					linkCount++
 				}
@@ -430,7 +434,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		}
 
 	} else {
-		links, page_html, statusCode = cw.extractAnchorTags(current_url, true, s)
+		links, page_html, statusCode, title = cw.extractAnchorTags(current_url, true, s)
 	}
 
 	fmt.Printf("Page %d Depth %d Crawling %s - %s \n", pages, depth, current_url, curr_parse)
@@ -440,7 +444,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	for link := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cw.count)
-		if newCurrentCount >= 10 || cw.limitReached.Load() {
+		if newCurrentCount >= 5 || cw.limitReached.Load() {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()
@@ -478,7 +482,8 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 						fmt.Print("Visited", s.Visited[link])
 						fmt.Println("----------------------------------------")
 						backlinkFound = true
-						backlinkValue := [2]string{curr_parse, page_html}
+						backlinkValue := [3]string{curr_parse, page_html, title}
+						// fmt.Printf("PAGE HTML, %s", page_html)
 						s.Backlinks[link] = backlinkValue
 						cw.mu.Unlock()
 
@@ -524,14 +529,12 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		}
 
 		currentCount := atomic.LoadInt32(&cw.count)
-		if cw.limitReached.Load() || currentCount >= 10 {
+		if cw.limitReached.Load() || currentCount >= 5 {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()
 			return
 		}
-
-		fmt.Printf("Next Page %s \n", next_url)
 
 		cw.wg.Add(1)
 		go func(next_url string) {
@@ -631,19 +634,20 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 	// 	return link
 	// }
 
+	// Check title of product to see if its relevant
 	if backlinkCondition {
-		res, err := http.Get(link)
-		if err != nil {
-			return ""
-		}
-		defer res.Body.Close()
-		body, err := io.ReadAll(res.Body)
-		if err != nil {
-			return ""
-		}
-		HtmlBody := strings.ToLower(string(body))
+		// res, err := http.Get(link)
+		// if err != nil {
+		// 	return ""
+		// }
+		// defer res.Body.Close()
+		// body, err := io.ReadAll(res.Body)
+		// if err != nil {
+		// 	return ""
+		// }
+		// HtmlBody := strings.ToLower(string(body))
 		// sIndex := strings.Index(BodyLower,"<title>")
-		fmt.Println(HtmlBody)
+		// fmt.Println(HtmlBody)
 		// fmt.Printf("%s\n%s\n", link, HtmlBody)
 
 		// title := HtmlBody[strings.Index(HtmlBody, "<title>")+7 : strings.Index(HtmlBody, "</title>")]
@@ -660,7 +664,7 @@ func checkBacklink(link string, current_url string, filter []string, s *models.S
 func (cs *CrawlerService) AddToMLQueue(curr_parse string, link string, page_html string, ctx context.Context) {
 	// Redis Publish and Cleanup
 
-	var cleanPageHtml string
+	// var cleanPageHtml string
 	lines := strings.Split(page_html, "\n")
 	cleaned := make([]string, 0, len(lines))
 	cleaned = append(cleaned, link)
@@ -670,16 +674,24 @@ func (cs *CrawlerService) AddToMLQueue(curr_parse string, link string, page_html
 			cleaned = append(cleaned, line)
 		}
 	}
-	cleanPageHtml = strings.Join(cleaned, "\n")
-	err := cs.RDB.Publish(ctx, "around-channel", cleanPageHtml).Err()
+	// cleanPageHtml = strings.Join(cleaned, "\n")
+
+	// pubMessage := fmt.Sprintf("%s:%s", curr_parse, cleanPageHtml)
+	// err := cs.RDB.Publish(ctx, "around-channel", pubMessage).Err()
+	// if err != nil {
+	// 	message := fmt.Sprintf("Link: %s\nCurr_parse:%s\nError:%v", link, curr_parse, err)
+	// 	panic(message)
+	// }
+	// fmt.Printf("Message Published from %s", curr_parse)
+
+	// Set in Cache
+	err := cs.RDB.Set(ctx, curr_parse, page_html, 30*time.Minute).Err()
 	if err != nil {
-		message := fmt.Sprintf("Link: %s\nCurr_parse:%s\nError:%v", link, curr_parse, err)
-		panic(message)
+		fmt.Println("Error seting cache")
 	}
-	fmt.Printf("Message Published from %s", curr_parse)
 }
 
-func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int) {
+func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *models.Spider) (map[string]string, string, int, string) {
 	// Get HTML from Page URL
 	// fmt.Printf("before page_html %s\n", page_url)
 	test := false
@@ -824,10 +836,20 @@ func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *m
 	res := make(map[string]string)
 	var trav func(node *html.Node)
 	var maxNode []*html.Node
+	var title string
 	trav = func(node *html.Node) {
 		var href string
 		rel := "none"
+		if node.Data == "title" {
+			fmt.Println("found the title")
+			if node.FirstChild != nil {
+				title = node.FirstChild.Data
+				fmt.Println("Got the title")
+				fmt.Println(title)
+			}
+		}
 		for _, attr := range node.Attr {
+
 			if node.Type == html.ElementNode && node.Data == "a" {
 				if node.Data == "a" {
 					//TODO: Somehow find a way to make this more concise put in another method or something
@@ -864,5 +886,5 @@ func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *m
 	if test {
 		fmt.Println("Chromedp go thread - still inside function but outside anonymous - right before return function")
 	}
-	return res, output, statusCode
+	return res, output, statusCode, title
 }

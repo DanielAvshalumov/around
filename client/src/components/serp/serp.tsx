@@ -1,10 +1,14 @@
 // SourceLinkTable.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ExternalLink } from 'lucide-react';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentered: boolean}) => {
   
+  useEffect(() => {
+    console.log(backlinks);
+  },[backlinks])
 
   const handleViewSource = (url: string) => {
     window.open(url, '_blank');
@@ -20,12 +24,12 @@ const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentere
                 <th className={styles.tableHeader}>Source Link</th>
                 <th className={`${styles.tableHeader} ${styles.textCenter}`}>Domain Authority</th>
                 <th className={styles.tableHeader}>Bank Links</th>
-                <th className={`${styles.tableHeader} ${styles.textCenter}`}>Add to Training Data</th>
+                <th className={`${styles.tableHeader} ${styles.textCenter}`}>Generate Response</th>
               </tr>
             </thead>
             <tbody className={styles.tableBody}>
               {backlinks?.map((item, index) => (
-                <tr key={index} className={styles.tableRow}>
+                <tr key={index} id={item.Id} className={styles.tableRow}>
                   <td className={styles.tableCell}>
                     <div className={styles.linkContainer}>
                       <ExternalLink className={styles.linkIcon} />
@@ -55,6 +59,14 @@ const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentere
                     >
                       View
                     </button>
+                  </td>
+                  <td className={`${styles.tableCell} ${styles.textCenter}`}>
+                    <Link
+                      href={`/backlink/${item.Id}`}
+                      className={styles.viewButton}
+                    >
+                      Add
+                    </Link>
                   </td>
                 </tr>
               ))}

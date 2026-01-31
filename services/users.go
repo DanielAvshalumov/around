@@ -46,3 +46,12 @@ func (u UserService) GetUserFromOAuth(dto auth.UserDTO) (*auth.User, error) {
 	}
 	return newUser, nil
 }
+
+func (u UserService) SaveBacklink(backlink_id int, user_id int64, response string) (int64, error) {
+	id, err := u.DB.InsertUserBacklink(backlink_id, user_id, response)
+	if err != nil {
+		fmt.Println("Error DB inserting", err.Error())
+		return 0, err
+	}
+	return id, nil
+}

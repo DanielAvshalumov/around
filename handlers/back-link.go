@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"runtime"
+	"strconv"
 	"time"
 
 	"github.com/danielavshalumov/around/lib"
@@ -15,12 +16,33 @@ import (
 
 type BacklinkHandler struct {
 	cs *services.CrawlerService
+	bs *services.BacklinkService
 }
 
-func NewBacklinkHandler(cs *services.CrawlerService) *BacklinkHandler {
+func NewBacklinkHandler(cs *services.CrawlerService, bs *services.BacklinkService) *BacklinkHandler {
 	return &BacklinkHandler{
 		cs: cs,
+		bs: bs,
 	}
+}
+
+func (b *BacklinkHandler) GetUrl(w http.ResponseWriter, r *http.Request) {
+	b.bs.TestUrl()
+}
+
+func (b *BacklinkHandler) GetBacklink(w http.ResponseWriter, r *http.Request) {
+	reqBacklinkId := r.PathValue("id")
+	backlinkId, err := strconv.Atoi(reqBacklinkId)
+	if err != nil {
+		fmt.Println("error converting request backlink ID from string to integer")
+	}
+	backlink, err := b.bs.GetBacklink(backlinkId)
+	if err != nil {
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Error getting backlink by ID from the handler",
+		})
+	}
+	json.NewEncoder(w).Encode(backlink)
 }
 
 func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {

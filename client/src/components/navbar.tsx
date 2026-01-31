@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import { useAuth } from '@/context/AuthContext';
+import { AuthService } from '../../lib/auth';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,7 +59,7 @@ export default function Navbar() {
         </div>
 
         <div className={styles.navActions}>
-         { !isLoading && <button className={styles.secondaryButton}>
+         { !isLoading && <button onClick={AuthService.login} className={styles.secondaryButton}>
             {isAuthenticated ? "Sign Out" : "Log In"}
           </button>}
           

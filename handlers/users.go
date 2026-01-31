@@ -2,18 +2,26 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strconv"
 
-	"github.com/danielavshalumov/around/config"
+	"github.com/danielavshalumov/around/lib"
 	"github.com/danielavshalumov/around/models"
-	"github.com/danielavshalumov/around/models/auth"
+	"github.com/danielavshalumov/around/services"
 )
 
 type UserHandler struct {
-	DB *config.Db
+	UserService *services.UserService
 }
 
-func HandleUserAccess(w http.ResponseWriter, r *http.Request) {
+func NewUserHandler(userService *services.UserService) *UserHandler {
+	return &UserHandler{
+		UserService: userService,
+	}
+}
+
+func (u UserHandler) SaveBacklink(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
@@ -23,13 +31,49 @@ func HandleUserAccess(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req auth.UserDTO
-	err := json.NewDecoder(r.Body).Decode(&req)
+	userId, err := lib.GetUserIdFromCookie(r)
 	if err != nil {
+		fmt.Println("error getting userId from cookie")
+		w.WriteHeader(http.StatusUnauthorized)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Unauthorized JWT",
+		})
+		return
+	}
+
+	backlinkIdPath := r.PathValue("id")
+	backlinkId, err := strconv.Atoi(backlinkIdPath)
+	if err != nil {
+		fmt.Println("Error with path variable", err.Error())
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(models.SimpleError{
-			Error: "Invalid JSON",
+			Error: "Bad Request",
+		})
+		return
+	}
+
+	var response *models.BacklinkSaveResponse
+	defer r.Body.Close()
+	err = json.NewDecoder(r.Body).Decode(&response)
+	if err != nil {
+		fmt.Println("Bady Body Request")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Method not allowed",
+		})
+		return
+	}
+	responseInsert := response.Response
+	rowsAffected, err := u.UserService.SaveBacklink(backlinkId, userId, responseInsert)
+	if err != nil {
+		fmt.Println("Error wth saving backlink")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Bad Request",
 		})
 	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(rowsAffected)
 
 }

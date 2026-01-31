@@ -44,17 +44,40 @@ func (db *Db) CreateNewCrawlSession(userId int64) (int64, error) {
 	return res.LastInsertId()
 }
 
+func (db *Db) GetBacklinkById(backlinkId int) (*models.Backlink, error) {
+	backlink := &models.Backlink{}
+	query := `SELECT id, source, link, s_id, title from backlinks where id = ?`
+	err := db.QueryRow(query, backlinkId).Scan(&backlink.Id, &backlink.Source, &backlink.Link, &backlink.Session, &backlink.Title)
+	if err != nil {
+		fmt.Println("Error in config/db", err.Error())
+		return nil, err
+	}
+	return backlink, nil
+}
+
 func (db *Db) InsertIntoBacklink(backlink *models.Backlink) (int64, error) {
 	query := `
-		INSERT INTO backlinks (source, link, dofollow, s_id)
-		VALUES (?, ?, ?, ?)
+		INSERT INTO backlinks (source, link, dofollow, s_id, title)
+		VALUES (?, ?, ?, ?, ?)
 	`
-	res, err := db.Exec(query, backlink.Source, backlink.Link, backlink.Dofollow, backlink.Session)
+	res, err := db.Exec(query, backlink.Source, backlink.Link, backlink.Dofollow, backlink.Session, backlink.Title)
 	if err != nil {
 		fmt.Printf("DB Error - Failed to insert backlinks %s -> %s", backlink.Source, backlink.Link)
 		return 0, err
 	}
 	return res.LastInsertId()
+}
+
+func (db *Db) InsertUserBacklink(backlink_id int, user_id int64, response string) (int64, error) {
+	query := `
+		INSERT INTO user_backlink (user_id, backlink_id, response)
+		VALUES (?, ?, ?)
+	`
+	res, err := db.Exec(query, user_id, backlink_id, response)
+	if err != nil {
+		fmt.Println("DB Error - failed to insert user_backlink", err.Error())
+	}
+	return res.RowsAffected()
 }
 
 func createBacklinkTable(db *sql.DB) {
@@ -82,7 +105,7 @@ func displayOpeningMessage() {
 func (db *Db) GetUserById(userId int64) (*auth.User, error) {
 	user := &auth.User{}
 	var sqlDate string
-	query := `SELECT userId, googleSub, email, dateCreated from users where userId`
+	query := `SELECT userId, googleSub, email, dateCreated from users where userId = ?`
 	err := db.QueryRow(query, userId).Scan(&user.UserId, &user.GoogleSub, &user.Email, &sqlDate)
 	if err != nil {
 		fmt.Println("User not found by Id")

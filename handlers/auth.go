@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/danielavshalumov/around/lib"
+	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/models/auth"
 	"github.com/danielavshalumov/around/services"
 )
@@ -49,13 +50,13 @@ func (a *AuthHandler) HandleMe(w http.ResponseWriter, r *http.Request) {
 
 func (a *AuthHandler) HandleAuthCallback(w http.ResponseWriter, r *http.Request) {
 
-	// if r.Method != http.MethodPost {
-	// 	w.WriteHeader(http.StatusMethodNotAllowed)
-	// 	json.NewEncoder(w).Encode(models.SimpleError{
-	// 		Error: "Method Not Allowed",
-	// 	})
-	// 	return
-	// }
+	if r.Method != http.MethodPost {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(models.SimpleError{
+			Error: "Method Not Allowed",
+		})
+		return
+	}
 	code := r.URL.Query().Get("code")
 	provider := "google"
 	tokenReq := auth.TokenRequest{Code: code, Provider: provider}

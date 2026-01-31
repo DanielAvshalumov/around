@@ -6,7 +6,7 @@ import styles from "./page.module.css"
 import BacklinkBuilderForm from '@/components/landing-page-content';
 import SourceLinkTable from '@/components/serp/serp';
 import CoolLoadingScreen from '@/components/serp/loading/serp-loading';
-import getForumProductLinks from '../../lib/backlink';
+import { getForumProductLinks } from '../../lib/backlink';
 import SEOAIPromo from '@/components/page-component-one';
 import getBacklinkDomains from '../../lib/hugHelper';
 import { AuthService } from '../../lib/auth';

@@ -30,15 +30,19 @@ func main() {
 	// Define Services
 	UserService := services.CreateUserService(db)
 	CrawlerService := services.NewCrawlerService(db, rdb)
+	BacklinkService := services.NewBacklinkService(db)
 
 	// Define Handlers
 	AuthHandler := handlers.NewAuthHandler(UserService)
-	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService)
+	BacklinkHandler := handlers.NewBacklinkHandler(CrawlerService, BacklinkService)
+	UserHandler := handlers.NewUserHandler(UserService)
 
 	// Set Up Endpoints
+	http.Handle("/api/user/backlink/{id}", config.CORS("http://localhost:3000")(http.HandlerFunc(UserHandler.SaveBacklink)))
 	http.Handle("/api/auth/me", config.CORS("http://localhost:3000")(http.HandlerFunc(AuthHandler.HandleMe)))
 	http.Handle("/api/auth/verify-user", config.CORS("http://localhost:3000")(http.HandlerFunc(AuthHandler.HandleAuthCallback)))
-	http.Handle("/back-link", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklinks)))
+	http.Handle("/forum-scrape", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklinks)))
+	http.Handle("/back-link/{id}", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklink)))
 
 	fmt.Println("Server Listening on port 8080")
 	http.ListenAndServe(":8080", nil)
