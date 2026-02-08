@@ -118,7 +118,7 @@ const MainPage = () => {
           <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry} competitorDomains={competitorDomains} setCompetitorDomains={setCompetitorDomains}/>
         </div>
         <div className={`${styles.newComponent} ${isCentered ? styles.hidden : styles.visible}`}>
-          {loading ? <CoolLoadingScreen isCentered={false} /> : <SourceLinkTable backlinks={backlinks} isCentered={false}/>}
+          {loading ? <CoolLoadingScreen isCentered={true} /> : <SourceLinkTable backlinks={backlinks} isCentered={false}/>}
         </div>
       </div>
     </Box>

@@ -81,7 +81,7 @@ func (b *BacklinkHandler) GetBacklinks(w http.ResponseWriter, r *http.Request) {
 
 	// "https://html.duckduckgo.com/html?q=\"" +
 	// keywords := req.Keywords
-	query := fmt.Sprintf("buying %s forum reccomendations (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
+	query := fmt.Sprintf("buying %s forum (inurl:forum OR inurl:thread OR inurl:community inurl:discussion)", req.Industry)
 	// query := fmt.Sprintf("%s forums inurl:reccomendation", req.Industry)
 	// query := "https://html.duckduckgo.com/html?q=inanchor:" + strings.Join(keywords, "+") + " " + req.Industry + " %20forums"
 

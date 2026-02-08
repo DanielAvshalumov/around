@@ -38,7 +38,7 @@ export default function Navbar() {
             <div className={styles.logoIconInner} />
           </div>
           <span className={styles.logoText}>
-            Velox
+            GettAround
             <span className={styles.logoBeta}>beta</span>
           </span>
         </Link>

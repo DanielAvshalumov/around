@@ -21,20 +21,46 @@ const theme = createTheme({
 export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
-    <html lang="en">
-      <body>
-        <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+  <html lang="en">
+    <body style={{ margin: 0, padding: 0 }}>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {/* Flex container with full viewport height */}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: '100vh',
+            }}
+          >
             <Navbar />
             <MatrixBackground />
-            {children}
-            <Box sx={{ backgroundColor: '#333', color: '#fff', padding: 3, textAlign: 'center' }}>
-              <Typography variant="body2">© 2023 Company Name. All rights reserved.</Typography>
+            
+            {/* Main content area - grows to push footer down */}
+            <Box component="main" sx={{ flexGrow: 1, position: 'relative', zIndex: 1 }}>
+              {children}
             </Box>
-          </ThemeProvider>
-        </AuthProvider>
-      </body>
-    </html>
-  )
+
+            {/* Footer always at bottom */}
+            <Box
+              component="footer"
+              sx={{
+                backgroundColor: '#333',
+                color: '#fff',
+                padding: 3,
+                textAlign: 'center',
+                mt: 'auto', // Pushes footer to bottom when content is short
+              }}
+            >
+              <Typography variant="body2">
+                © 2023 Company Name. All rights reserved.
+              </Typography>
+            </Box>
+          </Box>
+        </ThemeProvider>
+      </AuthProvider>
+    </body>
+  </html>
+);
 }

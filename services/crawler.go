@@ -379,6 +379,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	cw.mu.Lock()
 	switch {
 	case s.Visited[curr_parse] == true:
+		// fmt.Printf("FOUND VISITED: %s\n", curr_parse)
 		cw.mu.Unlock()
 		return
 	case s.Backlinks[curr_parse][0] != "":
@@ -844,8 +845,6 @@ func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *m
 			fmt.Println("found the title")
 			if node.FirstChild != nil {
 				title = node.FirstChild.Data
-				fmt.Println("Got the title")
-				fmt.Println(title)
 			}
 		}
 		for _, attr := range node.Attr {

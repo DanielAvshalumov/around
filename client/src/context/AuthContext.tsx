@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState} from 'react';
-
 interface AuthContextType {
     isAuthenticated: boolean;
     isLoading: boolean;
@@ -28,13 +27,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             const userData = await res.data
             setIsAuthenticated(true)
             setUser(userData)
-            console.log(userData)
+            
         } catch(err: any) {
             console.log("error", err)
             if (err?.response.status == 401) {
                 console.log('Unauthorized')
                 console.log(isAuthenticated)
                 setIsAuthenticated(false)
+                
+                if (window.location.href != "http://localhost:3000/") {
+                    window.location.href = "/"
+                }
                 return
             }
             console.log(isAuthenticated)
