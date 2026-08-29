@@ -9,8 +9,8 @@ type Payload = {
 
 export async function getForumProductLinks(payload?: Payload) {
     try {
-        // const res = await axios.post("http://localhost:8080/back-link",{"comp_domains":["amazon.com","ajmadison.com","homedepot.com","bestbuy.com","build.com","lowes.com"],"industry":`${payload?.industry}`,"browser":"duckduckgo"},{'headers':{'Content-Type' : 'application/json'}})
-        const res = await axios.post("http://localhost:8080/forum-scrape",{"industry":`${payload?.industry}`,"browser":"duckduckgo","comp_domains":payload?.Comp_domains},{'headers':{'Content-Type' : 'application/json'}, withCredentials: true})
+        // const res = await axios.post("http://localhost:1/back-link",{"comp_domains":["amazon.com","ajmadison.com","homedepot.com","bestbuy.com","build.com","lowes.com"],"industry":`${payload?.industry}`,"browser":"duckduckgo"},{'headers':{'Content-Type' : 'application/json'}})
+        const res = await axios.post("http://localhost:8081/forum-scrape",{"industry":`${payload?.industry}`,"browser":"duckduckgo","comp_domains":payload?.Comp_domains},{'headers':{'Content-Type' : 'application/json'}, withCredentials: true})
         const data = await res.data
         return data;
     } catch (error: any) {
@@ -19,13 +19,13 @@ export async function getForumProductLinks(payload?: Payload) {
 }
 
 export async function getBacklink(id: string) {
-    const res = await axios.post(`http://localhost:8080/back-link/${id}`);
+    const res = await axios.post(`http://localhost:8081/back-link/${id}`);
     const data = await res.data;
     return data;
 }
 
 export async function getBacklinks() {
-    const res = await axios.get('http://localhost:8080/api/user/backlinks', {withCredentials: true})
+    const res = await axios.get('http://localhost:8081/api/user/backlinks', {withCredentials: true})
     const data = await res.data;
     return data
 }
@@ -47,7 +47,7 @@ export async function testGenAiReply() : Promise<any> {
 }
 
 export async function publishBacklink(id: number, response: string) {
-    const res = await axios.post(`http://localhost:8080/api/user/backlink/${id}`, {response: response}, {withCredentials:true})
+    const res = await axios.post(`http://localhost:8081/api/user/backlink/${id}`, {response: response}, {withCredentials:true})
     const data = await res.data
     return data;
 }

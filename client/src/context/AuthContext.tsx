@@ -21,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const checkAuth = async () => {
         try {
-            const url = 'http://localhost:8080/api/auth/me'
+            const url = 'http://localhost:8081/api/auth/me'
             const res = await axios.get(url,{withCredentials: true})
             
             const userData = await res.data

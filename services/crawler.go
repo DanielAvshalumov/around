@@ -358,7 +358,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	defer atomic.AddInt32(&cw.threadCount, -1)
 
 	currentCount := atomic.LoadInt32(&cw.count)
-	if cw.limitReached.Load() || currentCount >= 5 {
+	if cw.limitReached.Load() || currentCount >= 10 {
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 		cw.cancel()
@@ -445,7 +445,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	for link := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cw.count)
-		if newCurrentCount >= 5 || cw.limitReached.Load() {
+		if newCurrentCount >= 10 || cw.limitReached.Load() {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()
@@ -530,7 +530,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		}
 
 		currentCount := atomic.LoadInt32(&cw.count)
-		if cw.limitReached.Load() || currentCount >= 5 {
+		if cw.limitReached.Load() || currentCount >= 10 {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()

@@ -3,3 +3,4 @@ config/*.sql
 output.txt
 hug
 .env
+.DS_Store

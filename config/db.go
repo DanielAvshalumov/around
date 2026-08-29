@@ -8,7 +8,7 @@ import (
 
 	"github.com/danielavshalumov/around/models"
 	"github.com/danielavshalumov/around/models/auth"
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 type Db struct {
@@ -24,7 +24,7 @@ func NewDB(db *sql.DB) *Db {
 func InitDB() (*Db, error) {
 	displayOpeningMessage()
 
-	db, err := sql.Open("sqlite3", "./config/avsolutions.db?_loc=auto&parseTime=true")
+	db, err := sql.Open("sqlite", "./config/avsolutions.db?_loc=auto&parseTime=true")
 	if err != nil {
 		return nil, fmt.Errorf("failed opening database: %w", err)
 	}

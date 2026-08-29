@@ -45,7 +45,7 @@ func main() {
 	http.Handle("/forum-scrape", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklinks)))
 	http.Handle("/back-link/{id}", config.CORS("http://localhost:3000")(http.HandlerFunc(BacklinkHandler.GetBacklink)))
 
-	fmt.Println("Server Listening on port 8080")
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("Server Listening on port 8081")
+	http.ListenAndServe(":8081", nil)
 
 }
