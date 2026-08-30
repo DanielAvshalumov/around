@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "starting checkout"
+                echo "Cloning Repo"
+                checkout scm
             }
         }
         stage('Build') {
             steps {
-                echo "building build"
+                echo "Deploying Docker Container"
+                sh "docker-compose up -d"
             }
         }
     }
