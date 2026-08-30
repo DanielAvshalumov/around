@@ -762,7 +762,7 @@ func (cw *CrawlerWorker) extractAnchorTags(page_url string, proxyFlag bool, s *m
 				delete(cw.tabs, id)
 				cw.crawlmu.Unlock()
 			}(id)
-			fmt.Println("Run starting")
+			fmt.Println("Run starting jenkins test")
 			err := chromedp.Run(tabContext,
 				chromedp.Navigate(page_url),
 				// 		chromedp.ActionFunc(func(ctx context.Context) error {
