@@ -5,6 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Cloning Repo"
+                sh "docker -v"
                 checkout scm
             }
         }
