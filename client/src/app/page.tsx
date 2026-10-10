@@ -50,8 +50,8 @@ const MainPage = () => {
         // const data = await api.data;
         // console.log(api)
         setBacklinks(api)
-        console.log(api)
-        if (api.length == 0) {
+        console.log(api)  
+        if (backlinks.length == 0) {
           setIsCentered(true)
         }
       } catch(err) {
