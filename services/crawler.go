@@ -358,7 +358,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 	defer atomic.AddInt32(&cw.threadCount, -1)
 
 	currentCount := atomic.LoadInt32(&cw.count)
-	if cw.limitReached.Load() || currentCount >= 10 {
+	if cw.limitReached.Load() || currentCount >= 2 {
 		fmt.Println("limit reached")
 		fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 		cw.cancel()
@@ -440,12 +440,12 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 
 	fmt.Printf("Page %d Depth %d Crawling %s - %s \n", pages, depth, current_url, curr_parse)
 
-	var backlinkFound bool
+	// var backlinkFound bool
 	var absolute, relative []string
 	for link := range links {
 
 		newCurrentCount := atomic.LoadInt32(&cw.count)
-		if newCurrentCount >= 10 || cw.limitReached.Load() {
+		if newCurrentCount >= 2 || cw.limitReached.Load() {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()
@@ -476,13 +476,13 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 				if depth < s.MaxDepth-1 {
 					cw.mu.Lock()
 
-					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth && !backlinkFound && s.Backlinks[link][0] == "" {
+					if checkBacklink(link, curr_parse, s.CompDomains, s) != "" && depth != s.MaxDepth  && s.Backlinks[link][0] == "" {
 						fmt.Println("------------ Backlink Found ------------")
 						fmt.Println(current_url + "->" + link)
 						// fmt.Print(parsed_host, "->", parsed_link_host)
 						fmt.Print("Visited", s.Visited[link])
 						fmt.Println("----------------------------------------")
-						backlinkFound = true
+						// backlinkFound = true
 						backlinkValue := [3]string{curr_parse, page_html, title}
 						// fmt.Printf("PAGE HTML, %s", page_html)
 						s.Backlinks[link] = backlinkValue
@@ -530,7 +530,7 @@ func (cw *CrawlerWorker) Crawl(s *models.Spider, current_url string, depth int, 
 		}
 
 		currentCount := atomic.LoadInt32(&cw.count)
-		if cw.limitReached.Load() || currentCount >= 10 {
+		if cw.limitReached.Load() || currentCount >= 2 {
 			fmt.Println("limit reached")
 			fmt.Printf("thread count %d\n", atomic.LoadInt32(&cw.threadCount))
 			cw.cancel()

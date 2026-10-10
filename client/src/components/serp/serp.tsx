@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentered: boolean}) => {
   
-  useEffect(() => {
-    console.log(backlinks);
-  },[backlinks])
+  // useEffect(() => {
+  //   console.log(backlinks);
+  // },[backlinks])
 
   const handleViewSource = (url: string) => {
     window.open(url, '_blank');
@@ -28,7 +28,7 @@ const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentere
               </tr>
             </thead>
             <tbody className={styles.tableBody}>
-              {backlinks?.map((item, index) => (
+              {backlinks.length > 0 ? backlinks.map((item, index) => (
                 <tr key={index} id={item.Id} className={styles.tableRow}>
                   <td className={styles.tableCell}>
                     <div className={styles.linkContainer}>
@@ -69,7 +69,8 @@ const SourceLinkTable = ({ backlinks, isCentered }: {backlinks: any[], isCentere
                     </Link>
                   </td>
                 </tr>
-              ))}
+              )) :
+              <p>No backlinks found</p>}
             </tbody>
           </table>
         </div>

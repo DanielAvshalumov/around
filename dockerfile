@@ -2,24 +2,23 @@ FROM golang:1.26 AS build
 
 WORKDIR /backend
 
-RUN apt-get update && apt-get install -y \
-tor \
-&& rm -rf /var/lib/apt/lists/*
-
 COPY --exclude=client . .
 
 RUN mkdir bin
 
 RUN CGO_ENABLED=0 go build -o ./bin/around ./main.go
 
-FROM scratch
+FROM debian:stable-slim
 
-COPY --from=build backend/bin/around ./bin/around
-COPY --from=build backend/config ./config
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    tor \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /usr/bin/tor /usr/bin/tor
-COPY --from=build /etc/tor /etc/tor
+COPY --from=build /backend/bin/around ./bin/around
+COPY --from=build /backend/config ./config
 
-ENTRYPOINT ["systemctl", "start", "tor"]
+COPY start.sh ./start.sh
+RUN chmod +x ./start.sh
 
-CMD ["/bin/around"]
+ENTRYPOINT ["./start.sh"]

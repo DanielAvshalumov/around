@@ -22,8 +22,6 @@ const MainPage = () => {
     const [industry, setIndustry] = useState('');
     const [competitorDomains, setCompetitorDomains] = useState(['']);
 
-    
-    
 
     const handleDomainsNames = async () => {
       console.log('more work')
@@ -53,15 +51,22 @@ const MainPage = () => {
         // console.log(api)
         setBacklinks(api)
         console.log(api)
-        if (backlinks.length == 0) {
+        if (api.length == 0) {
           setIsCentered(true)
         }
       } catch(err) {
         console.log(err)
       } finally {
         setLoading(false)
+        setBacklinks(backlinks => [...backlinks]);
+        console.log('reached finally clause')
       }
     }
+
+    useEffect(() => {
+      console.log('centered',isCentered)
+    },[isCentered])
+
 
     const backlinkForm = 
     <div className={`${styles.originalComponent} ${isCentered ? styles.centered : styles.leftAligned}`}>
@@ -118,7 +123,12 @@ const MainPage = () => {
           <BacklinkBuilderForm handleBacklink={handleBacklink} industry={industry} setIndustry={setIndustry} competitorDomains={competitorDomains} setCompetitorDomains={setCompetitorDomains}/>
         </div>
         <div className={`${styles.newComponent} ${isCentered ? styles.hidden : styles.visible}`}>
-          {loading ? <CoolLoadingScreen isCentered={true} /> : <SourceLinkTable backlinks={backlinks} isCentered={false}/>}
+          {loading ? 
+            <CoolLoadingScreen isCentered={!isCentered} /> 
+            : backlinks.length > 0 ? 
+              <SourceLinkTable backlinks={backlinks} isCentered={isCentered}/> :
+              <Typography>No backlink results found.</Typography>
+          }
         </div>
       </div>
     </Box>

@@ -1,3 +1,9 @@
-go run --race main.go >> output.txt
-cd client && bun run dev && cd ..
-source /hug/bin/activate && python main.py
+#!/bin/bash
+
+tor \
+  --SocksPort 127.0.0.1:9050 \
+  --ControlPort 127.0.0.1:9051 \
+  --CookieAuthentication 1 &
+
+echo "tor finished"
+exec /bin/around
